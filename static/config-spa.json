@@ -1,0 +1,35 @@
+{
+    "contextPath": "hornetshowroom-spa",
+    "welcomePage": "/accueil",
+    "communityLink": {
+        "git": {
+            "hubGen": "https://github.com/diplomatiegouvfr",
+            "hubDoc": "https://github.com/diplomatiegouvfr/hornet-man",
+            "labGen": "https://gitlab01.devng.diplomatie.gouv.fr/gitlab/hornet.js",
+            "labDoc": "https://gitlab01.devng.diplomatie.gouv.fr/gitlab/hornet.js"
+        },
+        "twitter": "https://twitter.com/FrameworkHornet",
+        "facebook": ""
+    },
+    "themeName": "hornet-themes-intranet",
+    "localeI18n": {
+        "locale": "fr-FR",
+        "lang": "fr"
+    },
+    "logClient": {
+        "remote": false,
+        "level": "INFO",
+        "appenders": [
+            {
+                "type": "BrowserConsole",
+                "layout": {
+                "type": "THIN"
+                }
+            }
+        ]
+    },
+    "fullSpa": {
+        "enabled": true,
+        "staticPath": "/static"
+    }
+}

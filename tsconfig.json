@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "commonjs",
+    "moduleResolution": "classic",
+    "experimentalDecorators": true,
+    "jsx": "react",
+    "sourceMap": true,
+    "noResolve": true,
+    "importHelpers": true,
+    "baseUrl": "./",
+    "paths": {
+      "tslib": [
+        "definition-ts/hornet-js-ts-typings/tslib/tslib.d.ts"
+      ]
+    }
+  },
+  "files": ["./node_modules/app/hornet-js-community/definition.d.ts"],
+  "typeRoots": [
+    "./node_modules/app/hornet-js-community"
+  ],
+  "types": ["./node_modules/app/hornet-js-community/definition.d.ts"],
+  "include": [
+    "./**/*.ts",
+    "src/**/*.tsx",
+    "definition-ts/**/*.d.ts"
+  ],
+  "exclude": [
+    "istanbul",
+    "node_modules",
+    "static"
+  ]
+}

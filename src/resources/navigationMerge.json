@@ -1,0 +1,58 @@
+{
+
+  "menu": [{
+      "text": "HORNET JS LITE ",
+      "title": "HORNET-JS-LITE",
+      "visibleDansMenu": true,
+      "visibleDansPlan": true,
+      "submenu": [{
+          "text": "Composants ",
+          "title": "03-Composants",
+          "visibleDansMenu": true,
+          "visibleDansPlan": true,
+          "url": "/catalogue",
+          "position": 2
+        },
+        {
+          "text": "Installation ",
+          "title": "01-Installation",
+          "visibleDansMenu": true,
+          "visibleDansPlan": true
+        },
+        {
+          "text": "Conception ",
+          "title": "04-Conception",
+          "visibleDansMenu": true,
+          "visibleDansPlan": true,
+          "position": 3,
+          "submenu": [{
+            "text": "Javascript ",
+            "title": "01-Javascript",
+            "visibleDansMenu": true,
+            "visibleDansPlan": true,
+            "submenu": [{
+              "text": "Configuration ",
+              "title": "Configuration",
+              "visibleDansMenu": true,
+              "visibleDansPlan": true
+            }]
+          }]
+        }
+      ]
+    }
+    /*
+    {
+      "text": "HORNET JS LITE ",
+      "title": "HORNET-JS-LITE",
+      "visibleDansMenu": true,
+      "visibleDansPlan": true,
+      "submenu": [{
+        "text": "Tutoriel ",
+        "title": "05-Tutoriel",
+        "visibleDansMenu": true,
+        "visibleDansPlan": true,
+        "url": "/tutoriel"
+      }]
+    }*/
+  ]
+}

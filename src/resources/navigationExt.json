@@ -1,0 +1,36 @@
+{
+  "menu": [{
+    "text": "HORNET JS",
+    "title": "HORNET-JS",
+    "visibleDansMenu": true,
+    "visibleDansPlan": true,
+    "submenu": [{
+      "text": "Composants ",
+      "title": "03-Composants",
+      "visibleDansMenu": true,
+      "visibleDansPlan": true,
+      "url": "/catalogue",
+      "position": 2,
+      "submenu": [{
+        "text": "test menu ",
+        "title": "test menu",
+        "url": "",
+        "visibleDansMenu": true,
+        "visibleDansPlan": true
+      }]
+    }]
+  }, {
+    "text": "HORNET JS LITE ",
+    "title": "HORNET-JS-LITE",
+    "visibleDansMenu": true,
+    "visibleDansPlan": true,
+    "submenu": [{
+      "text": "Composants ",
+      "title": "03-Composants",
+      "visibleDansMenu": true,
+      "visibleDansPlan": true,
+      "url": "/catalogue"
+
+    }]
+  }]
+}

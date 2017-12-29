@@ -1,0 +1,62 @@
+{
+  "name": "hornet-showroom",
+  "version": "5.1.0-PUB",
+  "license": "CECILL-2.1",
+  "description": "Projet de présentation des filières de développement hornet.js et hornet.js-lite",
+  "bugs": {
+    "url": "https://github.com/diplomatiegouvfr/hornet-showroom/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diplomatiegouvfr/hornet-showroom.git"
+  },
+  "main": "index.js",
+  "tsDefinitionDependencies": {
+    "hornet-js-ts-typings": "5.1.0",
+    "hornet-js-batch-dts": "5.1.0",
+    "hornet-js-bean-dts": "5.1.0",
+    "hornet-js-components-dts": "5.1.0",
+    "hornet-js-core-dts": "5.1.0",
+    "hornet-js-database-dts": "5.1.0",
+    "hornet-js-passport-dts": "5.1.0",
+    "hornet-js-react-components-dts": "5.1.0",
+    "hornet-js-test-dts": "5.1.0",
+    "hornet-js-utils-dts": "5.1.0"
+  },
+  "appDependencies": {
+    "hornet-themes-intranet": "5.1.0",
+    "hornet-js-batch": "5.1.0",
+    "hornet-js-bean": "5.1.0",
+    "hornet-js-components": "5.1.0",
+    "hornet-js-core": "5.1.0",
+    "hornet-js-database": "5.1.0",
+    "hornet-js-passport": "5.1.0",
+    "hornet-js-react-components": "5.1.0",
+    "hornet-js-test": "5.1.0",
+    "hornet-js-utils": "5.1.0",
+    "hornet-js-man": "5.1.0-PUB",
+    "generator-hornet-js": "5.1.0",
+    "generator-hornet-js-lite": "5.1.0",
+    "generator-hornet-js-lite-batch": "5.1.0",
+    "hornet-js-builder": "1.5.2",
+    "codemirror": "5.30.0",
+    "react-codemirror2": "3.0.7",
+    "typescript": "2.5.2",
+    "classnames": "2.2.3"
+  },
+  "buildDependencies": {
+    "highlight.js": "9.12.0",
+    "html-loader": "0.4.5",
+    "lodash": "4.17.4",
+    "loader-utils": "1.1.0",
+    "markdown-loader": "2.0.1"
+  },
+  "testDependencies": {},
+  "scripts": {
+    "init-dev": "hb install",
+    "init-snapshot": "HORNET_JS=`npm show hornet-js-core@latest version` && hb dependency:set --versionFix=${HORNET_JS} --dependencyVersionFix=hornet-js && HORNET_JS_THEMES=`npm show hornet-themes-intranet@latest version` && hb dependency:set --versionFix=${HORNET_JS_THEMES} --dependencyVersionFix=hornet-themes-intranet && HORNET_JS_GENERATOR=`npm show generator-hornet-js@latest version` && hb dependency:set --versionFix=${HORNET_JS_GENERATOR} --dependencyVersionFix=generator-hornet-js && HORNET_JS_GENERATOR_LITE=`npm show generator-hornet-js-lite@latest version` && hb dependency:set --versionFix=${HORNET_JS_GENERATOR_LITE} --dependencyVersionFix=generator-hornet-js-lite && HORNET_JS_GENERATOR_LITE_BATCH=`npm show generator-hornet-js-lite-batch@latest version` && hb dependency:set --versionFix=${HORNET_JS_GENERATOR_LITE_BATCH} --dependencyVersionFix=generator-hornet-js-lite-batch && HORNET_JS_BUILDER=`npm show hornet-js-builder@latest version` && hb dependency:set --versionFix=${HORNET_JS_BUILDER} --dependencyVersionFix=hornet-js-builder && HORNET_JS_COMMUNITY=`npm show hornet-js-community@latest version` && hb dependency:set --versionFix=${HORNET_JS_COMMUNITY} --dependencyVersionFix=hornet-js-community && HORNET_JS_MAN=`npm show hornet-js-man@latest version`  && hb dependency:set --versionFix=${HORNET_JS_MAN} --dependencyVersionFix=hornet-js-man",
+    "start": "node index.js",
+    "version": "echo $npm_package_version"
+  },
+  "author": "MEAE - Ministère de l'Europe et des Affaires étrangères"
+}
