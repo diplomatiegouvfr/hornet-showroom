@@ -24,7 +24,7 @@
     "hornet-js-utils-dts": "5.1.0"
   },
   "appDependencies": {
-    "hornet-themes-intranet": "5.1.0",
+    "hornet-themes": "5.1.0",
     "hornet-js-batch": "5.1.0",
     "hornet-js-bean": "5.1.0",
     "hornet-js-components": "5.1.0",
