@@ -11,7 +11,7 @@
         "twitter": "https://twitter.com/FrameworkHornet",
         "facebook": ""
     },
-    "themeName": "hornet-themes-intranet",
+    "themeName": "hornet-themes",
     "localeI18n": {
         "locale": "fr-FR",
         "lang": "fr"
@@ -19,14 +19,12 @@
     "logClient": {
         "remote": false,
         "level": "INFO",
-        "appenders": [
-            {
-                "type": "BrowserConsole",
-                "layout": {
+        "appenders": [{
+            "type": "BrowserConsole",
+            "layout": {
                 "type": "THIN"
-                }
             }
-        ]
+        }]
     },
     "fullSpa": {
         "enabled": true,

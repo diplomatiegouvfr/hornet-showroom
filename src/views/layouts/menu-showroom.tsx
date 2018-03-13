@@ -31,7 +31,10 @@ export class MenuShowroom extends HornetComponent<MenuShowroomProps, any> {
             this.setState({ reload: reload })
         });
 
-        this.state.isMenuOpen = false;
+        this.state = {
+            ...this.state,
+            isMenuOpen: false
+        }
     }
 
     /**
@@ -42,8 +45,8 @@ export class MenuShowroom extends HornetComponent<MenuShowroomProps, any> {
         return (
             <div id="showroom-menu-container">
                 <Menu vertical={true} onToggleClick={this.openCloseMenu} closeOnLinkClick={false}
-                      closeOnClickOutside={false} closeOnTabOutside={false} toggleMenuState={this.props.menuState}
-                      isMenuOpen={this.props.menuState}/>
+                    closeOnClickOutside={false} closeOnTabOutside={false} toggleMenuState={this.props.menuState}
+                    isMenuOpen={this.props.menuState} />
             </div>
         );
     }

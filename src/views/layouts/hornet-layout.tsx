@@ -43,7 +43,10 @@ export class HornetLayout extends HornetPage<any, HornetLayoutProps, any> {
         super(props, context);
 
         const currentUrl = Utils.getCls("hornet.routePath");
-        this.state.applicationTitle = this.i18n(NavigationUtils.retrievePageTextKey(NavigationUtils.getConfigMenu(), currentUrl));
+        this.state = {
+            ...this.state,
+            applicationTitle: this.i18n(NavigationUtils.retrievePageTextKey(NavigationUtils.getConfigMenu(), currentUrl))
+        }
     }
 
     prepareClient() {
@@ -82,32 +85,32 @@ export class HornetLayout extends HornetPage<any, HornetLayoutProps, any> {
         try {
             return (
                 <html dir="ltr" lang="fr">
-                <head>
-                    <meta name="viewport"
-                          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
-                    <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8"/>
-                    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-                    <link rel="icon" type="image/png" href={this.genUrlStatic(this.state.appLogo)}/>
-                    <title>{this.i18n("applicationTitle") + "  - " + this.i18n(this.state.applicationTitle)}</title>
-                    <link rel="stylesheet" type="text/css" href={HornetLayout.genUrlTheme(this.state.fwkTheme)}/>
-                    <link rel="stylesheet" type="text/css" href={this.genUrlStatic(this.state.appTheme)}/>
-                    <link rel="stylesheet" type="text/css" href={this.genUrlStatic(this.state.codeMirrorTheme)}/>
-                    <link rel="stylesheet" type="text/css" href={this.genUrlStatic(this.state.highlightTheme)}/>
-                </head>
-                <body>
-                {
-                    !this.state.nojavascript ?
-                        <div id="firstLoadingSpinner">
-                            <style dangerouslySetInnerHTML={{__html: styleLoader}}/>
-                            <div style={loadingOverlayStyle}/>
-                            <div style={loaderStyle} className="loader-page"/>
-                        </div>
-                        : null
-                }
-                <div id="app" dangerouslySetInnerHTML={{__html: this.state.content}}/>
-                <script dangerouslySetInnerHTML={{__html: (this.state.state || "").toString()}}/>
-                {this.renderScript()}
-                </body>
+                    <head>
+                        <meta name="viewport"
+                            content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+                        <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
+                        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+                        <link rel="icon" type="image/png" href={this.genUrlStatic(this.state.appLogo)} />
+                        <title>{this.i18n("applicationTitle") + "  - " + this.i18n(this.state.applicationTitle)}</title>
+                        <link rel="stylesheet" type="text/css" href={HornetLayout.genUrlTheme(this.state.fwkTheme)} />
+                        <link rel="stylesheet" type="text/css" href={this.genUrlStatic(this.state.appTheme)} />
+                        <link rel="stylesheet" type="text/css" href={this.genUrlStatic(this.state.codeMirrorTheme)} />
+                        <link rel="stylesheet" type="text/css" href={this.genUrlStatic(this.state.highlightTheme)} />
+                    </head>
+                    <body>
+                        {
+                            !this.state.nojavascript ?
+                                <div id="firstLoadingSpinner">
+                                    <style dangerouslySetInnerHTML={{ __html: styleLoader }} />
+                                    <div style={loadingOverlayStyle} />
+                                    <div style={loaderStyle} className="loader-page" />
+                                </div>
+                                : null
+                        }
+                        <div id="app" dangerouslySetInnerHTML={{ __html: this.state.content }} />
+                        <script dangerouslySetInnerHTML={{ __html: (this.state.state || "").toString() }} />
+                        {this.renderScript()}
+                    </body>
                 </html>
             );
         } catch (e) {

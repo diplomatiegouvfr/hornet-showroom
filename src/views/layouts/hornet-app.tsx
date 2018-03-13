@@ -40,8 +40,13 @@ export class HornetApp extends HornetPage<any, HornetAppProps, any> {
 
     constructor(props: HornetAppProps, context?: any) {
         super(props, context);
-        this.state.logoUrl = this.genUrlStatic(props.relativeLogoUrl);
-        this.state.content = props.content;
+
+        this.state = {
+            ...this.state,
+            logoUrl: this.genUrlStatic(props.relativeLogoUrl),
+            content: props.content,
+            isMenuOpen: false
+        }
 
         this.listen(URL_CHANGE_EVENT, (ev) => {
 
@@ -72,7 +77,7 @@ export class HornetApp extends HornetPage<any, HornetAppProps, any> {
         this.listen(SEARCH_CLOSE_EVENT, this.searchClose);
         this.listen(MENU_LINK_ACTIVATED, this.menuLinkActived);
 
-        this.state.isMenuOpen = false;
+
     }
 
     /**
@@ -91,7 +96,7 @@ export class HornetApp extends HornetPage<any, HornetAppProps, any> {
                 //on scroll une première fois avant pour un meilleur effet visuel
                 elem.scrollIntoView();
                 elem.focus();
-                setTimeout(function() {
+                setTimeout(function () {
                     elem.scrollIntoView();
                     elem.focus();
                 }, 500);
@@ -196,6 +201,6 @@ export class HornetApp extends HornetPage<any, HornetAppProps, any> {
         if (!this.state.isMenuOpen) {
             this.elementToFocus = event.detail.linkId;
         }
-        this.setState({isMenuOpen: true});
+        this.setState({ isMenuOpen: true });
     }
 }

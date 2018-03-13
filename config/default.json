@@ -1,5 +1,5 @@
 {
-  "contextPath": "hornetshowroom",
+  "contextPath": "hornet-showroom-online",
   "welcomePage": "/accueil",
   "communityLink": {
     "git": {
@@ -32,7 +32,7 @@
     "httpOnly": true,
     "secure": true
   },
-  "themeName": "hornet-themes-intranet",
+  "themeName": "hornet-themes",
   "security": {
     "enabled": true,
     "hpp": true,
@@ -58,6 +58,7 @@
       "imgSrc": [
         "'self'"
       ],
+      "frameAncestors": [],
       "reportOnly": false,
       "setAllHeaders": true,
       "disableAndroid": false
@@ -96,12 +97,11 @@
     "remote": false,
     "level": "INFO",
     "appenders": [{
-        "type": "BrowserConsole",
-        "layout": {
-          "type": "THIN"
-        }
+      "type": "BrowserConsole",
+      "layout": {
+        "type": "THIN"
       }
-    ]
+    }]
   },
   "defaultServices": {
     "host": "http://localhost:8888",
@@ -110,5 +110,9 @@
   "cache": {
     "enabled": true,
     "timetolive": 60
+  },
+  "fullSpa": {
+    "enabled": true,
+    "staticPath": "/static"
   }
 }

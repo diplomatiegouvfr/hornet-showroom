@@ -28,7 +28,10 @@ export class SearchResult extends HornetComponent<SearchResultProps, any> {
     constructor(props, context?: any) {
         super(props, context);
 
-        this.state.isActive = false;
+        this.state = {
+            ...this.state,
+            isActive: false
+        }
     }
 
     /**

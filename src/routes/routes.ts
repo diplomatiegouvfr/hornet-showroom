@@ -9,6 +9,12 @@ export class Routes extends AbstractRoutes {
         super();
 
         /* Routes des pages */
+        this.addPageRoute("/",
+            () => new PageRouteInfos(HomePage),
+            PUBLIC_ROUTE
+        );
+
+        /* Routes des pages */
         this.addPageRoute("/accueil",
             () => new PageRouteInfos(HomePage),
             PUBLIC_ROUTE

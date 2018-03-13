@@ -51,7 +51,7 @@ export class Editor<P extends EditorProps, S extends EditorState> extends Hornet
      *  @param  newCode 
      */
     updateCode(newCode: string) {
-        this.state.code = newCode;
+
         this.props.handleChangeCode(newCode, this.props.keyInMd);
     }
 

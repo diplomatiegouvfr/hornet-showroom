@@ -73,7 +73,7 @@
  * hornet-js-react-components - Ensemble des composants web React de base de hornet-js
  *
  * @author MEAE - Ministère de l'Europe et des Affaires étrangères
- * @version v5.1.0
+ * @version v5.1.1
  * @link git+https://github.com/diplomatiegouvfr/hornet-js.git
  * @license CECILL-2.1
  */
@@ -165,7 +165,10 @@ export class Menu extends HornetComponent<MenuProps, any> {
     constructor(props: MenuProps, context?: any) {
         super(props, context);
 
-        this.state.items = this.props.configMenu ? NavigationUtils.getFilteredConfigNavigation(_.cloneDeep(this.props.configMenu), this.user) : NavigationUtils.getFilteredConfigNavigation(NavigationUtils.getConfigMenu(), this.user);
+        this.state = {
+            ...this.state,
+            items: this.props.configMenu ? NavigationUtils.getFilteredConfigNavigation(_.cloneDeep(this.props.configMenu), this.user) : NavigationUtils.getFilteredConfigNavigation(NavigationUtils.getConfigMenu(), this.user)
+        }
         if (this.props.closeOnClickOutside) this.handleMenuOutsideClick.bind(this);
         //this.state.isMenuActive = false;
 
@@ -326,10 +329,10 @@ export class Menu extends HornetComponent<MenuProps, any> {
                     style={{ maxWidth: this.state.currentWorkingZoneWidth }}>
                     {this.state.showIconInfo && shouldShowIconInfo ? <MenuInfoAccessibilite /> : null}
                     <MenuNavigation items={this.state.items} isMenuOpen={this.props.isMenuOpen}
-                                    isVisible={this.state.toggleMenuState}
-                                    closeMenu={this.handleToggleMenu.bind(this)}
-                                    dataPassThru={this.props.dataPassThru}
-                                    closeOnLinkClick={this.props.closeOnLinkClick}/>
+                        isVisible={this.state.toggleMenuState}
+                        closeMenu={this.handleToggleMenu.bind(this)}
+                        dataPassThru={this.props.dataPassThru}
+                        closeOnLinkClick={this.props.closeOnLinkClick} />
                 </div>
             </div>
         );
@@ -385,8 +388,11 @@ export class Menu extends HornetComponent<MenuProps, any> {
             maxWidth = this.state.workingZoneWidth;
             classNameExpanded = "mainLayoutClassName";
         }
-        this.state.currentWorkingZoneWidth = maxWidth;
-        this.state.classNameExpanded = classNameExpanded;
+
+        this.setState({
+            currentWorkingZoneWidth: maxWidth,
+            classNameExpanded: classNameExpanded
+        });
     }
 
     /*private handleMajLink() {

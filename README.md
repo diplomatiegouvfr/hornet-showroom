@@ -1,11 +1,11 @@
-hornet showroom 5.1.0
-==========================
+hornet showroom 5.1.1
+=====================
 
 
 # Prérequis
 
-* NodeJS 6.X
-* hornet-js-builder 1.x.x (le builder) installé globalement avec la commande `npm install -g hornet-js-builder`
+* NodeJS 8.X
+* hornet-js-builder 1.x.x (le builder) installé globalement avec la commande `npm install -g hornet-js-build`
 
 * checkout du projet `hornet-showroom`
 

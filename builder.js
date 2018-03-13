@@ -141,7 +141,7 @@ module.exports = {
             var templateHornetName = "generator-hornet-js";
             var templateHornetLiteName = "generator-hornet-js-lite";
             var templateHornetLiteBatchName = "generator-hornet-js-lite-batch";
-            var hornetThemes = "hornet-themes-intranet";
+            var hornetThemes = "hornet-themes";
             var communityName = "hornet-js-community";
             var navigationMergeFile = "./src/resources/navigationMerge.json";
             var navigationExtFile = "./src/resources/navigationExt.json";
@@ -195,8 +195,6 @@ module.exports = {
                 "test-wrapper",
                 "chart-donut",
                 "chart-donut",
-                "edition-action-column",
-                "edition-action-body-cell",
                 "input-text-body-cell"
             ];
 
@@ -478,17 +476,14 @@ module.exports = {
     },
     externalModules: {
         enabled: false,
-        directories: [
-
-        ]
+        directories: []
     },
     config: {
         clientExclude: {
             modules: ["config", "continuation-local-storage"],
             noParse: ["node_modules/app/typescript"]
         },
-        typescript: { //bin: "~/Dev/node-v4.5.0-linux-x64/lib/node_modules/typescript"
-        },
+        typescript: {},
         webpack: {
             module: {
                 rules: [{
@@ -527,7 +522,7 @@ module.exports = {
             [/moment[\/\\]locale$/, /fr|en/],
             [/intl[\/\\]locale-data[\/\\]jsonp$/, /fr|en/]
 
-        ],      
-        spaFilter: ["^((?!.*config\/)).*"]        
+        ],
+        spaFilter: ["^((?!.*config\/)).*"]
     }
 };

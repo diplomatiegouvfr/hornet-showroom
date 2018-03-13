@@ -77,8 +77,8 @@ function hbw_install_pulled_builder() {
 
 	rm -Rf "${HB_INSTALL_BASEDIR}/${pulledVersion}"
 	mkdir -p "${HB_INSTALL_BASEDIR}/${pulledVersion}/node_modules"
-	mv ${HB_PULLED_DIR}/* ${HB_INSTALL_BASEDIR}/${pulledVersion}
-	mv ./node_modules/* ${HB_INSTALL_BASEDIR}/${pulledVersion}/node_modules
+	rsync -ah ${HB_PULLED_DIR}/ ${HB_INSTALL_BASEDIR}/${pulledVersion}/
+	rsync -ah ./node_modules/ ${HB_INSTALL_BASEDIR}/${pulledVersion}/node_modules/
 	rm -Rf ./node_modules
 
 	touch hb_version

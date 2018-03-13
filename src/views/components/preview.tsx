@@ -38,8 +38,11 @@ export class Preview<P extends PreviewProps, S extends PreviewState> extends Hor
 
     constructor(props, context?: any) {
         super(props);
-        this.state.previewVisible = false;
-        this.state.hasError = false;
+        this.state = {
+            ...this.state,
+            previewVisible: false,
+            hasError: false
+        }
     }
 
     /**

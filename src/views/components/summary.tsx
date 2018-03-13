@@ -35,7 +35,10 @@ export class Summary<P extends SummaryProps, S extends SummaryState> extends Hor
 
     constructor(props) {
         super(props);
-        this.state.isVisible = true;
+        this.state = {
+            ...this.state,
+            isVisible: true
+        }
     }
 
     /**

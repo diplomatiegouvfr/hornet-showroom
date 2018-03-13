@@ -73,7 +73,7 @@
  * hornet-js-react-components - Ensemble des composants web React de base de hornet-js
  *
  * @author MEAE - Ministère de l'Europe et des Affaires étrangères
- * @version v5.1.0
+ * @version v5.1.1
  * @link git+https://github.com/diplomatiegouvfr/hornet-js.git
  * @license CECILL-2.1
  */
@@ -177,7 +177,10 @@ export class MenuItem extends HornetComponent<MenuItemProps, any> {
                 };
             }
         }
-        this.state.style = style;
+        this.state = {
+            ...this.state,
+            style: style
+        }
 
     }
 
@@ -279,11 +282,11 @@ export class MenuItem extends HornetComponent<MenuItemProps, any> {
             let menuOpen = this.props.isMenuOpen;
             if (this.hasSubMenu()) {
                 subMenu = <MenuNavigation items={item.submenu}
-                                          level={item.level + 1} isMenuOpen={menuOpen}
-                                          idParent={item.id}
-                                          closeMenu={this.state.closeMenu}
-                                          dataPassThru={this.state.dataPassThru}
-                                          closeOnLinkClick={closeOnLinkClick}
+                    level={item.level + 1} isMenuOpen={menuOpen}
+                    idParent={item.id}
+                    closeMenu={this.state.closeMenu}
+                    dataPassThru={this.state.dataPassThru}
+                    closeOnLinkClick={closeOnLinkClick}
                 />;
             }
             return (
@@ -526,11 +529,11 @@ export class MenuNavigation extends HornetComponent<MenuNavigationProps, any> {
             if (item.visibleDansMenu) {
                 indexKey++;
                 return <MenuItem item={item} isMenuOpen={menuOpen}
-                                 isSubMenu={isSubMenu}
-                                 key={indexKey + item.text + item.url}
-                                 closeMenu={closeMenu}
-                                 dataPassThru={dataPassThru}
-                                 closeOnLinkClick={closeOnLinkClick}/>;
+                    isSubMenu={isSubMenu}
+                    key={indexKey + item.text + item.url}
+                    closeMenu={closeMenu}
+                    dataPassThru={dataPassThru}
+                    closeOnLinkClick={closeOnLinkClick} />;
             }
         });
 

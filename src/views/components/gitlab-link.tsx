@@ -27,8 +27,12 @@ export class GitLabLink extends HornetComponent<HornetComponentProps, any> {
         let currentPath = Utils.getCls("hornet.routePath");
         let menuConfig = NavigationUtils.getConfigMenu();
         let currentItem = NavigationUtils.getCurrentItem(menuConfig, currentPath);
-        this.state.currentPath = currentPath;
-        this.state.url = currentItem ? (currentItem as any).gitlabUrl : null;
+        this.state =
+            {
+                ...this.state,
+                currentPath: currentPath,
+                url: currentItem ? (currentItem as any).gitlabUrl : null
+            }
         this.communityLink = Utils.appSharedProps.get("hornet.communityLink");
 
 
