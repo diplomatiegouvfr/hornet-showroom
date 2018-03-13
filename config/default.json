@@ -58,7 +58,6 @@
       "imgSrc": [
         "'self'"
       ],
-      "frameAncestors": [],
       "reportOnly": false,
       "setAllHeaders": true,
       "disableAndroid": false
@@ -113,6 +112,6 @@
   },
   "fullSpa": {
     "enabled": true,
-    "staticPath": "/static"
+    "staticPath": "/static-5.1.1-PUB"
   }
 }

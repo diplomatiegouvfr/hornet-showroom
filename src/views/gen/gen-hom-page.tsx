@@ -105,7 +105,7 @@ export class HomePage extends HornetPage<any, HornetComponentProps, any> {
     renderHornetHornetLite(): JSX.Element {
 
         //Force la lageur de la tuile
-        let aStyle = { "max-width": "12em" };
+        let aStyle = { "maxWidth": "12em" };
         return (
             <div>
                 <div className={"grid mbm"}>
