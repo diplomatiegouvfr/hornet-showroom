@@ -134,7 +134,7 @@ PathHelper.listFilesWithDirName = function (pathToParse, ext, filtersExclude) {
 /**
  * Liste les dossier présent dans le path et commençant par startWith
  */
-PathHelper.listDir = function (pathToParse, startWith) {
+PathHelper.listDir = function (pathToParse, pattern, toExclude) {
     let dirs = [];
     let listFiles = fs.readdirSync(pathToParse);
 
@@ -143,11 +143,7 @@ PathHelper.listDir = function (pathToParse, startWith) {
         let dirName = currentPath.split("/");
         let projectName = PathHelper.cleanName(dirName[dirName.length - 1]);
         if (fs.statSync(currentPath).isDirectory()) {
-            if (projectName.indexOf(startWith) == 0 &&
-                projectName != "hornet-js-man" &&
-                projectName != "hornet-js-builder" &&
-                projectName != "hornet-js-community"
-            ) {
+            if (pattern.test(projectName)) {
                 let data = {
                     "name": projectName,
                     "dataPath": currentPath

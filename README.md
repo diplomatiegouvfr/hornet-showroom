@@ -1,53 +1,47 @@
-hornet showroom 5.1.1
-=====================
+# hornet showroom
 
-
-# Prérequis
+## Prérequis
 
 * NodeJS 8.X
-* hornet-js-builder 1.x.x (le builder) installé globalement avec la commande `npm install -g hornet-js-build`
+* hornet-js-builder 1.X installé en global:
 
-* checkout du projet `hornet-showroom`
+```shell
+npm install -g hornet-js-builder
+```
 
-# Initialisation
+## Initialisation
+
+Récupérer les sources sur projet.
 
 Se positionner dans le répertoire du projet `hornet-showroom` et lancer la commande:
 
-    $ hb install
+```shell
+hb install
+```
 
-# Démarrage de l'application en mode développement
-
-## Commande par défaut
+## Démarrage de l'application en mode développement
 
 la commande à exécuter en mode développement est la suivante:
 
-    $ hb w
+```shell
+hb w
+```
 
 Elle permet de lancer l'application en mode `watcher` afin que les modifications soient prises en compte (ce qui
 entrainera un redémarrage du serveur node dans le cas d'une détection de modification).
 
-## Options
 
-Il est également possible d'ajouter à cette commande l'option:
-
-    $ hb w -i
-
-Cette commande indique au builder de ne pas transpiler les fichiers typescript en javascript.
-Elle est à utiliser dans le cas où l'IDE a été configuré de telle sorte que la transpilation ts->js
-se fasse via ce dernier.
-
-
-# Vérification
+## Vérification
 
 Vous pouvez accéder à l'application depuis l'url [http://localhost:8888/hornet-showroom/](http://localhost:8888/hornet-showroom)
 
-# Fichier de configuration de l'application : default.json
+## Fichier de configuration de l'application : default.json
 
 L'ensemble de la configuration applicative du serveur NodeJS se situe dans le fichier default.json contenu dans les sources de l'application.
 
 Ce fichier ne doit pas être modifié, excepté pour le log console. Les modifications sont à apporter dans les fichiers d'infrastructure.
 
-## Partie applicative
+### Partie applicative
 
 | Paramètre | Description | Valeur |
 |-----------|-------------|--------|
@@ -65,7 +59,7 @@ Ce fichier ne doit pas être modifié, excepté pour le log console. Les modific
 ```
 
 
-## Configuration des logs serveur
+### Configuration des logs serveur
 
 Niveau de log :
 
@@ -123,7 +117,7 @@ ex : type fichier
 ]
 ```
 
-## Configuration des logs client
+### Configuration des logs client
 
 | Paramètre | Description | Valeur |
 |-----------|-------------|--------|
@@ -137,7 +131,7 @@ ex : type fichier
     ...
 ```
 
-## Déclaration des appenders
+### Déclaration des appenders
 
 Type BrowserConsole :
 
@@ -230,3 +224,8 @@ Pour tester le cryptage, le user `www-data` doit pouvoir lire le répertoire
 sudo -u www-data ls -l /var/www/html/hornetshowroom-spa/
 ```
 
+## Licence
+
+`hornet-showroom` est sous [licence cecill 2.1](./LICENSE.md).
+
+Site web : [http://www.cecill.info](http://www.cecill.info/licences/Licence_CeCILL_V2.1-en.html)

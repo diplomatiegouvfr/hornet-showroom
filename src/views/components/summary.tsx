@@ -1,7 +1,7 @@
 import { Utils } from "hornet-js-utils";
 import { Logger } from "hornet-js-utils/src/logger";
 import *  as React from "react";
-import * as ReactDOM from "react-dom"
+import * as ReactDOM from "react-dom";
 import { HornetComponent } from "hornet-js-react-components/src/widget/component/hornet-component";
 import { HornetComponentProps } from "hornet-js-components/src/component/ihornet-component";
 import { HornetEvent } from "hornet-js-core/src/event/hornet-event";
@@ -12,7 +12,7 @@ export interface SummaryOpenCloseDetail {
     opened: boolean;
 }
 
-export var SUMMARY_OPEN_CLOSE = new HornetEvent<SummaryOpenCloseDetail>("SUMMARY_OPEN_CLOSE");
+export let SUMMARY_OPEN_CLOSE = new HornetEvent<SummaryOpenCloseDetail>("SUMMARY_OPEN_CLOSE");
 
 
 const logger: Logger = Utils.getLogger("hornet-showroom.summary");
@@ -37,8 +37,8 @@ export class Summary<P extends SummaryProps, S extends SummaryState> extends Hor
         super(props);
         this.state = {
             ...this.state,
-            isVisible: true
-        }
+            isVisible: true,
+        };
     }
 
     /**
@@ -70,12 +70,12 @@ export class Summary<P extends SummaryProps, S extends SummaryState> extends Hor
      * @inheritDoc
      */
     render() {
-        let visible = this.state.isVisible ? "summary-visible" : "summary-hidden";
+        const visible = this.state.isVisible ? "summary-visible" : "summary-hidden";
 
 
-        let classNameButtonGitlab = {
+        const classNameButtonGitlab = {
             "gitlab-button": true,
-            //  "gitlab-button-right-0": summary.length == 0
+            //  "gitlab-button-right-0": summary.length === 0
         };
 
         return (
@@ -91,7 +91,7 @@ export class Summary<P extends SummaryProps, S extends SummaryState> extends Hor
                                 {this.state.summary.map((title, index) => {
                                     return (
                                         <div className={"summary-title"} key={"title" + index.toString()}>
-                                            <a id={"title-" + title.id} onClick={() => { this.goToAnchor(title.id) }}
+                                            <a id={"title-" + title.id} onClick={() => { this.goToAnchor(title.id); }}
                                                 className={"summary-title summary-title-" + title.level}>{title.name}</a>
                                         </div>
                                     );
@@ -138,7 +138,7 @@ export class Summary<P extends SummaryProps, S extends SummaryState> extends Hor
             id = this.currentItem.id;
         }
 
-        let elem = document.getElementById("title-" + id);
+        const elem = document.getElementById("title-" + id);
         if (elem) {
             elem.className += " title-active";
         }
@@ -150,19 +150,19 @@ export class Summary<P extends SummaryProps, S extends SummaryState> extends Hor
      * @param e
      */
     handleScroll(e): void {
-        let scrollPosition = e.target.scrollingElement.scrollTop;
+        const scrollPosition = e.target.scrollingElement.scrollTop;
 
         let closest = null;
         let closestItem = null;
 
         this.state.summary.map((item) => {
-            let elem = document.getElementById(item.id);
-            let elemTitle = document.getElementById("title-" + item.id);
+            const elem = document.getElementById(item.id);
+            const elemTitle = document.getElementById("title-" + item.id);
             if (closest && elem) {
 
                 elemTitle.className = elemTitle.className.replace(" title-active", "");
-                let pos = this.getTop(elem).top;
-                if (pos <= (scrollPosition + 60)) {
+                const pos = this.getTop(elem).top;
+                if (pos <= (scrollPosition + 80)) {
                     closest = elem;
                     closestItem = item;
                 }
@@ -190,17 +190,19 @@ export class Summary<P extends SummaryProps, S extends SummaryState> extends Hor
      * @returns {{top: number; left: number}}
      */
     getTop(element): any {
-        var top = 0, left = 0;
+        let topVal = 0;
+        let leftVal = 0;
         do {
-            top += element.offsetTop || 0;
-            left += element.offsetLeft || 0;
+            topVal += element.offsetTop || 0;
+            leftVal += element.offsetLeft || 0;
             element = element.offsetParent;
         } while (element);
 
         return {
-            top: top,
-            left: left
+            top: topVal,
+            left: leftVal,
         };
-    };
-};
+    }
+}
+
 

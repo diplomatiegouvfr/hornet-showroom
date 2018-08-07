@@ -7,8 +7,9 @@ target/
 istanbul/
 src/gen-doc
 src/resources/navigation.json
-static/hornet-themes/
+static/hornet-themes-intranet/
 static/html
+static/img
 static/messages*
 static/navigation*
 !builder.js
@@ -16,3 +17,6 @@ static/navigation*
 !path-helper.js
 !trigger-rundeck.js
 .vscode
+.idea
+test_report
+karma_html

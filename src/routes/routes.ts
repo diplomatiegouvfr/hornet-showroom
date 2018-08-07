@@ -9,28 +9,12 @@ export class Routes extends AbstractRoutes {
         super();
 
         /* Routes des pages */
-        this.addPageRoute("/",
-            () => new PageRouteInfos(HomePage),
-            PUBLIC_ROUTE
-        );
+        this.addPageRoute("/", () => new PageRouteInfos(HomePage), PUBLIC_ROUTE);
 
         /* Routes des pages */
-        this.addPageRoute("/accueil",
-            () => new PageRouteInfos(HomePage),
-            PUBLIC_ROUTE
-        );
-
-
-        this.addPageRoute("/catalogue",
-            () => new PageRouteInfos(CataloguePage),
-            PUBLIC_ROUTE
-        );
-
-        this.addPageRoute("/pictogrammes",
-            () => new PageRouteInfos(PictoPage),
-            PUBLIC_ROUTE
-        );
-
+        this.addPageRoute("/accueil", () => new PageRouteInfos(HomePage), PUBLIC_ROUTE);
+        this.addPageRoute("/catalogue", () => new PageRouteInfos(CataloguePage), PUBLIC_ROUTE);
+        this.addPageRoute("/pictogrammes", () => new PageRouteInfos(PictoPage), PUBLIC_ROUTE);
 
         /* Routes lazy */
         this.addLazyRoutes(URL_COMPOSANT, "showroom/showroom-routes");

@@ -19,13 +19,13 @@ import { MENU_LINK_ACTIVATED } from "src/widgets/navigation/menu-link";
 const logger: Logger = Utils.getLogger("hornet-showroom.views.layouts.hornet-app");
 
 export interface SearchResultEventDetail {
-    results: any
+    results: any;
 }
-export var SEARCH_RESULT_EVENT = new HornetEvent<SearchResultEventDetail>("SEARCH_RESULT_EVENT");
+export const SEARCH_RESULT_EVENT = new HornetEvent<SearchResultEventDetail>("SEARCH_RESULT_EVENT");
 
 export interface StopHighlightEventDetail {
 }
-export var STOP_HIGHLIGHT_EVENT = new HornetEvent<StopHighlightEventDetail>("STOP_HIGHLIGHT_EVENT");
+export const STOP_HIGHLIGHT_EVENT = new HornetEvent<StopHighlightEventDetail>("STOP_HIGHLIGHT_EVENT");
 
 export interface HornetAppProps extends HornetComponentProps {
     componentContext: any;
@@ -45,24 +45,24 @@ export class HornetApp extends HornetPage<any, HornetAppProps, any> {
             ...this.state,
             logoUrl: this.genUrlStatic(props.relativeLogoUrl),
             content: props.content,
-            isMenuOpen: false
-        }
+            isMenuOpen: false,
+        };
 
         this.listen(URL_CHANGE_EVENT, (ev) => {
 
-            var currentPath = ev.detail.newPath,
-                title = NavigationUtils.retrievePageTextKey(NavigationUtils.getConfigMenu(), currentPath);
+            const currentPath = ev.detail.newPath;
+            const title = NavigationUtils.retrievePageTextKey(NavigationUtils.getConfigMenu(), currentPath);
 
             NavigationUtils.applyTitlePageOnClient(this.i18n("applicationTitle") + "  - " + this.i18n(title));
         });
 
         this.listen(UPDATE_PAGE_EXPAND, (ev: HornetEvent<boolean>) => {
-            let configMax = 1200;
+            const configMax = 1200;
             let maxWidth;
             if (typeof Utils.getCls("hornet.pageLayoutWidth") === "undefined") {
                 maxWidth = "";
             } else {
-                if (window.document.getElementById("page").style.maxWidth.length == 0) {
+                if (window.document.getElementById("page").style.maxWidth.length === 0) {
                     maxWidth = configMax;
                 } else {
                     maxWidth = "";
@@ -91,15 +91,12 @@ export class HornetApp extends HornetPage<any, HornetAppProps, any> {
 
     componentDidUpdate() {
         if (this.elementToFocus) {
-            let elem = document.getElementById(this.elementToFocus);
+            const elem = document.getElementById(this.elementToFocus);
             if (elem) {
-                //on scroll une première fois avant pour un meilleur effet visuel
+                // on scroll une première fois avant pour un meilleur effet visuel
                 elem.scrollIntoView();
                 elem.focus();
-                setTimeout(function () {
-                    elem.scrollIntoView();
-                    elem.focus();
-                }, 500);
+                setTimeout(function () { elem.scrollIntoView(); elem.focus(); }, 500);
             }
             this.elementToFocus = null;
         }
@@ -108,13 +105,11 @@ export class HornetApp extends HornetPage<any, HornetAppProps, any> {
     static defaultProps = {
         composantPage: null,
         relativeLogoUrl: "/img/logoHornet.png",
-        workingZoneWidth: "100%"
+        workingZoneWidth: "100%",
     };
 
     onClickLinkFullscreen() {
-        this.setState({
-            modeFullscreen: !this.state.modeFullscreen
-        })
+        this.setState({ modeFullscreen: !this.state.modeFullscreen });
     }
 
     /**
@@ -129,21 +124,21 @@ export class HornetApp extends HornetPage<any, HornetAppProps, any> {
      */
     render(): JSX.Element {
         logger.info("VIEW HornetApp render");
-        let title = this.i18n("applicationTitle");
+        const title = this.i18n("applicationTitle");
 
-        let classes: any = {
-            'mode-fullscreen': this.state.modeFullscreen
+        const classes: any = {
+            "mode-fullscreen": this.state.modeFullscreen,
         };
 
-        let messIntl = this.i18n("header");
+        const messIntl = this.i18n("header");
 
-        let applicationTitle = this.i18n("applicationTitle");
+        const applicationTitle = this.i18n("applicationTitle");
 
-        let lienAide = (this.state.linkHelpVisible) ?
+        const lienAide = (this.state.linkHelpVisible) ?
             <li><a title={messIntl.help + applicationTitle} href={this.genUrl("/aide")}>{messIntl.help}</a></li>
             : null;
 
-        let menuClassName = this.state.isMenuOpen ? "fl menu-showroom menuOpen" : "fl menu-showroom menuClosed";
+        const menuClassName = this.state.isMenuOpen ? "fl menu-showroom menuOpen" : "fl menu-showroom menuClosed";
 
         return (
             <div id="site" className={classNames(classes)}>
@@ -173,7 +168,7 @@ export class HornetApp extends HornetPage<any, HornetAppProps, any> {
      */
     private changeInternationalization(i18nLocale: string) {
 
-        this.getService().changeLanguage({ "hornetI18n": i18nLocale }, (retourApi) => {
+        this.getService().changeLanguage({ hornetI18n: i18nLocale }, (retourApi) => {
             logger.trace("Retour API PartenaireApi.rechercher :", retourApi.body);
             Utils.setCls("hornet.internationalization", retourApi.body);
             this.forceUpdate();

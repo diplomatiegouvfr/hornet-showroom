@@ -139,7 +139,6 @@ export class MenuLink extends HornetComponent<MenuLinkProps, any> {
      */
     render(): JSX.Element {
         let item = this.state.item;
-        //logger.debug("MenuLink.render item.id : ", item.id);
         let attributesA = {};
 
         let hasSubMenu = NavigationUtils.hasVisibleSubMenu(item);
@@ -147,7 +146,6 @@ export class MenuLink extends HornetComponent<MenuLinkProps, any> {
         attributesA[ "className" ] = hasSubMenu ? HAVING_SUBMENU_CLASSNAME : null;
         attributesA[ "id" ] = item.id;
         attributesA[ "data-indice" ] = item.id;
-        attributesA[ "role" ] = "menuitem";
         attributesA[ "title" ] = this.i18n(item.text);
         if (this.state.dataPassThru) {
             attributesA[ "data-pass-thru" ] = "true";
@@ -157,7 +155,7 @@ export class MenuLink extends HornetComponent<MenuLinkProps, any> {
         attributesA[ "onMouseEnter" ] = this.handleMouseEnter;
         attributesA[ "onMouseLeave" ] = this.handleMouseLeave;
         /* On n'accède pas aux éléments de menu (autres que le premier) via la tabulation */
-        if (item.id == MENU_ROOT + "0") {
+        if (item.id === MENU_ROOT + "0") {
             attributesA[ "tabIndex" ] = 0;
         } else {
             attributesA[ "tabIndex" ] = -1;
@@ -176,7 +174,7 @@ export class MenuLink extends HornetComponent<MenuLinkProps, any> {
      * @param event
      */
     private handleKeyDown(event): void {
-        if (event.keyCode == KeyCodes.ENTER || event.keyCode == KeyCodes.SPACEBAR) {
+        if (event.keyCode === KeyCodes.ENTER || event.keyCode === KeyCodes.SPACEBAR) {
             let item = this.state.item;
             let url = (item.url) ? this.genUrl(item.url) : "#";
             window.router.setRoute(this.genUrl(url));

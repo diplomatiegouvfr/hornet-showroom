@@ -35,7 +35,7 @@ export class HornetContent extends HornetComponent<ContentProps, any> {
 
         this.listen(COMPONENT_CHANGE_EVENT, (ev) => {
             this.fadeIn();
-            if (!(ev.detail.newComponent == ErrorPage)) {
+            if (!(ev.detail.newComponent === ErrorPage)) {
                 this.setState({ content: ev.detail.newComponent, navigateData: ev.detail.data }, () => {
                     this.fire(PAGE_READY_EVENT.withData({}));
                     this.fadeIn(true);
@@ -53,9 +53,9 @@ export class HornetContent extends HornetComponent<ContentProps, any> {
     render(): JSX.Element {
         logger.info("VIEW Content render");
 
-        var title = this.i18n("topButtonTitle");
-        let clsSize = Utils.getCls("hornet.pageLayoutWidth");
-        let size = typeof clsSize == "undefined" ? 1200 : clsSize;
+        const title = this.i18n("topButtonTitle");
+        const clsSize = Utils.getCls("hornet.pageLayoutWidth");
+        const size = typeof clsSize === "undefined" ? 1200 : clsSize;
 
         let content;
 
@@ -65,11 +65,11 @@ export class HornetContent extends HornetComponent<ContentProps, any> {
             content = this.wrap(this.state.content, { navigateData: this.state.navigateData }, (this.props as any));
         }
 
-        let className = this.state.isMenuVisible ? "menuVisible" : "";
+        const className = this.state.isMenuVisible ? "menuVisible" : "";
         return (
-            <div style={{ "width": "100%" }}>
+            <div style={{ width: "100%" }}>
                 <HeaderShowroom />
-                <main id="page" className={className}>
+                <main id="showroom-page" className={className}>
                     <div id={"doc-container"}>
                         {content}
                     </div>
@@ -91,7 +91,7 @@ export class HornetContent extends HornetComponent<ContentProps, any> {
 
         // on applique le fadeIn/fadeOut que sur un changement de page et non lorsque l'on utilise le summary avec les anchors
         if (window && window.location && window.location.href && !_.includes(window.location.href, "#")) {
-            let e = document.getElementById("doc-container");
+            const e = document.getElementById("doc-container");
             if (bool) {
                 e.classList.remove("animate-out");
                 e.classList.add("animate-in");

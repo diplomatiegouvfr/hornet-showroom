@@ -6,12 +6,7 @@ import { HornetApp } from "src/views/layouts/hornet-app";
 import { ErrorPage } from "hornet-js-react-components/src/widget/component/error-page";
 import { ReactClientInitializer } from "hornet-js-react-components/src/react/react-client";
 
-declare var module: { hot: any };
-if (module.hot) {
-    module.hot.accept();
-}
-
-(function startClient() {
+const startClient = () => {
     const logger: Logger = Utils.getLogger("hornet-showroom.client");
 
     function routeLoader(name: string, callback: any) {
@@ -24,7 +19,7 @@ if (module.hot) {
     try {
         (<any>Error).stackTraceLimit = Infinity;
 
-        let configClient = {
+        const configClient = {
             appComponent: HornetApp,
             errorComponent: ErrorPage,
             routesLoaderfn: routeLoader,
@@ -34,26 +29,28 @@ if (module.hot) {
                 strict: false,
                 convert_hash_in_init: false,
                 recurse: false,
-                notfound: function() {
+                notfound: () => {
                     logger.error("Erreur. Cette route n'existe pas :'" + this.path + "'");
-                }
-            }
+                },
+            },
         };
 
         // On supprime le spinner de chargement de l'application
         // Cela ne gêne pas React car il est en dehors de sa div "app"
-        let readyCallback = function() {
-            var appLoading = document.getElementById("firstLoadingSpinner");
+        const readyCallback = () => {
+            const appLoading = document.getElementById("firstLoadingSpinner");
             if (appLoading) {
                 appLoading.parentNode.removeChild(appLoading);
             }
         };
 
-        let clientInit: ReactClientInitializer = new ReactClientInitializer(configClient.appComponent, readyCallback);
+        const clientInit: ReactClientInitializer = new ReactClientInitializer(configClient.appComponent, readyCallback);
 
         Client.initAndStart(configClient, clientInit);
     } catch (exc) {
         logger.error("Erreur lors du chargement de l'appli côté client (Exception)", exc);
     }
 
-})();
+};
+
+startClient();

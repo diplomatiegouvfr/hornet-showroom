@@ -23,13 +23,16 @@ export class HeaderShowroom extends HornetComponent<HeaderShowroomProps, any> {
             <HeaderPage>
                 <div id="header-showroom">
                     <div className="grid-4 has-gutter">
-                        <div className={"header-titre one-sixth"}><a href={this.genUrl(Utils.config.getOrDefault("welcomePage", "/"))} title={this.i18n("applicationTitle")}>SHOWROOM</a></div>
+                        <div className={"header-titre one-sixth"}>
+                            <a href={this.genUrl(Utils.config.getOrDefault("welcomePage", "/"))}
+                                title={this.i18n("applicationTitle")}>SHOWROOM</a>
+                        </div>
                         <div className={"one-half"}><BreadCrumb /></div>
                         <div className={"one-sixth social-network"}><SocialNetwork /></div>
                         <div className={"one-sixth header-version"}>{"v" + Utils.appSharedProps.get("appVersion")}</div>
                     </div>
                 </div>
             </HeaderPage>
-        )
+        );
     }
 }

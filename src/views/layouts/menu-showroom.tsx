@@ -7,15 +7,15 @@ import { HornetEvent } from "hornet-js-core/src/event/hornet-event";
 
 
 export interface MenuOpenEventDetail {
-    open: boolean
+    open: boolean;
 }
-export var MENU_OPEN_EVENT = new HornetEvent<MenuOpenEventDetail>("MENU_OPEN_EVENT");
+export const MENU_OPEN_EVENT = new HornetEvent<MenuOpenEventDetail>("MENU_OPEN_EVENT");
 
 
 export interface MenuShowroomProps extends HornetComponentProps {
     menuState?: boolean;
     isMenuOpen?: boolean;
-};
+}
 
 
 /**
@@ -27,14 +27,14 @@ export class MenuShowroom extends HornetComponent<MenuShowroomProps, any> {
         super(props, context);
 
         this.listen(SELECTED_RESULT_CHANGE, (event) => {
-            let reload = !this.state.reload;
-            this.setState({ reload: reload })
+            const reloadState = !this.state.reload;
+            this.setState({ reload: reloadState });
         });
 
         this.state = {
             ...this.state,
-            isMenuOpen: false
-        }
+            isMenuOpen: false,
+        };
     }
 
     /**
@@ -55,12 +55,12 @@ export class MenuShowroom extends HornetComponent<MenuShowroomProps, any> {
      * fermeture et ouverture du menu, appelée au click sur le toggler du menu
      */
     private openCloseMenu() {
-        if (this.state.isMenuOpen == false && !this.props.menuState) {
+        if (this.state.isMenuOpen === false && !this.props.menuState) {
             this.fire(MENU_OPEN_EVENT.withData({ open: true }));
             this.setState({ isMenuOpen: true });
         } else {
             this.fire(MENU_OPEN_EVENT.withData({ open: false }));
-            this.setState({ isMenuOpen: false, });
+            this.setState({ isMenuOpen: false });
         }
     }
 }

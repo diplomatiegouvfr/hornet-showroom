@@ -23,19 +23,19 @@ export class ErrorPage extends HornetPage<any, HornetComponentProps, any> {
      */
     render(): JSX.Element {
         logger.info("VIEW ErreurPage render");
-        var error = Utils.getCls("hornet.currentError");
-        var exceptions;
-        if (error != null) {
+        const error = Utils.getCls("hornet.currentError");
+        let exceptions;
+        if (error !== null) {
             if (error instanceof BusinessErrorList) {
                 exceptions = (error as BusinessErrorList).getErrors();
             } else {
-                exceptions = [error];
+                exceptions = [ error ];
             }
         }
         return (
             <div>
                 <h2>{this.i18n("errorsTitle")}</h2>
-                <Notification id="errorPage" exceptions={exceptions}/>
+                <Notification id="errorPage" exceptions={exceptions} />
             </div>
         );
     }

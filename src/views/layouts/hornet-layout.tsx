@@ -7,18 +7,22 @@ import { NavigationUtils } from "hornet-js-components/src/utils/navigation-utils
 
 const logger: Logger = Utils.getLogger("hornet-showroom.views.layouts.hornet-layout");
 
-const styleLoader: any = ".loader-page:before {display: block;position: absolute;content: '';left: -200px;width: 200px;height: 4px;background-color: #00d468;animation: loadingPage 2s linear infinite;}@keyframes loadingPage {from {left: -200px; width: 30%;}50% {width: 30%;}70% {width: 70%;}80% { left: 50%;}95% {left: 120%;}to {left: 100%;}}";
+const styleLoader: any = ".loader-page:before {display: block;position: absolute;content: '';" +
+    "left: -200px;width: 200px;height: 4px;background-color: #00d468;" +
+    "animation: loadingPage 2s linear infinite;}" +
+    "@keyframes loadingPage {from {left: -200px; width: 30%;}50% " +
+    "{width: 30%;}70% {width: 70%;}80% { left: 50%;}95% {left: 120%;}to {left: 100%;}}";
 
 export interface HornetLayoutProps extends HornetComponentProps {
-    content: string,
-    state: any,
-    appLogo: string,
-    appTheme: string,
-    fwkTheme: string,
-    appStatic: string,
-    applicationLoading: string,
-    nojavascript: boolean,
-    applicationTitle: string
+    content: string;
+    state: any;
+    appLogo: string;
+    appTheme: string;
+    fwkTheme: string;
+    appStatic: string;
+    applicationLoading: string;
+    nojavascript: boolean;
+    applicationTitle: string;
 }
 
 /**
@@ -35,8 +39,7 @@ export class HornetLayout extends HornetPage<any, HornetLayoutProps, any> {
         appStatic: "/js/client.js",
         nojavascript: false,
         applicationTitle: "",
-        workingZoneWidth: "100%"
-
+        workingZoneWidth: "100%",
     };
 
     constructor(props: HornetLayoutProps, context?: any) {
@@ -45,8 +48,8 @@ export class HornetLayout extends HornetPage<any, HornetLayoutProps, any> {
         const currentUrl = Utils.getCls("hornet.routePath");
         this.state = {
             ...this.state,
-            applicationTitle: this.i18n(NavigationUtils.retrievePageTextKey(NavigationUtils.getConfigMenu(), currentUrl))
-        }
+            applicationTitle: this.i18n(NavigationUtils.retrievePageTextKey(NavigationUtils.getConfigMenu(), currentUrl)),
+        };
     }
 
     prepareClient() {
@@ -61,17 +64,17 @@ export class HornetLayout extends HornetPage<any, HornetLayoutProps, any> {
      */
     render(): JSX.Element {
         logger.info("VIEW HornetLayout render");
-        let loaderStyle: React.CSSProperties = {
-            "width": "100%",
-            "position": "absolute",
-            "overflow": "hidden",
-            "backgroundColor": "#eee",
-            "height": "4px",
-            zIndex: 9999
+        const loaderStyle: React.CSSProperties = {
+            width: "100%",
+            position: "absolute",
+            overflow: "hidden",
+            backgroundColor: "#eee",
+            height: "4px",
+            zIndex: 9999,
         };
 
 
-        let loadingOverlayStyle: React.CSSProperties = {
+        const loadingOverlayStyle: React.CSSProperties = {
             background: "black",
             position: "fixed",
             top: 0,
@@ -79,7 +82,7 @@ export class HornetLayout extends HornetPage<any, HornetLayoutProps, any> {
             right: 0,
             left: 0,
             opacity: 0.1,
-            "zIndex": 9999
+            zIndex: 9999,
         };
 
         try {

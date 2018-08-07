@@ -1,11 +1,63 @@
 {
-
-  "menu": [{
+  "menu": [
+    {
+      "text": "HORNET JS ",
+      "title": "HORNET-JS",
+      "visibleDansMenu": true,
+      "visibleDansPlan": true,
+      "submenu": [
+        {
+          "text": "Documentation Framework ",
+          "title": "08-Documentation Framework",
+          "visibleDansMenu": true,
+          "visibleDansPlan": true,
+          "submenu": [
+            {
+              "text": "hornet-js-builder",
+              "title": "hornet-js-builder",
+              "visibleDansMenu": true,
+              "visibleDansPlan": true,
+              "url": "/composant/page/hornet-js-builder/readme"
+            },
+            {
+              "text": "generator-hornet-js",
+              "title": "generator-hornet-js",
+              "visibleDansMenu": true,
+              "visibleDansPlan": true,
+              "url": "/composant/page/generator-hornet-js/readme"
+            },
+            {
+              "text": "applitutoriel-js",
+              "title": "applitutoriel-js",
+              "visibleDansMenu": true,
+              "visibleDansPlan": true,
+              "url": "/composant/page/applitutoriel-js/readme"
+            },
+            {
+              "text": "hornet-themes-intranet",
+              "title": "hornet-themes-intranet",
+              "visibleDansMenu": true,
+              "visibleDansPlan": true,
+              "url": "/composant/page/hornet-themes-intranet/readme"
+            },
+            {
+              "text": "hornet-js-gc-monitor",
+              "title": "hornet-js-gc-monitor",
+              "visibleDansMenu": true,
+              "visibleDansPlan": true,
+              "url": "/composant/page/hornet-js-gc-monitor/readme"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "text": "HORNET JS LITE ",
       "title": "HORNET-JS-LITE",
       "visibleDansMenu": true,
       "visibleDansPlan": true,
-      "submenu": [{
+      "submenu": [
+        {
           "text": "Composants ",
           "title": "03-Composants",
           "visibleDansMenu": true,
@@ -17,7 +69,66 @@
           "text": "Installation ",
           "title": "01-Installation",
           "visibleDansMenu": true,
-          "visibleDansPlan": true
+          "visibleDansPlan": true,
+          "position": 1,
+          "submenu": [
+            {
+              "gitlabUrl": "/hornet-js-man/blob/develop/docs/HORNET-JS/01-Installation/01-Node.md",
+              "text": "Node ",
+              "title": "01-Node",
+              "url": "/composant/page/hornet-js/installation/node",
+              "visibleDansMenu": true,
+              "visibleDansPlan": true
+            },
+            {
+              "gitlabUrl": "/hornet-js-man/blob/develop/docs/HORNET-JS/01-Installation/02-Hornet-js-builder.md",
+              "text": "Hornet js builder ",
+              "title": "02-Hornet-js-builder",
+              "url": "/composant/page/hornet-js/installation/hornet-js-builder",
+              "visibleDansMenu": true,
+              "visibleDansPlan": true
+            },
+            {
+              "gitlabUrl": "/hornet-js-man/blob/develop/docs/HORNET-JS/01-Installation/03-Webstorm.md",
+              "text": "Webstorm ",
+              "title": "03-Webstorm",
+              "url": "/composant/page/hornet-js/installation/webstorm",
+              "visibleDansMenu": true,
+              "visibleDansPlan": true
+            },
+            {
+              "gitlabUrl": "/hornet-js-man/blob/develop/docs/HORNET-JS/01-Installation/04-Visual Studio Code.md",
+              "text": "Visual Studio Code ",
+              "title": "04-Visual Studio Code",
+              "url": "/composant/page/hornet-js/installation/visual_studio_code",
+              "visibleDansMenu": true,
+              "visibleDansPlan": true
+            },
+            {
+              "gitlabUrl": "/hornet-js-man/blob/develop/docs/HORNET-JS/01-Installation/06-SMTP.md",
+              "text": "SMTP ",
+              "title": "06-SMTP",
+              "url": "/composant/page/hornet-js/installation/smtp",
+              "visibleDansMenu": true,
+              "visibleDansPlan": true
+            }
+          ]          
+        },
+        {
+          "text": "Architecture ",
+          "title": "02-Architecture",
+          "visibleDansMenu": true,
+          "visibleDansPlan": true,
+          "position": 2,
+          "submenu": [
+            {
+              "text": "Principes ",
+              "title": "01-Principes",
+              "visibleDansMenu": true,
+              "visibleDansPlan": true,
+              "url": "/composant/page/hornet-js/architecture/principes"
+            }
+          ]
         },
         {
           "text": "Conception ",
@@ -25,34 +136,102 @@
           "visibleDansMenu": true,
           "visibleDansPlan": true,
           "position": 3,
-          "submenu": [{
-            "text": "Javascript ",
-            "title": "01-Javascript",
-            "visibleDansMenu": true,
-            "visibleDansPlan": true,
-            "submenu": [{
-              "text": "Configuration ",
-              "title": "Configuration",
+          "submenu": [
+            {
+              "text": "Javascript ",
+              "title": "01-Javascript",
               "visibleDansMenu": true,
               "visibleDansPlan": true
-            }]
-          }]
+            }
+          ]
+        },
+        {
+          "text": "Tutoriel ",
+          "title": "05-Tutoriel",
+          "visibleDansMenu": true,
+          "visibleDansPlan": true,
+          "position": 4,
+          "submenu": [
+            {
+              "text": "Creer un projet",
+              "title": "01-Creer un projet",
+              "visibleDansMenu": true,
+              "visibleDansPlan": true,
+              "url": "/composant/page/generator-hornet-js-lite/readme"
+            },
+            {
+              "text": "Creer une nouvelle page ",
+              "title": "02-Creer-une-nouvelle-page",
+              "visibleDansMenu": true,
+              "visibleDansPlan": true
+            },
+            {
+              "text": "Creer un projet batch",
+              "title": "03-Creer un projet batch",
+              "visibleDansMenu": true,
+              "visibleDansPlan": true,
+              "url": "/composant/page/generator-hornet-js-lite-batch/readme"
+            }
+          ]
+        },
+        {
+          "text": "Documentation Framework ",
+          "title": "08-Documentation Framework",
+          "visibleDansMenu": true,
+          "visibleDansPlan": true,
+          "submenu": [
+            {
+              "text": "hornet-js-builder",
+              "title": "hornet-js-builder",
+              "visibleDansMenu": true,
+              "visibleDansPlan": true,
+              "url": "/composant/page/hornet-js-builder/readme"
+            },
+            {
+              "text": "generator-hornet-js-lite",
+              "title": "generator-hornet-js-lite",
+              "visibleDansMenu": true,
+              "visibleDansPlan": true,
+              "url": "/composant/page/generator-hornet-js-lite/readme"
+            },
+            {
+              "text": "generator-hornet-js-lite-batch",
+              "title": "generator-hornet-js-lite-batch",
+              "visibleDansMenu": true,
+              "visibleDansPlan": true,
+              "url": "/composant/page/generator-hornet-js-lite-batch/readme"
+            },
+            {
+              "text": "applitutoriel-js-lite",
+              "title": "applitutoriel-js-lite",
+              "visibleDansMenu": true,
+              "visibleDansPlan": true,
+              "url": "/composant/page/applitutoriel-js-lite/readme"
+            },
+            {
+              "text": "applitutoriel-js-batch",
+              "title": "applitutoriel-js-batch",
+              "visibleDansMenu": true,
+              "visibleDansPlan": true,
+              "url": "/composant/page/applitutoriel-js-batch/readme"
+            },
+            {
+              "text": "hornet-themes-intranet",
+              "title": "hornet-themes-intranet",
+              "visibleDansMenu": true,
+              "visibleDansPlan": true,
+              "url": "/composant/page/hornet-themes-intranet/readme"
+            },
+            {
+              "text": "hornet-js-gc-monitor",
+              "title": "hornet-js-gc-monitor",
+              "visibleDansMenu": true,
+              "visibleDansPlan": true,
+              "url": "/composant/page/hornet-js-gc-monitor/readme"
+            }
+          ]
         }
       ]
     }
-    /*
-    {
-      "text": "HORNET JS LITE ",
-      "title": "HORNET-JS-LITE",
-      "visibleDansMenu": true,
-      "visibleDansPlan": true,
-      "submenu": [{
-        "text": "Tutoriel ",
-        "title": "05-Tutoriel",
-        "visibleDansMenu": true,
-        "visibleDansPlan": true,
-        "url": "/tutoriel"
-      }]
-    }*/
   ]
 }

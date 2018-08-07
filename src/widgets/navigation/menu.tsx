@@ -83,15 +83,11 @@ import { NavigationUtils } from "hornet-js-components/src/utils/navigation-utils
 import { HornetComponentProps } from "hornet-js-components/src/component/ihornet-component";
 import { HornetComponent } from "hornet-js-react-components/src/widget/component/hornet-component";
 import { MenuNavigation } from "src/widgets/navigation/menu-navigation";
-import { MENU_LINK_ACTIVATED } from "src/widgets/navigation/menu-link";
 import * as _ from "lodash";
-import * as classnames from "classnames";
 import * as classNames from "classnames";
-import * as ReactDOM from "react-dom";
 import { KeyCodes } from "hornet-js-components/src/event/key-codes";
 import { MenuInfoAccessibilite } from "hornet-js-react-components/src/widget/navigation/menu-info-accessibilite";
 import { Utils } from "hornet-js-utils";
-import { HornetEvent } from "hornet-js-core/src/event/hornet-event";
 import { UPDATE_PAGE_EXPAND_MENU } from "hornet-js-react-components/src/widget/screen/layout-switcher";
 
 import HTMLAttributes = __React.HTMLAttributes;
@@ -153,13 +149,12 @@ export interface MenuProps extends HornetComponentProps {
 }
 
 export class Menu extends HornetComponent<MenuProps, any> {
-
     private burgerIcon: HTMLElement;
 
     static defaultProps = {
         closeOnLinkClick: true,
         closeOnClickOutside: true,
-        closeOnTabOutside: true
+        closeOnTabOutside: true,
     };
 
     constructor(props: MenuProps, context?: any) {
@@ -167,16 +162,12 @@ export class Menu extends HornetComponent<MenuProps, any> {
 
         this.state = {
             ...this.state,
-            items: this.props.configMenu ? NavigationUtils.getFilteredConfigNavigation(_.cloneDeep(this.props.configMenu), this.user) : NavigationUtils.getFilteredConfigNavigation(NavigationUtils.getConfigMenu(), this.user)
-        }
+            items: this.props.configMenu ? NavigationUtils.getFilteredConfigNavigation(_.cloneDeep(this.props.configMenu), this.user)
+                : NavigationUtils.getFilteredConfigNavigation(NavigationUtils.getConfigMenu(), this.user),
+        };
         if (this.props.closeOnClickOutside) this.handleMenuOutsideClick.bind(this);
-        //this.state.isMenuActive = false;
-
-        this.handleLayoutExpand();
 
         this.listen(UPDATE_PAGE_EXPAND_MENU, this.handleUpatePageMenuExpand);
-
-        // /        this.listen(MENU_LINK_ACTIVATED, this.handleMajLink);
     }
 
     /**
@@ -191,6 +182,8 @@ export class Menu extends HornetComponent<MenuProps, any> {
      * @inheritDoc
      */
     componentDidMount() {
+        // TODO A supprimer car pas l'utilite dans l'application ?
+        this.handleLayoutExpand();
         // window.addEventListener("resize", this.handleResize);
     }
 
@@ -198,7 +191,6 @@ export class Menu extends HornetComponent<MenuProps, any> {
      * @inheritDoc
      */
     componentWillUnmount() {
-        //window.removeEventListener('resize', this.handleResize);
         // this.remove(MENU_LINK_ACTIVATED, this.handleMajLink);
         this.remove(UPDATE_PAGE_EXPAND_MENU, this.handleUpatePageMenuExpand);
     }
@@ -209,7 +201,7 @@ export class Menu extends HornetComponent<MenuProps, any> {
      */
     private handleKeyDown(event: KeyboardEvent): void {
         /*echap*/
-        let keyCode = event.keyCode;
+        const keyCode = event.keyCode;
         switch (keyCode) {
             case KeyCodes.ESCAPE:
                 this.handleToggleMenu();
@@ -218,12 +210,12 @@ export class Menu extends HornetComponent<MenuProps, any> {
             /*tab si l'element focus n'est pas dans le menu, on ferme celui-ci*/
             case KeyCodes.TAB:
                 if (this.state.closeOnTabOutside) {
-                    let focus = document.activeElement;
-                    let menuMain = document.getElementById("menu-main");
+                    const focus = document.activeElement;
+                    const menuMain = document.getElementById("menu-main");
                     /*le changement de focus passe par le body*/
-                    let body = document.body;
-                    if (menuMain && focus && focus != menuMain && focus != body) {
-                        let inMenu = menuMain.contains(focus);
+                    const body = document.body;
+                    if (menuMain && focus && focus !== menuMain && focus !== body) {
+                        const inMenu = menuMain.contains(focus);
                         if (!inMenu) {
                             this.handleToggleMenu();
                         }
@@ -239,19 +231,19 @@ export class Menu extends HornetComponent<MenuProps, any> {
     render(): JSX.Element {
 
         let classname: any = {};
-        if (typeof window != "undefined") {
+        if (typeof window !== "undefined") {
             classname = {
-                "vertical": this.state.vertical && (window.innerWidth > showIconSize) ? true : false,
-                "menuHaut": true
+                vertical: this.state.vertical && (window.innerWidth > showIconSize) ? true : false,
+                menuHaut: true,
             };
         } else {
             classname = {
-                "vertical": this.state.vertical,
-                "menuHaut": true
+                vertical: this.state.vertical,
+                menuHaut: true,
             };
         }
 
-        let menuAttributes: HTMLAttributes<HTMLElement> = {};
+        const menuAttributes: HTMLAttributes<HTMLElement> = {};
         menuAttributes.className = classNames(classname);
 
         return (
@@ -267,15 +259,14 @@ export class Menu extends HornetComponent<MenuProps, any> {
      * @returns {any}
      */
     private renderMenuButton(): JSX.Element {
-
-        let active = (this.props.toggleMenuState) ? this.props.toggleMenuState : false;
-        let buttonClasses = {
+        const active = (this.props.toggleMenuState) ? this.props.toggleMenuState : false;
+        const buttonClasses = {
             toggler: true,
-            "is-active": active
+            "is-active": active,
         };
 
         return (
-            <button className={classnames(buttonClasses)}
+            <button className={classNames(buttonClasses)}
                 onClick={this.handleToggleMenu.bind(this)}
                 aria-controls="menu-container"
                 aria-expanded={active}
@@ -316,7 +307,7 @@ export class Menu extends HornetComponent<MenuProps, any> {
         }*/
 
         let shouldShowIconInfo = this.state.shouldShowIconInfo;
-        if (typeof shouldShowIconInfo == "undefined") {
+        if (typeof shouldShowIconInfo === "undefined") {
             shouldShowIconInfo = window.innerWidth > showIconSize;
         }
 
@@ -343,9 +334,9 @@ export class Menu extends HornetComponent<MenuProps, any> {
      */
     handleToggleMenu() {
 
-        var body = document.body;
+        const body = document.body;
         body.classList.remove("noscroll");
-        let active = !this.state.toggleMenuState;
+        const active = !this.state.toggleMenuState;
         if (!active) {
             document.removeEventListener("keydown", this.handleKeyDown, false);
         } else {
@@ -355,12 +346,11 @@ export class Menu extends HornetComponent<MenuProps, any> {
         if (this.state.onToggleClick) {
             this.state.onToggleClick();
         }
-        //this.setState({ isMenuActive: active });
     }
 
 
     componentDidUpdate() {
-        //gestion de levent click ua chargement de la page
+        // gestion de levent click ua chargement de la page
         if (typeof document !== undefined && this.props.closeOnClickOutside) {
             if (!this.state.toggleMenuState) {
                 document.removeEventListener("click", this.handleMenuOutsideClick, false);
@@ -390,8 +380,8 @@ export class Menu extends HornetComponent<MenuProps, any> {
         }
 
         this.setState({
+            classNameExpanded,
             currentWorkingZoneWidth: maxWidth,
-            classNameExpanded: classNameExpanded
         });
     }
 
@@ -403,5 +393,4 @@ export class Menu extends HornetComponent<MenuProps, any> {
         this.handleLayoutExpand();
         this.setState({ maj: true });
     }
-
 }

@@ -2,4 +2,4 @@ import { HornetEvent, fireHornetEvent } from "hornet-js-core/src/event/hornet-ev
 
 
 export interface ErrorEventDetail { error: Error; }
-export var ERROR_EVENT = new HornetEvent<ErrorEventDetail>("ERROR_EVENT");
+export let ERROR_EVENT = new HornetEvent<ErrorEventDetail>("ERROR_EVENT");

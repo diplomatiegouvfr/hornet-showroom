@@ -1,0 +1,95 @@
+{
+    "app": {
+        "OS": [
+            {
+                "name": "debian",
+                "version": "9",
+                "logo": "/img/logos/logo-debian.svg",
+                "link": "https://www.debian.org"
+            }
+        ],
+        "IDE": [
+            {
+                "name": "webstorm",
+                "version": "2017.3.4",
+                "logo": "/img/logos/logo-webstorm.svg",
+                "link": "https://www.jetbrains.com/webstorm/",
+                "doc": "https://www.jetbrains.com/help/webstorm/meet-webstorm.html"
+            },
+            {
+                "name": "vscode",
+                "version": "1.25.0",
+                "logo": "/img/logos/logo-vscode.svg",
+                "link": "https://code.visualstudio.com/",
+                "doc": "https://code.visualstudio.com/docs"
+            }
+        ],
+        "Paquets Debian": [
+            
+            {
+                "name": "node deb.nodesource.com",
+                "version": "8.11.1",
+                "logo": "/img/logos/logo-nodejs.svg",
+                "link": "https://nodejs.org",
+                "doc": "https://nodejs.org/dist/latest-v8.x/docs/api/"
+            },
+            {
+                "name": "openjdk",
+                "version": "8u171-b11-1~deb9u1",
+                "logo": "/img/logos/logo-openjdk.png",
+                "link": "https://packages.debian.org/fr/stretch/openjdk-8-jdk"
+            },
+            {
+                "name": "apache",
+                "version": "2.4.25-3+deb9u4",
+                "logo": "/img/logos/logo-apache-httpd.png",
+                "link": "https://packages.debian.org/stretch/apache2",
+                "doc": "https://httpd.apache.org/docs/2.4/"
+            },
+            {
+                "name": "haproxy",
+                "version": "1.7.5-2",
+                "logo": "/img/logos/logo-haproxy.png",
+                "link": "https://packages.debian.org/stretch/haproxy",
+                "doc": "http://cbonte.github.io/haproxy-dconv/1.7/intro.html"
+            },
+            {
+                "name": "tomcat8",
+                "version": "8.5.14-1+deb9u2",
+                "logo": "/img/logos/logo-tomcat.svg",
+                "link": "https://packages.debian.org/fr/stretch/tomcat8",
+                "doc": "http://tomcat.apache.org/tomcat-8.5-doc/index.html"
+            },
+            {
+                "name": "postgresql apt.postgresql.org",
+                "version": "9.6",
+                "logo": "/img/logos/logo-postgresql.svg",
+                "link": "https://www.postgresql.org/",
+                "doc": "https://www.postgresql.org/docs/9.6/static/index.html"
+            }
+        ],
+        "Node modules": [
+            {
+                "name": "webpack",
+                "version": "3.10.0",
+                "logo": "/img/logos/logo-webpack.svg",
+                "link": "https://webpack.js.org/",
+                "doc": "https://webpack.js.org/concepts/"
+            },
+            {
+                "name": "React",
+                "version": "16.4.0",
+                "logo": "/img/logos/logo-reactjs.svg",
+                "link": "https://reactjs.org/",
+                "doc": "https://5abc31d8be40f1556f06c4be--reactjs.netlify.com/docs/hello-world.html"
+            },
+            {
+                "name": "Typescript",
+                "version": "2.8.3",
+                "logo": "/img/logos/logo-typescript.jpg",
+                "link": "https://www.typescriptlang.org/",
+                "doc": "https://www.typescriptlang.org/docs/home.html"
+            }
+        ]
+    }
+}

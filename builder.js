@@ -12,125 +12,21 @@ module.exports = {
     gulpTasks: function (gulp, project, conf, helper) {
 
         const marked = require("markdown-loader/node_modules/marked");
-        marked.InlineLexer.prototype.oldToken = marked.InlineLexer.prototype.token;
-        marked.Lexer.prototype.oldToken = marked.Lexer.prototype.token;
-
-        marked.InlineLexer.prototype.token = function () {
-
-            this.rules.code = /^(`+)\s*([\s\S]*?(?:\sshowroom)?[^`])\s*\1(?!`)/g;
-            return this.oldToken(arguments[0]);
-        };
-
-        marked.Lexer.prototype.token = function () {
-            this.rules.fences = /^ *(`{3,}|~{3,})[ \.]*(\S+(?:\sshowroom)?)? *\n([\s\S]*?)\s*\1 *(?:\n+|$)/;
-            return this.oldToken(arguments[0], arguments[1], arguments[2]);
-        };
-
-
-        /* surcharge fonction du module marked */
-        function escape(html, encode) {
-
-            return html.replace(!encode ? /&(?!#?\w+;)/g : /&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#39;');
-        }
-
-        marked.Renderer.oldCode = marked.Renderer.code;
-        marked.Renderer.prototype.oldcode = marked.Renderer.prototype.code;
-        marked.Renderer.prototype.code = function (code, lang, escaped) {
-
-            if (lang == "javascript showroom") {
-                return '<pre class="container-code"><code class="' +
-                    escape(lang, true) +
-                    '">' +
-                    escape(code, true) +
-                    '\n</code></pre>\n';
-            } else {
-                if (this.options.highlight) {
-                    var out = this.options.highlight(code, lang);
-                    if (out != null && out !== code) {
-                        escaped = true;
-                        code = out;
-                    }
-                }
-
-                if (!lang) {
-                    return '<pre><button class="copy-code-button">Copier</button><code>' +
-                        (escaped ? code : escape(code, true)) +
-                        '\n</code></pre>';
-                }
-
-                return '<pre><button class="copy-code-button">Copier</button><code class="' +
-                    this.options.langPrefix +
-                    escape(lang, true) +
-                    '">' +
-                    (escaped ? code : escape(code, true)) +
-                    '\n</code></pre>\n';
-            }
-        };
-
-        /**
-         * SURCHARGE
-         * Reformate les liens présents dans le md si celui pointe vers
-         * un autre ".md"
-         */
-        marked.Renderer.prototype.link = function (href, title, text) {
-
-            var rgx = new RegExp(/(^[\.])([\W\w]+)(\.md$)/, "g");
-
-            if (rgx.test(href)) {
-                href = PathHelper.cleanName(href.split(".md")[0]);
-            }
-
-            var out = '<a href="' + href + '"';
-            if (title) {
-                out += ' title="' + title + '"';
-            }
-            out += '>' + text + '</a>';
-            return out;
-        };
-
-
-        /**
-         * SURCHARGE
-         * modification Id des balise h
-         */
-        let idcpt = 0;
-        marked.Renderer.prototype.heading = function (text, level, raw) {
-
-            return '<h' +
-                level +
-                ' id="' +
-                this.options.headerPrefix +
-                raw.toLowerCase().replace(/[^\w]+/g, '-') + "-" + idcpt++ +
-                '">' +
-                text +
-                '</h' +
-                level +
-                '>\n';
-        };
-
-
+        const MdHelper = require("./md-helper");
         const hljs = require("highlight.js");
-        marked.setOptions({
-            highlight: function (code, lang) {
-                if (typeof lang === "undefined") {
-                    return hljs.highlightAuto(code).value;
-                } else if (lang === "nohighlight") {
-                    return code;
-                } else {
-                    return hljs.highlight(lang, code).value;
-                }
 
-            }
-        });
-
+        /**SURCHARGE MARKDOWN-LOADER */
+        MdHelper.liveCoding(marked);
+        MdHelper.mdLink(marked);
+        MdHelper.htmlTitle(marked);
+        MdHelper.htmlTable(marked);
+        MdHelper.highlight(marked, hljs);
 
         //Add task if needed
-        gulp.beforeTask("compile", function () {
-            helper.info("Exemple before compile task");
+        gulp.beforeTask("compile", _.once(beforeCompile));
+                
+        function beforeCompile() {
+            helper.info("Before compile task!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
             //Recuperation de la documentation dans le composant
             //var composantDirectory = "node_modules/app/hornet-js-react-components/";
@@ -141,8 +37,14 @@ module.exports = {
             var templateHornetName = "generator-hornet-js";
             var templateHornetLiteName = "generator-hornet-js-lite";
             var templateHornetLiteBatchName = "generator-hornet-js-lite-batch";
-            var hornetThemes = "hornet-themes";
+            var monitorName = "hornet-js-gc-monitor";
+            var hornetThemesName = "hornet-themes-intranet";
             var communityName = "hornet-js-community";
+            var applitutorieljsName = "applitutoriel-js";
+            var applitutorieljsliteName = "applitutoriel-js-lite";
+            var applitutorieljsbatchName = "applitutoriel-js-batch";
+
+
             var navigationMergeFile = "./src/resources/navigationMerge.json";
             var navigationExtFile = "./src/resources/navigationExt.json";
 
@@ -228,18 +130,19 @@ module.exports = {
 
             let filesToObject = {};
             let mdFiles = PathHelper.listFiles(docDir, ".md");
-            let compFiles = PathHelper.listFiles(composantDirectory, ".tsx", [/generator-hornet-js/, /generator-hornet-js-lite/, /generator-hornet-js-lite-batch/]);
-            let projects = PathHelper.listDir(nodeModuleDir, "hornet-js");
+            let compFiles = PathHelper.listFiles(composantDirectory, ".tsx", 
+                [/generator-hornet-js/, /generator-hornet-js-lite/, /generator-hornet-js-lite-batch/, /applitutoriel-js-lite/, /applitutoriel-js-common/]);
+            let projects = PathHelper.listDir(nodeModuleDir, /^hornet-js(?!-gc)(?!-man)(?!-community)(?!-builder)/); //exclusion du gc-monitor, man, builder et community
             let mdFwkFiles = [];
 
             let mdCommunityFiles = (fs.existsSync(communityDir)) ? PathHelper.listFiles(communityDir, ".md") : [];
 
             if (project.builderJs.externalModules.enabled) {
-                mdFwkFiles = PathHelper.listFiles(fwkDir, ".md", [/node_modules/, /\-dts/, /LICENSE.md/, /definition-ts/, /CHANGELOG.md/]);
+                mdFwkFiles = PathHelper.listFiles(fwkDir, ".md", [/node_modules/, /\-dts/, /LICENSE.md/, /LICENCE.md/, /definition-ts/, /CHANGELOG.md/, /CONTRIBUTING.md/, /static/]);
 
             } else {
                 for (var i = 0; i < projects.length; i++) {
-                    let file = PathHelper.listFilesWithDirName(projects[i].dataPath, ".md", [/\-dts/, /LICENSE.md/, /CHANGELOG.md/, /definition-ts/]);
+                    let file = PathHelper.listFilesWithDirName(projects[i].dataPath, ".md", [/\-dts/, /LICENSE.md/, /LICENCE.md/,/CHANGELOG.md/, /definition-ts/, /CONTRIBUTING.md/, /static/]);
                     mdFwkFiles[i] = file;
                 }
             }
@@ -275,11 +178,15 @@ module.exports = {
             }
 
             MenuHelper.getFiles(project, helper, builderName, filesToObject);
-            MenuHelper.getFiles(project, helper, hornetThemes, filesToObject);
+            MenuHelper.getFiles(project, helper, hornetThemesName, filesToObject);
+            MenuHelper.getFiles(project, helper, monitorName, filesToObject);
             MenuHelper.getFiles(project, helper, templateHornetName, filesToObject);
             MenuHelper.getFiles(project, helper, templateHornetLiteName, filesToObject);
             MenuHelper.getFiles(project, helper, templateHornetLiteBatchName, filesToObject);
-
+            MenuHelper.getFiles(project, helper, applitutorieljsName, filesToObject);
+            MenuHelper.getFiles(project, helper, applitutorieljsliteName, filesToObject);
+            MenuHelper.getFiles(project, helper, applitutorieljsbatchName, filesToObject);
+        
             let declareObj = JSON.stringify(filesToObject,
                 (key, value) => {
                     if (typeof value === "string") {
@@ -371,17 +278,19 @@ module.exports = {
                 for (var i = 0; i < mdFwkFiles.length; i++) {
                     let fmkMenuObject = MenuHelper.toObject(files[i], projects[i].name, projects[i].dataPath);
                     let tmpMenuNode = {}
+
                     for (var j = 0; j < fmkMenuObject.menu.length; j++) {
 
                         if (!("submenu" in tmpMenuNode)) {
-                            let menuFile = {
-                                "text": MenuHelper.cleanName(projects[i].name),
+                            //permet de ne pas afficher de sous répertoire dans le cas d'un seul élément
+                            let menu = {
+                                "text": projects[i].name,
                                 "title": projects[i].name,
                                 "visibleDansMenu": true,
                                 "visibleDansPlan": true,
-                                "submenu": [fmkMenuObject.menu[j]]
-                            }
-                            tmpMenuNode = menuFile;
+                                "url": fmkMenuObject.menu[j].url
+                            };
+                            tmpMenuNode = menu;
                         } else {
                             tmpMenuNode.submenu.push(fmkMenuObject.menu[j]);
                         }
@@ -389,7 +298,7 @@ module.exports = {
                     fmkMenuObjects.push(tmpMenuNode);
                 }
                 fmkMenu = {
-                    "text": "HORNET-JS",
+                    "text": "hornet-js",
                     "visibleDansMenu": true,
                     "visibleDansPlan": true,
                     "submenu": fmkMenuObjects
@@ -401,7 +310,12 @@ module.exports = {
             let templateHornetMenu = MenuHelper.getMenu(project, helper, templateHornetName);
             let templateHornetLiteMenu = MenuHelper.getMenu(project, helper, templateHornetLiteName);
             let templateHornetLiteBatchMenu = MenuHelper.getMenu(project, helper, templateHornetLiteBatchName);
-
+            let monitorMenu = MenuHelper.getMenu(project, helper, monitorName);
+            let hornetThemesMenu = MenuHelper.getMenu(project, helper, hornetThemesName);
+            let applitutorieljsMenu = MenuHelper.getMenu(project, helper, applitutorieljsName);
+            let applitutorieljsliteMenu = MenuHelper.getMenu(project, helper, applitutorieljsliteName);
+            let applitutorieljsbatchMenu = MenuHelper.getMenu(project, helper, applitutorieljsbatchName);
+           
             //génération du menu hornet-man
             let manMenuObject = MenuHelper.toObject(mdFiles, "docs", docDir);
 
@@ -424,7 +338,8 @@ module.exports = {
                 }
             }
 
-            let menuProjet = [fmkMenu, builderMenu, templateHornetMenu, templateHornetLiteMenu, templateHornetLiteBatchMenu];
+            let menuProjet = [fmkMenu, builderMenu, monitorMenu, hornetThemesMenu, templateHornetMenu, templateHornetLiteMenu, 
+                templateHornetLiteBatchMenu, applitutorieljsMenu, applitutorieljsliteMenu, applitutorieljsbatchMenu];
             let menuProjets = {
                 "text": "PROJETS",
                 "visibleDansMenu": true,
@@ -466,22 +381,30 @@ module.exports = {
                 fs.writeFileSync(menuSourceFile, declareObj);
             }
 
-        });
+        };
 
-        gulp.afterTask("compile", function () {
-            helper.info("Exemple after compile task");
-        });
-
+        
         gulp.addTaskDependency("package-zip-static", "prepare-package:spa");
     },
     externalModules: {
         enabled: false,
-        directories: []
+        directories: [
+            
+        ]
     },
     config: {
         clientExclude: {
-            modules: ["config", "continuation-local-storage"],
-            noParse: ["node_modules/app/typescript"]
+            noParse: ["node_modules/app/typescript"],
+            modules: [
+                "config",
+                "continuation-local-storage",
+                "carbone",
+                "pdfmake",
+                "pdfmake/src/printer",
+                "pdfkit",
+                "nodemailer",
+                "fontkit"
+            ]
         },
         typescript: {},
         webpack: {
@@ -519,8 +442,9 @@ module.exports = {
             }
         }],
         clientContext: [
-            [/moment[\/\\]locale$/, /fr|en/],
-            [/intl[\/\\]locale-data[\/\\]jsonp$/, /fr|en/]
+            [/moment[\/\\]locale$/, /fr/],
+            [/intl[\/\\]locale-data[\/\\]jsonp$/, /fr/],
+            [/.appender/, /console/]
 
         ],
         spaFilter: ["^((?!.*config\/)).*"]

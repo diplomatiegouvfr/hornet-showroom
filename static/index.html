@@ -24,7 +24,8 @@
                 var fileref = document.createElement('script');
                 fileref.setAttribute("type", "text/javascript");
                 fileref.setAttribute("src", filename);
-            } else if (filetype == "css") {
+            }
+            else if (filetype == "css") {
                 var fileref = document.createElement("link");
                 fileref.setAttribute("rel", "stylesheet");
                 fileref.setAttribute("type", "text/css");
@@ -40,8 +41,10 @@
                 document.getElementsByTagName(mountingPoint)[0].appendChild(fileref);
             }
         }
+
     </script>
     <script type="text/javascript">
+
         (function (root) {
             var messages = undefined;
             var menuItems = undefined;
@@ -93,27 +96,27 @@
 
 
                 root.AppSharedProps = {
-                    "appName": "hornet-showroom-spa",
+                    "appName":"hornet-showroom-spa",
                     "appVersion": "5.1.1",
-                    "appDescription": "Application documentaire du Framework hornet",
-                    "appAuthor": "MEAE - Ministère de l'Europe et des Affaires étrangères",
-                    "welcomePageUrl": "\u002Faccueil"
+                    "appDescription":"Application documentaire du Framework hornet",
+                    "appAuthor":"MEAE - Ministère de l'Europe et des Affaires étrangères",
+                    "welcomePageUrl":"\u002Faccueil"
                 };
 
                 loadFileInDom("/hornetshowroom-spa/img/logo.png", "icon");
-                loadFileInDom("/hornetshowroom-spa/hornet-themes/css/theme.css", "css");
+                loadFileInDom("/hornetshowroom-spa/hornet-themes-intranet/css/theme.css", "css");
                 loadFileInDom("/hornetshowroom-spa/css/theme.css", "css");
                 loadFileInDom("/hornetshowroom-spa/css/codemirror.css", "css");
                 loadFileInDom("/hornetshowroom-spa/css/github.css", "css");
                 loadFileInDom("/hornetshowroom-spa/js/client.js", "js", "body");
-            }
+            }           
 
         }(this));
     </script>
 </head>
 
 <body>
-    <div id="app"></div>
+<div id="app"></div>
 </body>
 
 </html>

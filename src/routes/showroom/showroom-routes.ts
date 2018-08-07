@@ -9,14 +9,10 @@ export default class ShowroomRoutes extends AbstractRoutes {
     constructor() {
         super();
 
-        this.addPageRoute("/page/(.+)",
-            (composantname) => new PageRouteInfos(ShowroomPage, { composant: composantname }, ShowroomServiceImpl),
-            PUBLIC_ROUTE
-        );
+        this.addPageRoute("/page/(.+)", (composantname) =>
+            new PageRouteInfos(ShowroomPage, { composant: composantname }, ShowroomServiceImpl), PUBLIC_ROUTE);
+        this.addDataRoute("/test/(.+)", (composantname) =>
+            new DataRouteInfos(ComposantActions.rechercheComposantMd, { composant: composantname }, ComposantServiceImpl), PUBLIC_ROUTE);
 
-        this.addDataRoute("/test/(.+)",
-            (composantname) => new DataRouteInfos(ComposantActions.rechercheComposantMd, { composant: composantname }, ComposantServiceImpl),
-            PUBLIC_ROUTE
-        );
     }
 }

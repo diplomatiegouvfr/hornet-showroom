@@ -1,12 +1,12 @@
 {
-  "contextPath": "hornet-showroom-online",
+  "contextPath": "hornetshowroom",
   "welcomePage": "/accueil",
   "communityLink": {
     "git": {
       "hubGen": "https://github.com/diplomatiegouvfr",
       "hubDoc": "https://github.com/diplomatiegouvfr/hornet-man",
-      "labGen": "",
-      "labDoc": ""
+      "labGen": "https://gitlab01.devng.diplomatie.gouv.fr/gitlab/hornet.js",
+      "labDoc": "https://gitlab01.devng.diplomatie.gouv.fr/gitlab/hornet.js"
     },
     "twitter": "https://twitter.com/FrameworkHornet",
     "facebook": ""
@@ -32,7 +32,7 @@
     "httpOnly": true,
     "secure": true
   },
-  "themeName": "hornet-themes",
+  "themeName": "hornet-themes-intranet",
   "security": {
     "enabled": true,
     "hpp": true,
@@ -57,6 +57,9 @@
       ],
       "imgSrc": [
         "'self'"
+      ],
+      "frameAncestors": [
+        "http://10.110.193.33/sam/*"
       ],
       "reportOnly": false,
       "setAllHeaders": true,
@@ -96,11 +99,12 @@
     "remote": false,
     "level": "INFO",
     "appenders": [{
-      "type": "BrowserConsole",
-      "layout": {
-        "type": "THIN"
+        "type": "BrowserConsole",
+        "layout": {
+          "type": "THIN"
+        }
       }
-    }]
+    ]
   },
   "defaultServices": {
     "host": "http://localhost:8888",
@@ -109,9 +113,5 @@
   "cache": {
     "enabled": true,
     "timetolive": 60
-  },
-  "fullSpa": {
-    "enabled": true,
-    "staticPath": "/static-5.1.1-PUB"
   }
 }

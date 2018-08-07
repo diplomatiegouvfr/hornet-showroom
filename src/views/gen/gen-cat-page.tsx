@@ -7,185 +7,180 @@ import { HornetComponentProps } from "hornet-js-components/src/component/ihornet
 const logger: Logger = Utils.getLogger("hornet-showroom.views.gen.gen-hom-page");
 
 /*tableau des composants*/
-let HornetComposant =
+const hornetComposant =
     {
-        "Layouts": [
+        Layouts: [
             {
-                "label": "Acccordions",
-                "picto": "/img/pictos_composants/accordions/accordion_white.svg",
-                "url": "/composant/page/hornet-js/composants/layouts/accordions"
+                label: "Acccordions",
+                picto: "/img/pictos_composants/accordions/accordion_white.svg",
+                url: "/composant/page/hornet-js/composants/layouts/accordions",
             },
             {
-                "label": "Form",
-                "picto": "/img/pictos_composants/form/form_white.svg",
-                "url": "/composant/page/hornet-js/composants/layouts/form"
+                label: "Form",
+                picto: "/img/pictos_composants/form/form_white.svg",
+                url: "/composant/page/hornet-js/composants/layouts/form",
             },
             {
-                "label": "HeaderPage",
-                "picto": "/img/pictos_composants/header/header_white.svg",
-                "url": "/composant/page/hornet-js/composants/layouts/headerpage"
+                label: "HeaderPage",
+                picto: "/img/pictos_composants/header/header_white.svg",
+                url: "/composant/page/hornet-js/composants/layouts/headerpage",
             },
             {
-                "label": "Navigation",
-                "picto": "/img/pictos_composants/navigation/navigation_white.svg",
-                "url": "/composant/page/hornet-js/composants/layouts/navigation"
+                label: "Navigation",
+                picto: "/img/pictos_composants/navigation/navigation_white.svg",
+                url: "/composant/page/hornet-js/composants/layouts/navigation",
             },
             {
-                "label": "Tabs",
-                "picto": "/img/pictos_composants/tabs/tabs_white.svg",
-                "url": "/composant/page/hornet-js/composants/layouts/tabs"
-            }
+                label: "Tabs",
+                picto: "/img/pictos_composants/tabs/tabs_white.svg",
+                url: "/composant/page/hornet-js/composants/layouts/tabs",
+            },
         ],
-        "Buttons": [
+        Buttons: [
             {
-                "label": "Button",
-                "picto": "/img/pictos_composants/button/button_white.svg",
-                "url": "composant/page/hornet-js/composants/buttons/button"
+                label: "Button",
+                picto: "/img/pictos_composants/button/button_white.svg",
+                url: "composant/page/hornet-js/composants/buttons/button",
             },
             {
-                "label": "TopButton",
-                "picto": "/img/pictos_composants/button/top-button.svg",
-                "url": "composant/page/hornet-js/composants/buttons/topbutton"
+                label: "TopButton",
+                picto: "/img/pictos_composants/button/top-button.svg",
+                url: "composant/page/hornet-js/composants/buttons/topbutton",
             },
             {
-                "label": "ButtonInfoAccessibilite",
-                "picto": "/img/pictos_composants/button/button-info-accessibilite.svg",
-                "url": "composant/page/hornet-js/composants/buttons/buttoninfoaccessibilite"
-            }
+                label: "ButtonInfoAccessibilite",
+                picto: "/img/pictos_composants/button/button-info-accessibilite.svg",
+                url: "composant/page/hornet-js/composants/buttons/buttoninfoaccessibilite",
+            },
+        ],
+        Commons: [
+            {
+                label: " ChangeLanguage",
+                picto: "/img/pictos_composants/language/language_white.svg",
+                url: "/composant/page/hornet-js/composants/commons/changelanguage",
+            },
+            {
+                label: "Icon",
+                picto: "/img/pictos_composants/icon/icon_white.svg",
+                url: "composant/page/hornet-js/composants/commons/icon",
+            },
+            {
+                label: "Pictogrammes",
+                picto: "/img/pictos_composants/icon/pictogrammes.svg",
+                url: "pictogrammes",
+            },
+            {
+                label: "Spinner",
+                picto: "/img/pictos_composants/spinner/spinner_white.svg",
+                url: "/composant/page/hornet-js/composants/commons/spinner",
+            },
+            {
+                label: "Tooltip",
+                picto: "/img/pictos_composants/info/info_white.svg",
+                url: "/composant/page/hornet-js/composants/commons/tooltip",
+            },
         ],
 
-        "Commons": [
+        Contents: [
             {
-                "label": " ChangeLanguage",
-                "picto": "/img/pictos_composants/language/language_white.svg",
-                "url": "/composant/page/hornet-js/composants/commons/changelanguage"
+                label: "Chart",
+                picto: "/img/pictos_composants/chart/chart_white.svg",
+                url: "composant/page/hornet-js/composants/contents/chart",
             },
             {
-                "label": "Icon",
-                "picto": "/img/pictos_composants/icon/icon_white.svg",
-                "url": "composant/page/hornet-js/composants/commons/icon"
+                label: "Table",
+                picto: "/img/pictos_composants/table/table_white.svg",
+                url: "/composant/page/hornet-js/composants/contents/table",
             },
-            {
-                "label": "Pictogrammes",
-                "picto": "/img/pictos_composants/icon/pictogrammes.svg",
-                "url": "pictogrammes"
-            },
-            {
-                "label": "Spinner",
-                "picto": "/img/pictos_composants/spinner/spinner_white.svg",
-                "url": "/composant/page/hornet-js/composants/commons/spinner"
-            },
-            {
-                "label": "Tooltip",
-                "picto": "/img/pictos_composants/info/info_white.svg",
-                "url": "/composant/page/hornet-js/composants/commons/tooltip"
-            }
         ],
-
-        "Contents": [
+        Dialogs: [
             {
-                "label": "Chart",
-                "picto": "/img/pictos_composants/chart/chart_white.svg",
-                "url": "composant/page/hornet-js/composants/contents/chart"
+                label: "Alert",
+                picto: "/img/pictos_composants/alert/alert_white.svg",
+                url: "composant/page/hornet-js/composants/dialogs/alert",
             },
             {
-                "label": "Table",
-                "picto": "/img/pictos_composants/table/table_white.svg",
-                "url": "/composant/page/hornet-js/composants/contents/table"
-            }
+                label: "Modal",
+                picto: "/img/pictos_composants/modal/modal_white.svg",
+                url: "composant/page/hornet-js/composants/dialogs/modal",
+            },
+            {
+                label: "Notification",
+                picto: "/img/pictos_composants/notification/notifications_white.svg",
+                url: "/composant/page/hornet-js/composants/dialogs/notification",
+            },
         ],
-        "Dialogs": [
+        Headers: [
             {
-                "label": "Alert",
-                "picto": "/img/pictos_composants/alert/alert_white.svg",
-                "url": "composant/page/hornet-js/composants/dialogs/alert"
+                label: "LayoutSwitcher",
+                picto: "/img/pictos_composants/layout_switcher/layout_switcher_white.svg",
+                url: "/composant/page/hornet-js/composants/headers/layoutswitcher",
             },
             {
-                "label": "Modal",
-                "picto": "/img/pictos_composants/modal/modal_white.svg",
-                "url": "composant/page/hornet-js/composants/dialogs/modal"
+                label: "User",
+                picto: "/img/pictos_composants/user/user_white.svg",
+                url: "/composant/page/hornet-js/composants/headers/user",
             },
-            {
-                "label": "Notification",
-                "picto": "/img/pictos_composants/notification/notifications_white.svg",
-                "url": "/composant/page/hornet-js/composants/dialogs/notification"
-            }
         ],
-        "Headers": [
+        Inputs: [
             {
-                "label": "LayoutSwitcher",
-                "picto": "/img/pictos_composants/layout_switcher/layout_switcher_white.svg",
-                "url": "/composant/page/hornet-js/composants/headers/layoutswitcher"
+                label: "AutoComplete",
+                picto: "/img/pictos_composants/auto_complete/auto_complete_white.svg",
+                url: "/composant/page/hornet-js/composants/inputs/autocompletefield",
             },
             {
-                "label": "User",
-                "picto": "/img/pictos_composants/user/user_white.svg",
-                "url": "/composant/page/hornet-js/composants/headers/user"
-            }
+                label: "CalendarField",
+                picto: "/img/pictos_composants/calendar_field/calendar_white.svg",
+                url: "/composant/page/hornet-js/composants/inputs/calendarfield",
+            },
+            {
+                label: "InputField",
+                picto: "/img/pictos_composants/inputfield/inputfield_white.svg",
+                url: "/composant/page/hornet-js/composants/inputs/inputfield",
+            },
+            {
+                label: "TextareaField",
+                picto: "/img/pictos_composants/textareafield/textareafield_white.svg",
+                url: "/composant/page/hornet-js/composants/inputs/textareafield",
+            },
+            {
+                label: "UploadfileField",
+                picto: "/img/pictos_composants/upload_file_field/uploadfield_white.svg",
+                url: "/composant/page/hornet-js/composants/inputs/uploadfilefield",
+            },
         ],
-        "Inputs": [
+        List_Group: [
             {
-                "label": "AutoComplete",
-                "picto": "/img/pictos_composants/auto_complete/auto_complete_white.svg",
-                "url": "/composant/page/hornet-js/composants/inputs/autocompletefield"
+                label: "Dropdown",
+                picto: "/img/pictos_composants/dropdown/dropdown_white.svg",
+                url: "/composant/page/hornet-js/composants/list_group/dropdown",
             },
             {
-                "label": "CalendarField",
-                "picto": "/img/pictos_composants/calendar_field/calendar_white.svg",
-                "url": "/composant/page/hornet-js/composants/inputs/calendarfield"
+                label: "CheckboxField",
+                picto: "/img/pictos_composants/checkbox/checkbox_white.svg",
+                url: "/composant/page/hornet-js/composants/list_group/checkboxfield",
             },
             {
-                "label": "InputField",
-                "picto": "/img/pictos_composants/inputfield/inputfield_white.svg",
-                "url": "/composant/page/hornet-js/composants/inputs/inputfield"
+                label: "RadiosField",
+                picto: "/img/pictos_composants/radio/radiofield_white.svg",
+                url: "/composant/page/hornet-js/composants/list_group/radiosfield",
             },
             {
-                "label": "TextareaField",
-                "picto": "/img/pictos_composants/textareafield/textareafield_white.svg",
-                "url": "/composant/page/hornet-js/composants/inputs/textareafield"
+                label: "SelectField",
+                picto: "/img/pictos_composants/selectfield/selectfield_white.svg",
+                url: "/composant/page/hornet-js/composants/list_group/selectfield",
             },
-            {
-                "label": "UploadfileField",
-                "picto": "/img/pictos_composants/upload_file_field/uploadfield_white.svg",
-                "url": "/composant/page/hornet-js/composants/inputs/uploadfilefield"
-            }
         ],
-        "List Group": [
-            {
-                "label": "Dropdown",
-                "picto": "/img/pictos_composants/dropdown/dropdown_white.svg",
-                "url": "/composant/page/hornet-js/composants/list_group/dropdown"
-            },
-            {
-                "label": "CheckboxField",
-                "picto": "/img/pictos_composants/checkbox/checkbox_white.svg",
-                "url": "/composant/page/hornet-js/composants/list_group/checkboxfield"
-            },
-            {
-                "label": "RadiosField",
-                "picto": "/img/pictos_composants/radio/radiofield_white.svg",
-                "url": "/composant/page/hornet-js/composants/list_group/radiosfield"
-            },
-            {
-                "label": "SelectField",
-                "picto": "/img/pictos_composants/selectfield/selectfield_white.svg",
-                "url": "/composant/page/hornet-js/composants/list_group/selectfield"
-            }
-        ]
-    }/*
-        {
-    "label": "HornetPage",
-        "picto": "/img/pictos_composants/page/page_white.svg",
-            "url": "/composant/page/hornet-js/composants/hornetpage"
-        }*/
-    ;
-
+    };
 
 
 /**
  * Ecran de page d'accueil de l'application
  */
 export class CataloguePage extends HornetPage<any, HornetComponentProps, any> {
+
+
+    indexCompo = 0;
 
     prepareClient() {
     }
@@ -202,8 +197,6 @@ export class CataloguePage extends HornetPage<any, HornetComponentProps, any> {
                 <h1>Catalogue des composants </h1>
                 {this.renderCard()}
             </div>
-
-
         );
     }
 
@@ -212,20 +205,18 @@ export class CataloguePage extends HornetPage<any, HornetComponentProps, any> {
      * Rendu des cards et leur contenu
      */
     renderCard(): JSX.Element {
-        let htmlLink: JSX.Element[] = Object.keys(HornetComposant).map((composants) => {
-            //let CategorieName = Object.keys(composants)[ 0 ];
-            return (
+        const htmlLink: JSX.Element[] = Object.keys(hornetComposant).map((composants, index) => {
 
-                <div className={"card mbl"}>
+            return (
+                <div className={"card mbl"} key={"rub_" + index}>
                     <h2 className="card-span-title">{composants}</h2>
                     <hr className="hr-5" />
-                    {this.renderTuile(HornetComposant[ composants ])}
+                    {this.renderTuile(hornetComposant[ composants ])}
                 </div>
-
             );
         });
         return (
-            <div className="grid-3 has-gutter-xl">
+            <div className="grid-3 has-gutter-l">
                 {htmlLink}
             </div>
         );
@@ -237,22 +228,25 @@ export class CataloguePage extends HornetPage<any, HornetComponentProps, any> {
      */
     renderTuile(listCompo): JSX.Element {
 
-        //Force la lageur de la tuile 
-        let aStyle = {
-            "maxWidth": "11em"
-        }
+        // Force la lageur de la tuile 
+        const aStyle = {
+            width: "10.5em",
+        };
+
         if (listCompo) {
-            let htmlLink: JSX.Element[] = listCompo.map((compo, index) => {
+            const htmlLink: JSX.Element[] = listCompo.map((compo, index) => {
+                this.indexCompo++;
                 return (
-                    <a href={this.genUrl(compo.url)} className="home-tule" style={aStyle}>
+                    <a href={this.genUrl(compo.url)} className="home-tule" style={aStyle} key={"compo_" + this.indexCompo}>
                         {(compo.picto) ? <img src={this.genUrlStatic(compo.picto)} alt={compo.label} /> : null}
                         <br />
                         {compo.label}
                     </a >
                 );
+
             });
 
-            return <div className="grid-5 has-gutter-xl">{htmlLink}</div>;
+            return <div className="grid-4 has-gutter-l">{htmlLink}</div>;
         }
     }
 

@@ -125,13 +125,6 @@
         margin-right: 2%;
     }
 
-    #page {
-        margin-left: 18%;
-        box-shadow: none;
-        width: auto;
-        margin: 0;
-    }
-
     #pageAccueil {
         margin-top: 0;
     }
@@ -146,6 +139,10 @@
 
     .container-code {
         background: #eaeaea;
+    }
+
+    .container-code:not(.react-codemirror2) {
+        font-family: sans-serif;
     }
 
     .logo-showroom {
@@ -214,24 +211,24 @@
     }
     /* Surcharge  Table */
 
-    table {
+    .showroom-table {
         margin-top: 1em;
     }
 
-    table>thead>tr>th,
-    table>tbody>tr>td {
+    .showroom-table>thead>tr>th,
+    .showroom-table>tbody>tr>td {
         overflow: auto;
         text-overflow: auto;
         white-space: initial
     }
 
-    table>thead>tr>th {
+    .showroom-table>thead>tr>th {
         background-color: #f4f4f4;
         color: #007eca;
         padding: .3em .8em;
     }
 
-    table>thead>tr>th:first-letter {
+    .showroom-table>thead>tr>th:first-letter {
         text-transform: uppercase;
     }
 
@@ -245,10 +242,16 @@
         color: white;
         position: fixed;
         top: 12.67em;
-        /*height: 70%;*/
         transition: width .5s ease-in;
         z-index: 10;
         padding-bottom: 10%;
+    }
+    /*Surcharge specifique pour firefox */
+
+    @-moz-document url-prefix() {
+        .menu-showroom .menu-content {
+            height: calc(100% - 12.5em);
+        }
     }
 
     .menu-showroom ul.nav li.nav-item {
@@ -345,15 +348,17 @@
         transition: margin-left 0.5s ease-in-out;
     }
 
-    #page {
-        margin-left: 5%;
+    #showroom-page {
+        width: auto;
+        box-shadow: none;
+        margin-left: 6%;
         transition: margin-left .5s ease-in-out;
         margin-top: 5em;
+        padding: 0 1.85em 4em 1.85em;
     }
 
-    #page.menuVisible {
+    #showroom-page.menuVisible {
         margin-left: 20%;
-        transition: margin-left .5s ease-in-out;
     }
 
     .toggler.is-active {
@@ -363,7 +368,6 @@
 
     .menu-showroom:not(.menuOpen) .menu-content {
         width: 5%;
-        height: 70%;
         transition: width .5s ease-in-out;
     }
 
@@ -464,7 +468,7 @@
 
     .home-tule {
         background: #224562;
-        min-width: 15em;
+        min-width: 8em;
         width: 200px;
         min-height: 5.5em;
         border-radius: 0.313em;
@@ -535,12 +539,7 @@
     #header-exemple #header-container {
         background-color: #224562;
         height: 2em;
-        margin-left: 5%;
         position: relative;
-    }
-
-    #page.menuVisible #header-exemple #header-container {
-        margin-left: 25%;
     }
 
     #header-exemple #user-exemple {
@@ -573,8 +572,6 @@
         -webkit-appearance: none;
         background-color: transparent;
         width: 90%;
-        /*margin-left: 0.5em;
-        margin-right: 1em;*/
         float: left;
         color: white;
         margin-bottom: 1em;
@@ -771,25 +768,25 @@
     }
 
     .picto-tule {
-        min-height: 6.5em;
         border-radius: 0.313em;
         text-align: center;
         margin-top: 1em;
-        padding-right: 1em;
+        padding: 0.425em;
         background-color: #efefef;
-        padding-left: 1em;
-        width: 18em !important;
+    }
+
+    .picto-tule-action {
+        text-align: right;
     }
 
     .picto-tule button.picto-button {
         background-color: white;
         border: none;
-        margin-top: 0.5em;
+        margin-top: auto;
         border-radius: 50%;
         margin-bottom: 0.6em;
         width: 3.5em;
         height: 3.5em;
-        margin-top: 1.5em;
     }
 
     .picto-tule .picto-white {
@@ -798,16 +795,39 @@
 
     .picto-colors {
         display: inline-block;
-        margin-left: -2em;
     }
 
     .picto-color {
-        height: 1.3em;
-        width: 1.3em;
+        height: 1.8em;
+        width: 1.8em;
         border-radius: 50%;
-        float: left;
         margin-right: 0.3em;
         cursor: pointer;
+        transition: all 0.3s ease-in;
+        display: inline-block;
+        position: relative;
+    }
+
+    .picto-color::before {
+        content: '';
+        position: absolute;
+        bottom: -11px;
+        left: 0;
+        width: 100%;
+        height: 6px;
+        background: #efefef;
+        box-shadow: 0 0 5px #efefef, 0 0 5px #efefef, 0 0 5px #efefef;
+        border-radius: 90px/20px;
+        transition: all 0.3s ease-in;
+    }
+
+    .picto-color-active::before {
+        bottom: -11px;
+        left: 2px;
+        width: 90%;
+        height: 5px;
+        background: #DCDCDC;
+        box-shadow: 0 0 3px #DCDCDC, 0 0 3px #DCDCDC, 0 0 3px #DCDCDC, 0 0 3px #DCDCDC, 0 0 3px #DCDCDC;
     }
 
     .picto-color-white {
@@ -827,6 +847,10 @@
         background-color: #757575;
     }
 
+    .picto-color-darkBlue {
+        background-color: #2e586e;
+    }
+
     .picto-info-container {
         padding-top: 1em;
         align-items: center;
@@ -834,16 +858,14 @@
     }
 
     .picto-info-name {
-        padding-bottom: 0.5em;
         word-break: break-all;
         width: auto;
-        padding-left: 0.8em;
     }
 
     .picto-color-active {
         margin-top: -0.3em;
-        width: 1.6em;
-        height: 1.6em;
+        width: 2.6em;
+        height: 2.6em;
     }
     /**
 * Summary
@@ -857,11 +879,10 @@
 
     .summary-titles {
         padding-right: 1em;
-        padding-bottom: 2em;
+        margin-bottom: 20%;
     }
 
     .summary-title-2 {
-        /*padding-left:1em;*/
         font-weight: bold;
         color: #3e3e3e;
     }
@@ -879,7 +900,6 @@
     .summary {
         position: fixed;
         right: 0px;
-        background-color: white;
         min-width: 18%;
         padding-left: 2em;
         font-size: 15px;
@@ -909,6 +929,7 @@
     .summary-hidden {
         width: 3%;
         background-color: transparent;
+        min-width: unset;
     }
 
     .title-active {
@@ -916,13 +937,13 @@
         margin-left: 0;
     }
 
-    table thead tr th {
+    .showroom-table thead tr th {
         background-color: #224562;
         color: white;
         text-transform: uppercase;
     }
 
-    table tbody tr:nth-of-type(2n+1) {
+    .showroom-table tbody tr:nth-of-type(2n+1) {
         background-color: rgba(0, 0, 0, 0.05);
     }
 
@@ -981,31 +1002,47 @@
         background-size: cover;
         height: 1.2em;
         width: 1.2em;
-        float: right;
         padding-top: -2em;
         border: none;
         background-color: transparent;
         cursor: pointer;
     }
 
-    .picto-name-container {
-        display: flex;
-    }
-
-    .card.hornet-js {
+    .hornet-js {
         background-image: url(../img/logo-hornet-js.png);
-        background-position: calc(50% - (50% - 32%)) calc(100% - (100% - 18px));
+        background-position: calc(50% - (50% - 1%)) calc(100% - (100% - 2px));
         background-repeat: no-repeat;
         background-size: 4em 3em;
     }
 
-    .card.hornet-js-lite {
+    .hornet-js-lite {
         background-image: url("../img/logo-hornet-js-lite1.png");
         background-position: top right;
         background-repeat: no-repeat;
-        background-position: calc(50% - (50% - 32%)) calc(100% - (100% - 26px));
+        background-position: calc(50% - (50% - 1%)) calc(100% - (100% - 7px));
         background-size: 4rem 4rem;
     }
+
+    .hornet-js >h3 {
+        margin-left :4em;
+    }
+    .hornet-js-lite >h3{
+        margin-left :3.25em;
+    }
+
+    .hornet-js >h3::before, .hornet-js-lite >h3::before{
+        counter-increment: none;
+        content: none;
+        
+    }
+
+    .hornet-js .home-tule, .hornet-js-lite .home-tule {
+        min-width: 0;
+        width: 10em;
+        margin: 1em;
+        padding: 1em;
+    }
+
 
     .gitlab-button {
         cursor: pointer;
@@ -1210,7 +1247,7 @@ scrollbar du menu
         }
         .menu-showroom .menu-content {
             width: 22%;
-            /*  padding-bottom: 10%;*/
+            height: 70%;
         }
         .menu-showroom:not(.menuOpen) .menu-content {
             width: 6%;
@@ -1264,15 +1301,14 @@ scrollbar du menu
         .menu-showroom.menuClosed .menu-footer-showroom {
             width: 6%;
         }
+        .menu-showroom .menu-content {
+            width: 25%;
+        }
         .menu-showroom ul.nav li.nav-item ul.sub-nav-1 {
             padding-left: 3em;
         }
         .menu-showroom:not(.menuOpen) .menu-content {
             width: 6%;
-        }
-        .menu-showroom .menu-content {
-            width: 25%;
-            /*padding-bottom: 5%;*/
         }
         .menu-showroom:not(.menuOpen) .menu-content .having-sub-nav {
             width: 4rem;
@@ -1294,7 +1330,7 @@ scrollbar du menu
             height: 26px;
             width: 26px;
         }
-        #page.menuVisible {
+        #showroom-page.menuVisible.menuVisible {
             margin-left: 24%;
         }
         .home-tule {
@@ -1337,7 +1373,6 @@ scrollbar du menu
         }
         .menu-showroom .menu-content {
             width: 22%;
-            /* padding-bottom: 3%;*/
         }
         #header-showroom .header-titre {
             padding-left: 4em;
@@ -1362,10 +1397,6 @@ scrollbar du menu
         .summary-title {
             padding-left: 0;
             margin-left: 0;
-        }
-        .summary-titles {
-            padding-right: 1em;
-            padding-bottom: 2em;
         }
         .summary-title-2 {
             font-weight: bold;
@@ -1416,7 +1447,6 @@ scrollbar du menu
         }
         .menu-showroom .menu-content {
             width: 22%;
-            /*padding-bottom: 3%;*/
         }
         #header-showroom .header-titre {
             padding-left: 4em;
@@ -1435,10 +1465,6 @@ scrollbar du menu
         .summary-title {
             padding-left: 0;
             margin-left: 0;
-        }
-        .summary-titles {
-            padding-right: 1em;
-            padding-bottom: 2em;
         }
         .summary-title-2 {
             font-weight: bold;
@@ -1485,9 +1511,7 @@ scrollbar du menu
             width: 5%;
         }
         .menu-showroom .menu-content {
-            /*padding-bottom: 10%;*/
             width: 21%;
-            height: 72%;
         }
         #header-showroom .header-titre {
             padding-left: 4.3em;
@@ -1552,4 +1576,69 @@ scrollbar du menu
 
     li.sub-nav-item:not(.masked) ul li {
         border-left: 1px dotted rgba(255, 255, 255, 0.35);
+    }
+
+    /* empeche les retours a la ligne des labels
+    .previewArea {
+        white-space: nowrap;
+    }*/
+    /* SURCHARGE COMPOSANT NAVIGATION */
+
+    .previewArea .menu-content {
+        position: relative;
+        margin-left: auto;
+        top: 0;
+        min-width: unset;
+    }
+
+    .previewArea .toggler.is-active {
+        margin-left: 0;
+    }
+
+    .previewArea #menu-main {
+        width: 100%;
+    }
+    /*SURCHARGE COMPOSANT TOPBUTTON*/
+
+    .previewArea .top-button {
+        position: unset;
+    }
+    /** CSS ZONE VERSION MODULE */
+
+    .version-container {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .version-title{
+        font-weight: bolder;
+        font-style: italic;
+        height: 2em;
+        margin-bottom: 0.425em;
+
+    }
+
+    .version-content {
+        margin-bottom: 0.425em;
+        text-align: center;
+    }
+
+    .version-content > div >div {
+        margin-bottom: 0.425em;
+    }
+
+    .version-content .card{
+        padding: 0.1em;
+        min-width: 11em;
+        width: 11em;
+    }
+
+    .version-content .card a {
+        display: block;
+    }
+
+    .version-img {
+        position: relative;
+        max-width: 4em;
+        margin: 1em;
     }

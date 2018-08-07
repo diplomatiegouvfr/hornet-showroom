@@ -5,29 +5,28 @@ import {
     listenHornetEvent,
     listenOnceHornetEvent,
     fireHornetEvent,
-    removeHornetEvent
+    removeHornetEvent,
 } from "hornet-js-core/src/event/hornet-event";
 import { HornetComponent } from "hornet-js-react-components/src/widget/component/hornet-component";
 import { HornetComponentProps } from "hornet-js-components/src/component/ihornet-component";
 import { Utils } from "hornet-js-utils";
 import { ERROR_EVENT } from "src/views/components/event";
 import { Logger } from "hornet-js-utils/src/logger";
-import { ReactElement } from "react";
 
-var ts = require("typescript");
+const ts = require("typescript");
 const logger: Logger = Utils.getLogger("hornet-showroom.preview");
 
 
 export interface PreviewProps extends HornetComponentProps {
-    code: string,
-    scope: {},
+    code: string;
+    scope: {};
 
 }
 
 export interface PreviewState {
-    code?: string,
-    errorPreview?: string,
-    previewVisible?: boolean
+    code?: string;
+    errorPreview?: string;
+    previewVisible?: boolean;
 }
 
 export class Preview<P extends PreviewProps, S extends PreviewState> extends HornetComponent<PreviewProps, any> {
@@ -41,8 +40,8 @@ export class Preview<P extends PreviewProps, S extends PreviewState> extends Hor
         this.state = {
             ...this.state,
             previewVisible: false,
-            hasError: false
-        }
+            hasError: false,
+        };
     }
 
     /**
@@ -52,7 +51,9 @@ export class Preview<P extends PreviewProps, S extends PreviewState> extends Hor
      * @returns {Readonly<P> | boolean | Readonly<S>}
      */
     shouldComponentUpdate(nextProps, nextState) {
-        return (nextProps && nextProps.code !== this.props.code) || (nextState && nextState.code != undefined && nextState.code != this.state.code) || this.reload;
+        return (nextProps && nextProps.code !== this.props.code)
+            || (nextState && nextState.code !== undefined && nextState.code !== this.state.code)
+            || this.reload;
     }
 
     /**
@@ -79,8 +80,8 @@ export class Preview<P extends PreviewProps, S extends PreviewState> extends Hor
      * @param {S} prevState
      */
     componentDidUpdate(prevProps, prevState) {
-        if ((this.props.code !== prevProps.code) || (this.state.code != undefined && this.state.code != prevState.code)) {
-            //Ajout d'un try catch car non catché par la methode componentDidCatch
+        if ((this.props.code !== prevProps.code) || (this.state.code !== undefined && this.state.code !== prevState.code)) {
+            // Ajout d'un try catch car non catché par la methode componentDidCatch
             try {
                 this.executeCode();
             } catch (e) {
@@ -97,7 +98,7 @@ export class Preview<P extends PreviewProps, S extends PreviewState> extends Hor
      */
     componentDidCatch(error, info) {
         this.reload = true;
-        this.setState({ hasError: true, error: error });
+        this.setState({ hasError: true, error });
     }
 
     /**
@@ -109,7 +110,7 @@ export class Preview<P extends PreviewProps, S extends PreviewState> extends Hor
             <div id="content-show">
                 {this.state.hasError ? <div className="preview-error"> {this.state.error.toString()}<br /></div> :
                     <div ref={(preview) => {
-                        this.preview = preview
+                        this.preview = preview;
                     }} className="previewArea">
                         {this.state.previewVisible ? <div>{this.state.div}</div> : null}
                     </div>}
@@ -123,20 +124,20 @@ export class Preview<P extends PreviewProps, S extends PreviewState> extends Hor
      */
     compileCode() {
 
-        let code = this.state.code;
-        let scope = this.props.scope;
+        const code = this.state.code;
+        const scope = this.props.scope;
 
-        let options = {
-            "target": "es5",
-            "module": "commonjs",
-            "moduleResolution": "classic",
-            "experimentalDecorators": true,
-            "jsx": "react",
-            "noResolve": true
+        const options = {
+            target: "es5",
+            module: "commonjs",
+            moduleResolution: "classic",
+            experimentalDecorators: true,
+            jsx: "react",
+            noResolve: true,
         };
 
-        let sourceCode = `
-            (function (${Object.keys(scope).join(', ')}, preview) {
+        const sourceCode = `
+            (function (${Object.keys(scope).join(", ")}, preview) {
                ${code};
             }); `;
 
@@ -161,14 +162,14 @@ export class Preview<P extends PreviewProps, S extends PreviewState> extends Hor
      */
     executeCode() {
         logger.info(" PREVIEW - executeCode");
-        let preview = ReactDOM.findDOMNode(this.preview);
-        let scope = this.buildScope(preview);
-        let compileCode = this.compileCode();
-        let code = eval(compileCode).apply(null, scope);
+        const preview = ReactDOM.findDOMNode(this.preview);
+        const scope = this.buildScope(preview);
+        const compileCode = this.compileCode();
+        const code = eval(compileCode).apply(null, scope);
 
-        let div = <div> {code} </div>;
+        const codeDiv = <div> {code} </div>;
 
-        this.setState({ div: div, previewVisible: true });
+        this.setState({ div: codeDiv, previewVisible: true });
     }
     /**
      * Surcharge de la methode listen de hornetComponent
@@ -181,4 +182,4 @@ export class Preview<P extends PreviewProps, S extends PreviewState> extends Hor
             listenHornetEvent(event, callback, capture);
         }
     }
-};
+}

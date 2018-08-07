@@ -1,7 +1,7 @@
 import { Utils } from "hornet-js-utils";
 import { Logger } from "hornet-js-utils/src/logger";
 import *  as React from "react";
-import * as ReactDOM from "react-dom"
+import * as ReactDOM from "react-dom";
 import { HornetComponent } from "hornet-js-react-components/src/widget/component/hornet-component";
 import { HornetComponentProps } from "hornet-js-components/src/component/ihornet-component";
 
@@ -22,16 +22,16 @@ if (!Utils.isServer) {
 
 
 export interface EditorProps extends HornetComponentProps {
-    code: string, //code de l'editeur
-    composantName: string, //Nom du composant
-    scope?: {}, //liste des componsants que l'on souhaite utiliser dans l'editeur
-    selectedLines?: {},
-    handleChangeCode?: (code: string, keyInMd?: number) => void,
+    code: string; // code de l'editeur
+    composantName: string; // Nom du composant
+    scope?: {}; // liste des componsants que l'on souhaite utiliser dans l'editeur
+    selectedLines?: {};
+    handleChangeCode?: (code: string, keyInMd?: number) => void;
     keyInMd?: number;
 }
 
 export interface EditorState {
-    code: string  //code de l'editeur
+    code: string;  // code de l'editeur
 }
 
 
@@ -42,7 +42,7 @@ export class Editor<P extends EditorProps, S extends EditorState> extends Hornet
     constructor(props?: P, context?: any) {
         super(props, context);
 
-        //autobinding
+        // autobinding
         this.updateCode = this.updateCode.bind(this);
     }
 
@@ -63,7 +63,8 @@ export class Editor<P extends EditorProps, S extends EditorState> extends Hornet
      * 
      */
     shouldComponentUpdate(nextProps, nextState) {
-        if ((nextProps && nextProps.code !== this.props.code) || (nextState && nextState.code != undefined && nextState.code != this.state.code)) {
+        if ((nextProps && nextProps.code !== this.props.code)
+            || (nextState && nextState.code !== undefined && nextState.code !== this.state.code)) {
             return true;
         }
         return false;
@@ -78,16 +79,12 @@ export class Editor<P extends EditorProps, S extends EditorState> extends Hornet
         /**
          * option codeMirror
          **/
-        let options = {
+        const options = {
             firstLineNumber: 1,
             lineNumbers: true,
             mode: "jsx",
             indentWithTabs: true,
-            extraKeys: {
-                "Ctrl-Q": function (cm) {
-                    cm.foldCode(cm.getCursor());
-                }
-            },
+            extraKeys: { "Ctrl-Q": (cm) => cm.foldCode(cm.getCursor()) },
             foldGutter: true,
             gutters: [ "CodeMirror-linenumbers", "CodeMirror-foldgutter" ],
             lineWrapping: true,
@@ -101,7 +98,7 @@ export class Editor<P extends EditorProps, S extends EditorState> extends Hornet
                 <CodeMirror
                     ref={(editor) => {
                         if (editor !== null) {
-                            this.editor = editor
+                            this.editor = editor;
                         }
                     }}
                     value={this.state.code}
@@ -113,4 +110,4 @@ export class Editor<P extends EditorProps, S extends EditorState> extends Hornet
             </div>
         );
     }
-};
+}

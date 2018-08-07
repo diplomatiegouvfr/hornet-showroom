@@ -7,7 +7,7 @@ const logger: Logger = Utils.getLogger("hornet.showroom.services.composant-servi
 const composantDirectory = "node_modules/app/hornet-js-react-components/docs";
 
 export interface ComposantsService {
-    rechercheComposantMd(composantName: string): Promise<any> ;
+    rechercheComposantMd(composantName: string): Promise<any>;
 
     readDirRecursive(dir, callback): any;
 }
@@ -21,22 +21,23 @@ export interface ComposantsService {
 export class ComposantServiceImpl implements ComposantsService {
 
     readDirRecursive(dir, callback) {
-        var files = fs.readdirSync(dir);
+        const files = fs.readdirSync(dir);
         files.forEach((file) => {
-            var nextRead = path.join(dir, file);
-            var stats = fs.lstatSync(nextRead);
+            const nextRead = path.join(dir, file);
+            const stats = fs.lstatSync(nextRead);
             if (stats.isDirectory()) {
                 this.readDirRecursive(nextRead + path.sep, callback);
             } else {
                 callback(dir, file);
             }
         });
-    };
+    }
 
 
-    fileExists = function(file) {
+    fileExists = function (file) {
+        let stat: fs.Stats;
         try {
-            var stat = fs.statSync(file);
+            stat = fs.statSync(file);
         } catch (_) {
             return false;
         }
@@ -53,11 +54,11 @@ export class ComposantServiceImpl implements ComposantsService {
 
     requirePath(source) {
 
-        let sourceDir = source.split(path.sep);
+        const sourceDir = source.split(path.sep);
         let newPath = "";
         for (let i = 2; i < sourceDir.length; i++) {
             (i < (sourceDir.length - 1)) ?
-                newPath += path.join(sourceDir[i] + path.sep) : newPath += path.join(sourceDir[i]);
+                newPath += path.join(sourceDir[ i ] + path.sep) : newPath += path.join(sourceDir[ i ]);
         }
 
         return newPath;
@@ -75,7 +76,7 @@ export class ComposantServiceImpl implements ComposantsService {
                 composant = {
                     docSource: dir + composantName + ".md",
                     name: composantName,
-                    requirePath: this.requirePath(dir + composantName + ".md")
+                    requirePath: this.requirePath(dir + composantName + ".md"),
                 };
         });
 

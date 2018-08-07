@@ -13,7 +13,7 @@ const logger: Logger = Utils.getLogger("hornet-showroom.views.gen.gen-pic-page")
  */
 export class PictoPage extends HornetPage<any, HornetComponentProps, any> {
 
-    HornetComposant: any;
+    hornetComposant: any;
 
     prepareClient() {
 
@@ -26,28 +26,28 @@ export class PictoPage extends HornetPage<any, HornetComponentProps, any> {
         super.componentWillMount();
 
         /*tableau des picto*/
-        this.HornetComposant = [];
+        this.hornetComposant = [];
 
         let present = false;
         /**
          * récupère tous les pictogrammes de Picto
          */
-        for (var property in Picto) {
+        for (const property in Picto) {
             if (Picto.hasOwnProperty(property) && property !== "defaultProps") {
-                for (var picto in Picto[property]) {
+                for (const picto in Picto[ property ]) {
                     present = false;
-                    this.HornetComposant.map((composant, index) => {
-                        if (composant.name == picto) {
+                    this.hornetComposant.map((composant, index) => {
+                        if (composant.name === picto) {
                             present = true;
                         }
                     });
 
                     if (!present) {
-                        this.HornetComposant.push({
+                        this.hornetComposant.push({
                             src: property,
                             name: picto,
                             label: "Picto." + property + "." + picto,
-                            color: property
+                            color: property,
                         });
                     }
                 }
@@ -76,20 +76,24 @@ export class PictoPage extends HornetPage<any, HornetComponentProps, any> {
      */
     renderTuile(): JSX.Element {
 
-        let htmlLink: JSX.Element[] = this.HornetComposant.map((composant, index) => {
+        const htmlLink: JSX.Element[] = this.hornetComposant.map((composant, index) => {
             return (
-                <div className={"picto-tule grid"}>
-                    <Icon src={Picto[composant.color][composant.name]} alt={composant.name} title={composant.name}
-                          classImg={"showroom-picto"} classLink={"picto-button picto-" + composant.src + " one-half"}/>
-                    <br/>
-                    <div className={"picto-info-container grid-1"}>
+                <div className={"picto-tule"} key={index} >
+                    <div className={"picto-tule-action"}>
                         <button onClick={() => {
-                            this.copyName(index)
+                            this.copyName(index);
                         }} title="copier" className="picto-copy-button"></button>
-                        <div className="picto-name-container">
-                            <div id={"picto-" + index} className="picto-info-name">{composant.label}</div>
+                    </div>
+                    <div className={"picto-picto-container grid"}>
+                        <Icon src={Picto[ composant.color ][ composant.name ]} alt={composant.name} title={composant.name}
+                            classImg={"showroom-picto"} classLink={"picto-button picto-" + composant.src + " one-half"} />
+                        <br />
+                        <div className={"picto-info-container grid-1"}>
+                            {this.renderColors(composant, index)}
                         </div>
-                        {this.renderColors(composant, index)}
+                    </div>
+                    <div className="picto-name-container">
+                        <div id={"picto-" + index} className="picto-info-name">{composant.label}</div>
                     </div>
                 </div>
             );
@@ -108,8 +112,8 @@ export class PictoPage extends HornetPage<any, HornetComponentProps, any> {
      */
     copyName(index) {
         window.getSelection().removeAllRanges();
-        let range = document.createRange();
-        let code = document.getElementById("picto-" + index);
+        const range = document.createRange();
+        const code = document.getElementById("picto-" + index);
         if (code) {
             range.selectNode(code);
             window.getSelection().addRange(range);
@@ -121,8 +125,8 @@ export class PictoPage extends HornetPage<any, HornetComponentProps, any> {
      * génération des couleurs d'un composant
      * @param composant composant dont on veut les couleurs
      * @param index index du composant
-     * @returns {any}
-     */
+* @returns {any}
+            */
     renderColors(composant: any, index: any) {
 
         /**
@@ -132,13 +136,13 @@ export class PictoPage extends HornetPage<any, HornetComponentProps, any> {
          *   background-color: [code couleur];
          *  }
          */
-        let colors = ["black", "white", "blue", "grey"];
+        const colors = [ "black", "white", "blue", "grey", "darkBlue" ];
 
-        let pictoColor = [];
+        const pictoColor = [];
 
         colors.map((color, index) => {
-            if (Picto[color][composant.name]) {
-                pictoColor.push(color)
+            if (Picto[ color ][ composant.name ]) {
+                pictoColor.push(color);
             }
         });
 
@@ -147,13 +151,13 @@ export class PictoPage extends HornetPage<any, HornetComponentProps, any> {
             <div className={"picto-colors"}>
                 {pictoColor.map((color, index) => {
                     let isColor = false;
-                    if (color == composant.color) {
+                    if (color === composant.color) {
                         isColor = true;
                     }
-                    let cname = isColor ? " picto-color-active" : "";
-                    return <a className={"picto-color picto-color-" + color + cname} onClick={() => {
-                        this.changeColor(composant, color)
-                    }}/>
+                    const cname = isColor ? " picto-color-active" : "";
+                    return <a key={index} className={"picto-color picto-color-" + color + cname} onClick={() => {
+                        this.changeColor(composant, color);
+                    }} />;
                 })}
             </div>
         );
@@ -163,17 +167,17 @@ export class PictoPage extends HornetPage<any, HornetComponentProps, any> {
      * change la couleur active du pictogramme
      * @param composant
      * @param color
-     * @returns {any}
-     */
+* @returns {any}
+        */
     changeColor(composant: any, color: any) {
-        this.HornetComposant.map((comp, index) => {
-            if (composant.name == comp.name) {
-                this.HornetComposant[index].color = color;
-                this.HornetComposant[index].src = color;
-                this.HornetComposant[index].label = "Picto." + comp.color + "." + comp.name,
-                    this.setState({reload: true})
+        this.hornetComposant.map((comp, index) => {
+            if (composant.name === comp.name) {
+                this.hornetComposant[ index ].color = color;
+                this.hornetComposant[ index ].src = color;
+                this.hornetComposant[ index ].label = "Picto." + comp.color + "." + comp.name,
+                    this.setState({ reload: true });
             }
         });
-        return null
+        return null;
     }
 }

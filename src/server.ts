@@ -11,13 +11,13 @@ import { ErrorPage } from "hornet-js-react-components/src/widget/component/error
 import { Routes } from "src/routes/routes";
 import {
     PageRenderingMiddleware,
-    UnmanagedViewErrorMiddleware
+    UnmanagedViewErrorMiddleware,
 } from "hornet-js-react-components/src/middleware/component-middleware";
 
 
 import * as HornetMiddlewares from "hornet-js-core/src/middleware/middlewares";
 
-const Menu = require("src/resources/navigation");
+const MENU = require("src/resources/navigation");
 
 const logger: Logger = Utils.getLogger("applitutoriel.server");
 
@@ -27,7 +27,6 @@ function routeLoader(name) {
 }
 
 export class Server {
-
     // let configServer: ServerConfiguration;
 
     // constructor(configServer: ServerConfiguration, Array<Class<AbstractHornetMiddleware>>){
@@ -36,8 +35,7 @@ export class Server {
 
 
     static configure() {
-
-        let configServer: ServerConfiguration = {
+        const configServer: ServerConfiguration = {
             serverDir: __dirname,
             staticPath: "../static",
             appComponent: HornetApp,
@@ -45,18 +43,17 @@ export class Server {
             errorComponent: ErrorPage,
             defaultRoutesClass: new Routes(),
             sessionStore: null, // new RedisStore({host: "localhost",port: 6379,db: 2,pass: "RedisPASS"}),
-            //routesLoaderfn: routeLoader,
             routesLoaderPaths: [ "src/routes/" ],
             /*Directement un flux JSON >>internationalization:require("./i18n/messages-fr-FR.json"),*/
             /*Sans utiliser le système clé/valeur>> internationalization:null,*/
             internationalization: new AppliI18nLoader(),
-            menuConfig: Menu.menu,
+            menuConfig: MENU.menu,
             loginUrl: null,
             logoutUrl: null,
             welcomePageUrl: Utils.config.get("welcomePage"),
             publicZones: [
-                Utils.config.get("welcomePage")
-            ]
+                Utils.config.get("welcomePage"),
+            ],
         };
 
         Utils.appSharedProps.set("hornet.communityLink", Utils.config.getOrDefault("communityLink", null));
@@ -67,22 +64,20 @@ export class Server {
             configServer.httpsOptions = {
                 key: fs.readFileSync(key, "utf8"),
                 cert: fs.readFileSync(cert, "utf8"),
-                passphrase: Utils.config.get("server.https.passphrase")
+                passphrase: Utils.config.get("server.https.passphrase"),
             };
         }
         return configServer;
     }
 
     static middleware() {
-
-        let hornetMiddlewareList = new HornetMiddlewares.HornetMiddlewareList()
+        return new HornetMiddlewares.HornetMiddlewareList()
             .addAfter(PageRenderingMiddleware, HornetMiddlewares.UserAccessSecurityMiddleware)
             .addAfter(UnmanagedViewErrorMiddleware, HornetMiddlewares.DataRenderingMiddleware);
-        return hornetMiddlewareList;
     }
 
     static startApplication() {
-        let server = new HornetServer.Server(Server.configure(), Server.middleware());
+        const server = new HornetServer.Server(Server.configure(), Server.middleware());
         server.start();
     }
 

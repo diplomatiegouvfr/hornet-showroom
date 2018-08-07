@@ -15,10 +15,10 @@ export interface SearchLayoutProps extends HornetComponentProps {
 }
 
 export interface SearchCloseEventDetail {
-    result: any
+    result: any;
 }
 
-export var SEARCH_CLOSE_EVENT = new HornetEvent<SearchCloseEventDetail>("SEARCH_CLOSE_EVENT");
+export let SEARCH_CLOSE_EVENT = new HornetEvent<SearchCloseEventDetail>("SEARCH_CLOSE_EVENT");
 
 /**
  * Composant de recherche dans le menu et affichage des résultats
@@ -28,7 +28,7 @@ export class SearchLayout extends HornetComponent<SearchLayoutProps, any> {
     docs;
     searchContainer: any = null;
     static defaultProps = {
-        isVisible: true
+        isVisible: true,
     };
 
     constructor(props, context?: any) {
@@ -54,17 +54,18 @@ export class SearchLayout extends HornetComponent<SearchLayoutProps, any> {
      */
     render(): JSX.Element {
 
-        let searchBarClassName = this.props.isVisible ? "search-bar" : "search-bar not-visible";
+        const searchBarClassName = this.props.isVisible ? "search-bar" : "search-bar not-visible";
 
-        let searchClassName = this.props.isVisible ? "search" : "search not-visible";
+        const searchClassName = this.props.isVisible ? "search" : "search not-visible";
 
-        let searchInputClassName = this.props.isVisible ? "" : "not-visible";
-        let visibilityClassName = this.state.results ? "search-result-panel" : "search-result-panel result-hidden";
+        const searchInputClassName = this.props.isVisible ? "" : "not-visible";
+        const visibilityClassName = this.state.results ? "search-result-panel" : "search-result-panel result-hidden";
 
         let lastClassName = this.props.isVisible ? "search-result-panel-hidden" : "search-result-panel-hidden not-visible";
-        lastClassName = ((this.state.results && this.state.results.length) && this.props.isVisible) ? "search-result-panel-container" : lastClassName;
+        lastClassName = ((this.state.results && this.state.results.length) && this.props.isVisible)
+            ? "search-result-panel-container" : lastClassName;
 
-        let placeHolder = this.i18n("menu.search.placeholder");
+        const placeHolder = this.i18n("menu.search.placeholder");
 
         return (
 
@@ -90,9 +91,10 @@ export class SearchLayout extends HornetComponent<SearchLayoutProps, any> {
                     <span id="result" />
                     <div className="result-panel">
                         <div className="search-result-panel">
-                            {this.state.results ? this.state.results.map((item, index) =>
-                                <SearchResult item={item} key={index} />
-                            ) : null}
+                            {(this.state.results) ?
+                                this.state.results.map((item, index) => {
+                                    return <SearchResult item={item} key={index} />;
+                                }) : null}
                         </div>
                     </div>
                 </div>
@@ -107,7 +109,7 @@ export class SearchLayout extends HornetComponent<SearchLayoutProps, any> {
      * @param event
      */
     updateResult(event) {
-        let data = this.resultReceived(event);
+        const data = this.resultReceived(event);
         this.setState({ results: data });
     }
 
@@ -117,8 +119,8 @@ export class SearchLayout extends HornetComponent<SearchLayoutProps, any> {
      * @returns {Array}
      */
     resultReceived(event) {
-        let results = event.detail.results;
-        let formatedResults = [];
+        const results = event.detail.results;
+        const formatedResults = [];
         this.formatResult(results, "", formatedResults);
         return formatedResults;
     }
@@ -130,21 +132,21 @@ export class SearchLayout extends HornetComponent<SearchLayoutProps, any> {
      * @param formatedResults résultats formatés
      */
     formatResult(results, pathToResult, formatedResults) {
-        for (let key in results) {
-            let path = pathToResult + "/" + key;
+        for (const key in results) {
+            const pathComp = pathToResult + "/" + key;
             if (results[ key ].input) {
-                let data = {
-                    "url": "/composant/page" + path,
-                    "name": key,
-                    "before": results[ key ][ 1 ],
-                    "after": results[ key ][ 3 ],
-                    "all": results[ key ][ 0 ],
-                    "word": results[ key ][ 2 ],
-                    "path": path
+                const data = {
+                    url: "/composant/page" + pathComp,
+                    name: key,
+                    before: results[ key ][ 1 ],
+                    after: results[ key ][ 3 ],
+                    all: results[ key ][ 0 ],
+                    word: results[ key ][ 2 ],
+                    path: pathComp,
                 };
                 formatedResults.push(data);
             } else {
-                this.formatResult(results[ key ], path, formatedResults);
+                this.formatResult(results[ key ], pathComp, formatedResults);
             }
         }
 
@@ -154,12 +156,12 @@ export class SearchLayout extends HornetComponent<SearchLayoutProps, any> {
      * fermeture de l'affichage de recherche
      */
     private closeSearch() {
-        let imgCross = document.getElementById("search-close-icon-search");
+        const imgCross = document.getElementById("search-close-icon-search");
         imgCross.classList.add("search-close-icon-hidden");
 
-        let elem = document.getElementById("showroom-menu-container");
-        let result = document.getElementById("result");
-        let inputSearch = document.getElementById("search-input") as any;
+        const elem = document.getElementById("showroom-menu-container");
+        const result = document.getElementById("result");
+        const inputSearch = document.getElementById("search-input") as any;
 
         if (elem) {
             elem.classList.remove("showroom-menu-hidden");
@@ -182,9 +184,9 @@ export class SearchLayout extends HornetComponent<SearchLayoutProps, any> {
      */
     private openSearch() {
 
-        let value = (document.getElementById("search-input") as any).value;
+        const value = (document.getElementById("search-input") as any).value;
 
-        let imgCross = document.getElementById("search-close-icon-search");
+        const imgCross = document.getElementById("search-close-icon-search");
         if (value) {
 
             imgCross.classList.remove("search-close-icon-hidden");
@@ -194,10 +196,10 @@ export class SearchLayout extends HornetComponent<SearchLayoutProps, any> {
 
 
         if (value && value.length > 2) {
-            let elem = document.getElementById("showroom-menu-container");
-            let result = document.getElementById("result");
+            const elem = document.getElementById("showroom-menu-container");
+            const result = document.getElementById("result");
 
-            let resultPanel = document.getElementById("search-result-panel-container");
+            const resultPanel = document.getElementById("search-result-panel-container");
 
             if (elem) {
                 if (!_.includes(elem.classList, "showroom-menu-hidden")) {
@@ -226,9 +228,11 @@ export class SearchLayout extends HornetComponent<SearchLayoutProps, any> {
      * @returns {any}
      */
     protected searchData(object, criteria) {
-        for (var key in object) {
+        for (const key in object) {
             if (typeof object[ key ] === "string") {
-                let test = object[ key ].match(RegExp("((?:[a-z'-]+[^a-z'-]+){0,10})(" + criteria + ")((?:[^a-z'-]+[a-z'-]+){0,10})", "i"), "gi");
+                const test = object[ key ].match(
+                    RegExp("((?:[a-z'-]+[^a-z'-]+){0,10})(" + criteria + ")((?:[^a-z'-]+[a-z'-]+){0,10})", "i"), "gi");
+
                 if (!test) {
                     delete object[ key ];
                 } else {
@@ -236,9 +240,9 @@ export class SearchLayout extends HornetComponent<SearchLayoutProps, any> {
                     object[ key ] = test;
                 }
             } else {
-                let child = this.searchData(object[ key ], criteria);
+                const child = this.searchData(object[ key ], criteria);
                 object[ key ] = null;
-                for (var children in child) {
+                for (const children in child) {
                     if (child[ children ]) {
                         if (!object[ key ]) object[ key ] = {};
                         object[ key ][ children ] = child[ children ];
@@ -256,24 +260,24 @@ export class SearchLayout extends HornetComponent<SearchLayoutProps, any> {
      * Lancement de la recherche des md contenant le mot rechercher
      */
     protected search() {
-        let value = (document.getElementById("search-input") as any).value;
+        const value = (document.getElementById("search-input") as any).value;
         if (value && value.length > 2) {
 
             this.matches = 0;
-            let clone = _.cloneDeep(this.docs.comp);
-            let result = this.searchData(clone, value);
+            const clone = _.cloneDeep(this.docs.comp);
+            const result = this.searchData(clone, value);
             let message = this.i18n("menu.search.multipleResult");
-            if (this.matches == 1) {
+            if (this.matches === 1) {
                 message = this.i18n("menu.search.result");
             }
             (document.getElementById("result") as any).innerHTML = this.matches.toString() + " " + message;
             this.fire(SEARCH_RESULT_EVENT.withData({ results: result }));
-            //console.log("=>", result)
+            // console.log("=>", result)
         } else {
             (document.getElementById("result") as any).innerHTML = "";
 
             // fermeture du menu si il y a  moins de deux lettres
-            let inputSearch = document.getElementById("search-input") as any;
+            const inputSearch = document.getElementById("search-input") as any;
             this.closeSearch();
             inputSearch.value = value;
         }

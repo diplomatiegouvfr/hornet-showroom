@@ -42,7 +42,7 @@ MenuHelper.toObject = function (mdFiles, until, startDirectory) {
                     }
 
                     //ajout d'une condition pour hornet-js-builder car il ne possède pas de fichier builder.js
-                    if (projectName == "hornet-js-builder") {
+                    if (projectName == "hornet-js-builder" || projectName == "hornet-js-gc-monitor") {
                         componentPath = projectName + "/" + componentPath;
                     }
                 } else {
@@ -111,9 +111,9 @@ MenuHelper.getFiles = function (project, helper, projectName, filesToObject) {
 
     let files = [];
     if (project.builderJs.externalModules.enabled) {
-        files = PathHelper.listFiles(directory, ".md", [/node_modules/, /\-dts/, /LICENSE.md/, /CHANGELOG.md/, /definition-ts/, /generators/, /.svn/, "/.vscode/", "/.idea/"]);
+        files = PathHelper.listFiles(directory, ".md", [/node_modules/, /\-dts/, /LICENSE.md/, /LICENCE.md/, /CHANGELOG.md/, /definition-ts/, /generators/, /CONTRIBUTING.md/, /static/, /.svn/, "/.vscode/", "/.idea/"]);
     } else {
-        files = PathHelper.listFiles(directory, ".md", [/\-dts/, /LICENSE.md/, /CHANGELOG.md/, /definition-ts/, /generators/]);
+        files = PathHelper.listFiles(directory, ".md", [/\-dts/, /LICENSE.md/, /LICENCE.md/, /CHANGELOG.md/, /definition-ts/, /generators/, /CONTRIBUTING.md/, /static/]);
 
     }
 
@@ -163,19 +163,32 @@ MenuHelper.getMenu = function (project, helper, projectName) {
 
     let files = [];
     if (project.builderJs.externalModules.enabled) {
-        files = PathHelper.listFiles(directory, ".md", [/node_modules/, /\-dts/, /LICENSE.md/, /CHANGELOG.md/, /definition-ts/, /generators/]);
+        files = PathHelper.listFiles(directory, ".md", [/node_modules/, /\-dts/, /LICENSE.md/, /LICENCE.md/, /CHANGELOG.md/, /definition-ts/, /generators/, /CONTRIBUTING.md/, /static/]);
     } else {
-        files = PathHelper.listFiles(directory, ".md", [/\-dts/, /LICENSE.md/, /CHANGELOG.md/, /definition-ts/, /generators/]);
+        files = PathHelper.listFiles(directory, ".md", [/\-dts/, /LICENSE.md/, /LICENCE.md/, /CHANGELOG.md/, /definition-ts/, /generators/, /CONTRIBUTING.md/, /static/]);
 
     }
 
     let menuObject = MenuHelper.toObject(files, projectName, directory);
-    let menu = {
-        "text": MenuHelper.cleanName(projectName.toUpperCase()),
-        "visibleDansMenu": true,
-        "visibleDansPlan": true,
-        "submenu": menuObject.menu
-    };
+    let menu = {};
+    if(menuObject.menu.length === 1){
+        //permet de ne pas afficher de sous répertoire dans le cas d'un seul élément
+        menu = {
+            "text": projectName,
+            "title": projectName,
+            "visibleDansMenu": true,
+            "visibleDansPlan": true,
+            "url": menuObject.menu[0].url
+        };
+    }else{
+        menu = {
+            "text": projectName,
+            "title": projectName,
+            "visibleDansMenu": true,
+            "visibleDansPlan": true,
+            "submenu": menuObject.menu
+        };
+    }
 
     return menu;
 }
@@ -275,7 +288,10 @@ MenuHelper.menuExtendMerged = function (menuExt, menuSource) {
                 if (mExt.submenu == undefined) {
                     mExt.submenu = [];
                 }
-                _.merge(mExt, menu[i]);
+                //_.merge(mExt, menu[i]);
+                if(menu[i].submenu){
+                    mExt.submenu = mExt.submenu.concat(menu[i].submenu);
+                }
             } else {
                 if (menu[i].submenu !== undefined) {
                     recursiveFind(menu[i].submenu, mExt);
@@ -313,8 +329,9 @@ MenuHelper.sortMenu = function (menuSource) {
      * @returns {*}
      */
     function recursiveSort(menu) {
+    
         menu.map((item, index) => {
-            if (item.position) {
+            if (item && item.position) {
                 let newMenu = [];
                 let comp = 0;
                 for (let i = 0; i < menu.length; i++) {
@@ -327,11 +344,9 @@ MenuHelper.sortMenu = function (menuSource) {
                         comp++;
                     }
                 }
-
                 menu = newMenu;
-
             }
-            if (item.submenu) {
+            if (item && item.submenu) {
                 if (item.position) {
                     menu[item.position].submenu = recursiveSort(item.submenu);
                 } else {

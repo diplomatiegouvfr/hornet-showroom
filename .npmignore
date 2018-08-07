@@ -12,3 +12,6 @@ environment
 template
 test_report
 hbw.sh
+Jenkinsfile
+trigger-rundeck.js
+karma_html

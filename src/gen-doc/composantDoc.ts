@@ -6,7 +6,8 @@ export var comp = {
       "webstorm": require("node_modules/app/hornet-js-man/docs/HORNET-JS/01-Installation/03-Webstorm.md"),
       "visual_studio_code": require("node_modules/app/hornet-js-man/docs/HORNET-JS/01-Installation/04-Visual Studio Code.md"),
       "java": require("node_modules/app/hornet-js-man/docs/HORNET-JS/01-Installation/05-Java.md"),
-      "smtp": require("node_modules/app/hornet-js-man/docs/HORNET-JS/01-Installation/06-SMTP.md")
+      "smtp": require("node_modules/app/hornet-js-man/docs/HORNET-JS/01-Installation/06-SMTP.md"),
+      "clamav": require("node_modules/app/hornet-js-man/docs/HORNET-JS/01-Installation/07-Clamav.md")
     },
     "architecture": {
       "principes": require("node_modules/app/hornet-js-man/docs/HORNET-JS/02-Architecture/01-Principes.md"),
@@ -36,6 +37,7 @@ export var comp = {
         "modal": require("node_modules/app/hornet-js-man/docs/HORNET-JS/03-Composants/06-Dialogs/01-Modal.md"),
         "alert": require("node_modules/app/hornet-js-man/docs/HORNET-JS/03-Composants/06-Dialogs/02-Alert.md"),
         "sessionnotification": require("node_modules/app/hornet-js-man/docs/HORNET-JS/03-Composants/06-Dialogs/03-SessionNotification.md"),
+        "sessionidpexpirenotification": require("node_modules/app/hornet-js-man/docs/HORNET-JS/03-Composants/06-Dialogs/04-SessionIdpExpireNotification.md"),
         "notification": require("node_modules/app/hornet-js-man/docs/HORNET-JS/03-Composants/06-Dialogs/Notification.md")
       },
       "headers": {
@@ -65,20 +67,21 @@ export var comp = {
     },
     "conception": {
       "javascript": {
+        "server": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/01-Javascript/01-Server.md"),
+        "client": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/01-Javascript/02-Client.md"),
+        "server-log": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/01-Javascript/03-Server-log.md"),
+        "context-path": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/01-Javascript/04-Context-path.md"),
+        "cookie-manager": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/01-Javascript/05-Cookie-manager.md"),
+        "cache": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/01-Javascript/06-Cache.md"),
+        "hornet-js-passport": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/01-Javascript/07-Hornet-js-passport.md"),
+        "avancee": {
+          "result": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/01-Javascript/Avancée/10-Result.md"),
+          "datasource": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/01-Javascript/Avancée/11-Datasource.md"),
+          "injection": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/01-Javascript/Avancée/12-Injection.md"),
+          "json-loader": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/01-Javascript/Avancée/13-Json-loader.md")
+        },
         "configuration": {
-          "server": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/01-Javascript/Configuration/01-Server.md"),
-          "client": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/01-Javascript/Configuration/02-Client.md"),
-          "server-log": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/01-Javascript/Configuration/03-Server-log.md"),
-          "context-path": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/01-Javascript/Configuration/04-Context-path.md"),
-          "cookie-manager": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/01-Javascript/Configuration/05-Cookie-manager.md"),
-          "cache": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/01-Javascript/Configuration/06-Cache.md"),
-          "hornet-js-passport": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/01-Javascript/Configuration/07-Hornet-js-passport.md"),
-          "avancee": {
-            "result": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/01-Javascript/Configuration/Avancée/10-Result.md"),
-            "datasource": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/01-Javascript/Configuration/Avancée/11-Datasource.md"),
-            "injection": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/01-Javascript/Configuration/Avancée/12-Injection.md"),
-            "json-loader": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/01-Javascript/Configuration/Avancée/13-Json-loader.md")
-          }
+          "hornet-js-passport": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/01-Javascript/Configuration/07-Hornet-js-passport.md")
         }
       },
       "java": {
@@ -90,18 +93,21 @@ export var comp = {
         "dao": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/02-Java/06-Dao.md"),
         "donnees": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/02-Java/07-Donnees.md")
       },
-      "paliers_techniques": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/Paliers techniques.md")
+      "bonnes-pratiques-ergonomie": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/Bonnes-Pratiques-Ergonomie.md"),
+      "paliers_techniques": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/Paliers techniques.md"),
+      "paliers-techniques": require("node_modules/app/hornet-js-man/docs/HORNET-JS/04-Conception/Paliers-techniques.md")
     },
     "tutoriel": {
-      "bonnes_pratiques_ergonomie": require("node_modules/app/hornet-js-man/docs/HORNET-JS/05-Tutoriel/Bonnes Pratiques Ergonomie.md"),
       "java": {
-        "test-unitaires": require("node_modules/app/hornet-js-man/docs/HORNET-JS/05-Tutoriel/Java/08-Test-unitaires.md"),
-        "best-practices-java": require("node_modules/app/hornet-js-man/docs/HORNET-JS/05-Tutoriel/Java/09-Best-practices-java.md")
+        "creer-un-projet": require("node_modules/app/hornet-js-man/docs/HORNET-JS/05-Tutoriel/Java/01-Creer-un-projet.md"),
+        "test-unitaires": require("node_modules/app/hornet-js-man/docs/HORNET-JS/05-Tutoriel/Java/02-Test-unitaires.md"),
+        "best-practices-java": require("node_modules/app/hornet-js-man/docs/HORNET-JS/05-Tutoriel/Java/03-Best-practices-java.md")
       },
       "javascript": {
         "creer-un-projet": require("node_modules/app/hornet-js-man/docs/HORNET-JS/05-Tutoriel/Javascript/01-Creer-un-projet.md"),
         "gestion-des-routes": require("node_modules/app/hornet-js-man/docs/HORNET-JS/05-Tutoriel/Javascript/02-Gestion-des-routes.md"),
         "creer-une-nouvelle-page": require("node_modules/app/hornet-js-man/docs/HORNET-JS/05-Tutoriel/Javascript/03-Creer-une-nouvelle-page.md"),
+        "generation-des-routes": require("node_modules/app/hornet-js-man/docs/HORNET-JS/05-Tutoriel/Javascript/03-Generation-des-routes.md"),
         "internationalisation": require("node_modules/app/hornet-js-man/docs/HORNET-JS/05-Tutoriel/Javascript/04-Internationalisation.md"),
         "mode-bouchon": require("node_modules/app/hornet-js-man/docs/HORNET-JS/05-Tutoriel/Javascript/05-Mode-bouchon.md"),
         "securite": require("node_modules/app/hornet-js-man/docs/HORNET-JS/05-Tutoriel/Javascript/06-Securite.md"),
@@ -110,7 +116,8 @@ export var comp = {
         "qualimetrie": require("node_modules/app/hornet-js-man/docs/HORNET-JS/05-Tutoriel/Javascript/09-Qualimetrie.md"),
         "demonstration": require("node_modules/app/hornet-js-man/docs/HORNET-JS/05-Tutoriel/Javascript/10-Demonstration.md"),
         "best-practices-javascript": require("node_modules/app/hornet-js-man/docs/HORNET-JS/05-Tutoriel/Javascript/11-Best-practices-Javascript.md"),
-        "mailer": require("node_modules/app/hornet-js-man/docs/HORNET-JS/05-Tutoriel/Javascript/17-Mailer.md")
+        "mailer": require("node_modules/app/hornet-js-man/docs/HORNET-JS/05-Tutoriel/Javascript/17-Mailer.md"),
+        "feature-flipping": require("node_modules/app/hornet-js-man/docs/HORNET-JS/05-Tutoriel/Javascript/Feature-flipping.md")
       }
     },
     "production": {
@@ -119,6 +126,7 @@ export var comp = {
       "nodejs": require("node_modules/app/hornet-js-man/docs/HORNET-JS/06-Production/03-NodeJs.md"),
       "tomcat": require("node_modules/app/hornet-js-man/docs/HORNET-JS/06-Production/04-Tomcat.md"),
       "applitutoriel": require("node_modules/app/hornet-js-man/docs/HORNET-JS/06-Production/05-Applitutoriel.md"),
+      "saml": require("node_modules/app/hornet-js-man/docs/HORNET-JS/06-Production/06-SAML.md"),
       "haproxy": require("node_modules/app/hornet-js-man/docs/HORNET-JS/06-Production/07-Haproxy.md"),
       "livraison": {
         "projet_specifique_meae": require("node_modules/app/hornet-js-man/docs/HORNET-JS/06-Production/Livraison/01-Projet Specifique MEAE.md")
@@ -128,120 +136,101 @@ export var comp = {
       }
     },
     "documentation_framework": {
-      "archetype-hornet-service": {
-        "presentation": require("node_modules/app/hornet-js-man/docs/HORNET-JS/08-Documentation Framework/Archetype-hornet-service/01-presentation.md")
-      },
-      "hornet-js-gc-monitor": {
-        "presentation": require("node_modules/app/hornet-js-man/docs/HORNET-JS/08-Documentation Framework/Hornet-js-gc-monitor/01-presentation.md")
-      },
-      "hornet-service": {
-        "presentation": require("node_modules/app/hornet-js-man/docs/HORNET-JS/08-Documentation Framework/Hornet-service/01-presentation.md"),
-        "detail_implementation": require("node_modules/app/hornet-js-man/docs/HORNET-JS/08-Documentation Framework/Hornet-service/02-detail implementation.md")
-      },
-      "themes": {
-        "presentation": require("node_modules/app/hornet-js-man/docs/HORNET-JS/08-Documentation Framework/Themes/01-presentation.md")
-      },
+      "hornet-service": require("node_modules/app/hornet-js-man/docs/HORNET-JS/08-Documentation Framework/hornet-service.md"),
       "applitutoriel-js": {
         "presentation": require("node_modules/app/hornet-js-man/docs/HORNET-JS/08-Documentation Framework/applitutoriel-js/01-presentation.md"),
         "configuration": require("node_modules/app/hornet-js-man/docs/HORNET-JS/08-Documentation Framework/applitutoriel-js/02-configuration.md")
       },
-      "applitutoriel-service": {
-        "presentation": require("node_modules/app/hornet-js-man/docs/HORNET-JS/08-Documentation Framework/applitutoriel-service/01-presentation.md"),
-        "configuration": require("node_modules/app/hornet-js-man/docs/HORNET-JS/08-Documentation Framework/applitutoriel-service/02-configuration.md")
-      },
+      "applitutoriel-service": require("node_modules/app/hornet-js-man/docs/HORNET-JS/08-Documentation Framework/applitutoriel-service.md"),
+      "archetype-hornet-service": require("node_modules/app/hornet-js-man/docs/HORNET-JS/08-Documentation Framework/archetype-hornet-service.md"),
       "generator-hornet-js": {
         "presentation": require("node_modules/app/hornet-js-man/docs/HORNET-JS/08-Documentation Framework/generator-hornet-js/01-presentation.md")
       },
-      "hornet-js": {
-        "presentation": require("node_modules/app/hornet-js-man/docs/HORNET-JS/08-Documentation Framework/hornet-js/01-presentation.md")
-      }
+      "hornet-js": require("node_modules/app/hornet-js-man/docs/HORNET-JS/08-Documentation Framework/hornet-js.md")
     }
   },
   "hornet-js-lite": {
+    "installation": {
+      "base_de_donnees": require("node_modules/app/hornet-js-man/docs/HORNET-JS-LITE/01-Installation/07-Base de données.md")
+    },
     "architecture": {
       "architecture": require("node_modules/app/hornet-js-man/docs/HORNET-JS-LITE/02-Architecture/01-Architecture.md")
     },
+    "conception": {
+      "javascript": {
+        "batch": require("node_modules/app/hornet-js-man/docs/HORNET-JS-LITE/04-Conception/01-Javascript/01-batch.md"),
+        "antivirus": require("node_modules/app/hornet-js-man/docs/HORNET-JS-LITE/04-Conception/01-Javascript/02-antivirus.md"),
+        "sequelize": require("node_modules/app/hornet-js-man/docs/HORNET-JS-LITE/04-Conception/01-Javascript/03-Sequelize.md")
+      }
+    },
     "tutoriel": {
-      "batch": require("node_modules/app/hornet-js-man/docs/HORNET-JS-LITE/05-Tutoriel/01-batch.md"),
-      "antivirus": require("node_modules/app/hornet-js-man/docs/HORNET-JS-LITE/05-Tutoriel/02-antivirus.md"),
-      "sequelize": require("node_modules/app/hornet-js-man/docs/HORNET-JS-LITE/05-Tutoriel/03-Sequelize.md"),
-      "generateur": {
-        "generateur-papyrus": require("node_modules/app/hornet-js-man/docs/HORNET-JS-LITE/05-Tutoriel/04-Générateur/générateur-papyrus.md")
-      },
-      "demonstration": require("node_modules/app/hornet-js-man/docs/HORNET-JS-LITE/05-Tutoriel/Démonstration.md")
+      "demonstration": require("node_modules/app/hornet-js-man/docs/HORNET-JS-LITE/05-Tutoriel/Démonstration.md"),
+      "modelisation_avec_papyrus": require("node_modules/app/hornet-js-man/docs/HORNET-JS-LITE/05-Tutoriel/Modélisation avec papyrus.md")
     },
     "production": {
       "infrastructure": require("node_modules/app/hornet-js-man/docs/HORNET-JS-LITE/06-Production/01-Infrastructure.md"),
       "nodejs": require("node_modules/app/hornet-js-man/docs/HORNET-JS-LITE/06-Production/02-Nodejs.md"),
       "apache": require("node_modules/app/hornet-js-man/docs/HORNET-JS-LITE/06-Production/03-Apache.md")
-    },
-    "documentation_framework": {
-      "applitutoriel-js-lite": {
-        "configuration": require("node_modules/app/hornet-js-man/docs/HORNET-JS-LITE/08-Documentation Framework/applitutoriel-js-lite/01-configuration.md")
-      }
     }
   },
-  "contribution": require("node_modules/app/hornet-js-community/docs/contribution.md"),
   "hornet-js-batch": {
-    "contributing": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/hornet-js-batch/CONTRIBUTING.md"),
-    "readme": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/hornet-js-batch/README.md")
+    "readme": require("/home/glotyan/Dev/workspace-js/5.2.0/hornet-showroom/node_modules/app/hornet-js-batch/README.md")
   },
   "hornet-js-bean": {
-    "contributing": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/hornet-js-bean/CONTRIBUTING.md"),
-    "readme": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/hornet-js-bean/README.md")
+    "readme": require("/home/glotyan/Dev/workspace-js/5.2.0/hornet-showroom/node_modules/app/hornet-js-bean/README.md")
   },
   "hornet-js-components": {
-    "contributing": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/hornet-js-components/CONTRIBUTING.md"),
-    "readme": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/hornet-js-components/README.md")
+    "readme": require("/home/glotyan/Dev/workspace-js/5.2.0/hornet-showroom/node_modules/app/hornet-js-components/README.md")
   },
   "hornet-js-core": {
-    "contributing": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/hornet-js-core/CONTRIBUTING.md"),
-    "readme": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/hornet-js-core/README.md")
+    "readme": require("/home/glotyan/Dev/workspace-js/5.2.0/hornet-showroom/node_modules/app/hornet-js-core/README.md")
   },
   "hornet-js-database": {
-    "contributing": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/hornet-js-database/CONTRIBUTING.md"),
-    "readme": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/hornet-js-database/README.md")
+    "readme": require("/home/glotyan/Dev/workspace-js/5.2.0/hornet-showroom/node_modules/app/hornet-js-database/README.md")
   },
   "hornet-js-passport": {
-    "contributing": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/hornet-js-passport/CONTRIBUTING.md"),
-    "readme": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/hornet-js-passport/README.md")
+    "readme": require("/home/glotyan/Dev/workspace-js/5.2.0/hornet-showroom/node_modules/app/hornet-js-passport/README.md")
   },
   "hornet-js-react-components": {
-    "contributing": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/hornet-js-react-components/CONTRIBUTING.md"),
-    "readme": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/hornet-js-react-components/README.md")
+    "readme": require("/home/glotyan/Dev/workspace-js/5.2.0/hornet-showroom/node_modules/app/hornet-js-react-components/README.md")
   },
   "hornet-js-test": {
-    "contributing": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/hornet-js-test/CONTRIBUTING.md"),
-    "readme": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/hornet-js-test/README.md")
+    "readme": require("/home/glotyan/Dev/workspace-js/5.2.0/hornet-showroom/node_modules/app/hornet-js-test/README.md")
   },
   "hornet-js-utils": {
-    "contributing": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/hornet-js-utils/CONTRIBUTING.md"),
-    "readme": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/hornet-js-utils/README.md")
+    "readme": require("/home/glotyan/Dev/workspace-js/5.2.0/hornet-showroom/node_modules/app/hornet-js-utils/README.md")
   },
   "hornet-js-builder": {
-    "contributing": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/hornet-js-builder/CONTRIBUTING.md"),
-    "readme": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/hornet-js-builder/README.md")
+    "readme": require("/home/glotyan/Dev/workspace-js/5.2.0/hornet-showroom/node_modules/app/hornet-js-builder/README.md")
   },
-  "hornet-themes": {
-    "readme": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/hornet-themes/README.md")
+  "hornet-themes-intranet": {
+    "readme": require("/home/glotyan/Dev/workspace-js/5.2.0/hornet-showroom/node_modules/app/hornet-themes-intranet/README.md")
+  },
+  "hornet-js-gc-monitor": {
+    "readme": require("/home/glotyan/Dev/workspace-js/5.2.0/hornet-showroom/node_modules/app/hornet-js-gc-monitor/README.md")
   },
   "generator-hornet-js": {
-    "contributing": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/generator-hornet-js/CONTRIBUTING.md"),
-    "readme": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/generator-hornet-js/README.md")
+    "readme": require("/home/glotyan/Dev/workspace-js/5.2.0/hornet-showroom/node_modules/app/generator-hornet-js/README.md")
   },
   "generator-hornet-js-lite": {
-    "contributing": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/generator-hornet-js-lite/CONTRIBUTING.md"),
-    "readme": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/generator-hornet-js-lite/README.md")
+    "readme": require("/home/glotyan/Dev/workspace-js/5.2.0/hornet-showroom/node_modules/app/generator-hornet-js-lite/README.md")
   },
   "generator-hornet-js-lite-batch": {
-    "contributing": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/generator-hornet-js-lite-batch/CONTRIBUTING.md"),
-    "readme": require("/home/cotediag/Dev/workspaceJS/livraison/hornet-showroom/node_modules/app/generator-hornet-js-lite-batch/README.md")
+    "readme": require("/home/glotyan/Dev/workspace-js/5.2.0/hornet-showroom/node_modules/app/generator-hornet-js-lite-batch/README.md")
+  },
+  "applitutoriel-js": {
+    "readme": require("/home/glotyan/Dev/workspace-js/5.2.0/hornet-showroom/node_modules/app/applitutoriel-js/README.md")
+  },
+  "applitutoriel-js-lite": {
+    "readme": require("/home/glotyan/Dev/workspace-js/5.2.0/hornet-showroom/node_modules/app/applitutoriel-js-lite/README.md")
+  },
+  "applitutoriel-js-batch": {
+    "readme": require("/home/glotyan/Dev/workspace-js/5.2.0/hornet-showroom/node_modules/app/applitutoriel-js-batch/README.md")
   }
 }
 import { Content } from "hornet-js-react-components/src/widget/table/content";
 import { TabContent } from "hornet-js-react-components/src/widget/tab/tab-content";
 import { HornetContent } from "hornet-js-react-components/src/widget/component/hornet-content";
-import { CanvasLoader } from "hornet-js-community/src/demo/components/widget/canvas/canvas-loader";
 import { ConnexionPage } from "hornet-js-passport/src/strategy/saml/views/cnx/connexion-page";
 import { Picto } from "hornet-js-react-components/src/img/picto";
 import { AccordionHeader } from "hornet-js-react-components/src/widget/accordion/accordion-header";
@@ -266,6 +255,7 @@ import { AutoCompleteMultiField } from "hornet-js-react-components/src/widget/fo
 import { AutoCompleteSelector } from "hornet-js-react-components/src/widget/form/auto-complete-selector";
 import { ButtonsArea } from "hornet-js-react-components/src/widget/form/buttons-area";
 import { CalendarField } from "hornet-js-react-components/src/widget/form/calendar-field";
+import { CharsCounter } from "hornet-js-react-components/src/widget/form/chars-counter";
 import { CheckBoxField } from "hornet-js-react-components/src/widget/form/checkbox-field";
 import { CheckBox } from "hornet-js-react-components/src/widget/form/checkbox";
 import { DomAdapter } from "hornet-js-react-components/src/widget/form/dom-adapter";
@@ -293,6 +283,7 @@ import { Plan } from "hornet-js-react-components/src/widget/navigation/plan";
 import { Countdown } from "hornet-js-react-components/src/widget/notification/count-down";
 import { MessageItem } from "hornet-js-react-components/src/widget/notification/notification-message-item";
 import { NotificationSessionFooter } from "hornet-js-react-components/src/widget/notification/notification-session-footer";
+import { SessionIdpExpireNotification } from "hornet-js-react-components/src/widget/notification/notification-session-idp";
 import { SessionExpireNotification } from "hornet-js-react-components/src/widget/notification/notification-session";
 import { Notification } from "hornet-js-react-components/src/widget/notification/notification";
 import { Pager } from "hornet-js-react-components/src/widget/pager/pager";
@@ -353,7 +344,6 @@ import { NotificationType } from "hornet-js-core/src/notification/notification-m
 import { Position } from "hornet-js-react-components/src/widget/dropdown/dropdown";
 import { Tabs } from "hornet-js-react-components/src/widget/tab/tabs";
 export var hornetComponent = {
- 	"CanvasLoader" : CanvasLoader, 
  	"ConnexionPage" : ConnexionPage, 
  	"Picto" : Picto, 
  	"AccordionHeader" : AccordionHeader, 
@@ -379,6 +369,7 @@ export var hornetComponent = {
  	"AutoCompleteSelector" : AutoCompleteSelector, 
  	"ButtonsArea" : ButtonsArea, 
  	"CalendarField" : CalendarField, 
+ 	"CharsCounter" : CharsCounter, 
  	"CheckBoxField" : CheckBoxField, 
  	"CheckBox" : CheckBox, 
  	"DomAdapter" : DomAdapter, 
@@ -406,6 +397,7 @@ export var hornetComponent = {
  	"Countdown" : Countdown, 
  	"MessageItem" : MessageItem, 
  	"NotificationSessionFooter" : NotificationSessionFooter, 
+ 	"SessionIdpExpireNotification" : SessionIdpExpireNotification, 
  	"SessionExpireNotification" : SessionExpireNotification, 
  	"Notification" : Notification, 
  	"Pager" : Pager, 

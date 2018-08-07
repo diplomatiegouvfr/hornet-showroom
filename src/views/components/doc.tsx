@@ -11,13 +11,13 @@ import { HornetComponentProps } from "hornet-js-components/src/component/ihornet
 import { STOP_HIGHLIGHT_EVENT } from "src/views/layouts/hornet-app";
 import { Summary, SUMMARY_OPEN_CLOSE } from "src/views/components/summary";
 
-var path = require("path");
+const path = require("path");
 const logger: Logger = Utils.getLogger("hornet-showroom.showroom.page");
 
 export interface docProps extends HornetComponentProps {
-    title?: string
-    composantName: string
-    word?: string
+    title?: string;
+    composantName: string;
+    word?: string;
 }
 
 
@@ -49,18 +49,18 @@ export class Doc extends HornetComponent<docProps, any> {
      * @param nextContext
      */
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        if (nextState.composantName == this.state.composantName) {
+        if (nextState.composantName === this.state.composantName) {
             if (this.editor && this.editor.length > 0) {
                 this.editor.forEach((item) => {
                     if (item) {
-                        item.setState({ code: nextState.code })
+                        item.setState({ code: nextState.code });
                     }
                 });
             }
             if (this.preview && this.preview.length > 0) {
                 this.preview.forEach((item) => {
                     if (item) {
-                        item.setState({ code: nextState.code })
+                        item.setState({ code: nextState.code });
                     }
                 });
             }
@@ -117,7 +117,7 @@ export class Doc extends HornetComponent<docProps, any> {
         return (
             <div>
                 {this.state.hasError ? this.state.error.toString() : this.docRender()}
-            </div>)
+            </div>);
     }
 
     /**
@@ -126,27 +126,27 @@ export class Doc extends HornetComponent<docProps, any> {
      * @returns {any | string}
             */
     highlightWord(text) {
-        //on découpe le texte du md aux endroits ou il y a le mot
+        // on découpe le texte du md aux endroits ou il y a le mot
 
-        let data = text.split(new RegExp(this.state.word, "i"));
+        const data = text.split(new RegExp(this.state.word, "i"));
         let result = data[ 0 ];
         // chaine permttant de savoir ou on en est dans texte
         let cuttedText = data[ 0 ];
         for (let i = 0; i < data.length - 1; i++) {
-            //on récupère le mot dans le texte a l'endroit souhaité
-            let word = text.substring(cuttedText.length, cuttedText.length + this.state.word.length);
+            // on récupère le mot dans le texte a l'endroit souhaité
+            const word = text.substring(cuttedText.length, cuttedText.length + this.state.word.length);
 
-            let beginning = text.substring(0, cuttedText.length);
+            const beginning = text.substring(0, cuttedText.length);
 
-            let begOpen = beginning.lastIndexOf("<");
-            let begClose = beginning.lastIndexOf(">");
+            const begOpen = beginning.lastIndexOf("<");
+            const begClose = beginning.lastIndexOf(">");
 
             /**
              * On regarde les positions des balises ouvrantes et fermante avant le mot pour savoir s'il se trouve dans une balise ou non
              */
-            if ((begOpen == -1 && begClose == -1) ||
-                (begClose != -1 && begOpen == -1) ||
-                (begOpen != -1 && begClose != -1 && begClose > begOpen)) {
+            if ((begOpen === -1 && begClose === -1) ||
+                (begClose !== -1 && begOpen === -1) ||
+                (begOpen !== -1 && begClose !== -1 && begClose > begOpen)) {
                 if (this.isFirst) {
                     result += "<span class=\"search-word-md\" id=\"first-word\">" + word + "</span>" + data[ i + 1 ];
                     this.isFirst = false;
@@ -159,7 +159,7 @@ export class Doc extends HornetComponent<docProps, any> {
 
             cuttedText += word + data[ i + 1 ];
         }
-        return result
+        return result;
     }
 
     /**
@@ -168,7 +168,7 @@ export class Doc extends HornetComponent<docProps, any> {
      */
     reload(event) {
         this.setState({ word: null }, () => {
-            this.forceUpdate()
+            this.forceUpdate();
         });
     }
 
@@ -182,7 +182,7 @@ export class Doc extends HornetComponent<docProps, any> {
                 this.preview[ key ].setState({ code: newCode });
             } else {
                 this.preview.forEach((item) => {
-                    item.setState({ code: newCode })
+                    item.setState({ code: newCode });
                 });
             }
         }
@@ -198,23 +198,23 @@ export class Doc extends HornetComponent<docProps, any> {
         if (!Utils.isServer) {
 
             // scroll en haut de page
-            let componentDoc = require("src/gen-doc/composantDoc");
+            const componentDoc = require("src/gen-doc/composantDoc");
 
             this.scopeHornetComposant = componentDoc[ "hornetComponent" ];
             // Injection composant specifique
-            this.scopeHornetComposant[ 'React' ] = React;
+            this.scopeHornetComposant[ "React" ] = React;
 
-            let mdSource = "comp." + this.props.composantName.replace(/\//g, ".");
+            const mdSource = "comp." + this.props.composantName.replace(/\//g, ".");
             let text = _.get(componentDoc, mdSource) as any;
 
             text = this.includeMd(text, componentDoc);
 
             text = text.replace(/<a /g, "<a target=\"_blank\"");
 
-            let tab = (text) ? this.getEditorCode(text) : [];
+            const tab = (text) ? this.getEditorCode(text) : [];
             let removenext = false;
 
-            let summary = (text) ? this.summarize(text) : [];
+            const summary = (text) ? this.summarize(text) : [];
 
 
             this.preview = [];
@@ -222,28 +222,28 @@ export class Doc extends HornetComponent<docProps, any> {
             let indKey = -1;
             mdRender = (
                 <div ref={(div) => {
-                    this.div = div
+                    this.div = div;
                 }}
                 >
 
                     {summary && summary.length > 0 ? <Summary summary={summary} /> : null}
                     {tab.map((item, i) => {
-                        let baliseShowroom = "<code class=\"javascript showroom\">";
-                        let closeBalise = "</code>";
-                        let removeBalise = "<pre class=\"container-code\">";
-                        let removeBaliseEnd = "</pre>"
+                        const baliseShowroom = "<code class=\"javascript showroom\">";
+                        const closeBalise = "</code>";
+                        const removeBalise = "<pre class=\"container-code\">";
+                        const removeBaliseEnd = "</pre>";
 
                         if (item.indexOf(baliseShowroom) !== -1) {
-                            let indDebut = baliseShowroom.length
-                            let indFin = item.length - closeBalise.length;
-                            let code = item.substring(indDebut, indFin)
+                            const indDebut = baliseShowroom.length;
+                            const indFin = item.length - closeBalise.length;
+                            let code = item.substring(indDebut, indFin);
                             code = this.escape(code);
                             removenext = true;
                             indKey++;
                             return <div id="content-doc" key={i} className="content-doc-container">
                                 <pre className="container-code">
                                     <button className="copy-code-editor-button" onClick={() => {
-                                        this.copyEditor(indKey)
+                                        this.copyEditor(indKey);
                                     }}>Copier</button>
                                     <Editor ref={(editor) => {
                                         if (editor) {
@@ -253,16 +253,16 @@ export class Doc extends HornetComponent<docProps, any> {
                                         handleChangeCode={this.handleChangeCode.bind(this)} keyInMd={indKey} />
                                     <Preview code={code} scope={this.scopeHornetComposant} ref={(preview) => {
                                         if (preview) {
-                                            this.preview.push(preview)
+                                            this.preview.push(preview);
                                         }
                                     }} />
                                 </pre>
-                            </div>
+                            </div>;
                         } else {
                             let codeTxt = item;
 
                             if (item.indexOf(removeBalise) !== -1) {
-                                let indFin = item.length - removeBalise.length;
+                                const indFin = item.length - removeBalise.length;
                                 codeTxt = item.substring(0, indFin);
                             }
                             if (codeTxt.indexOf(removeBaliseEnd) !== -1 && removenext) {
@@ -274,7 +274,7 @@ export class Doc extends HornetComponent<docProps, any> {
                             }
 
                             return <div className="content-doc-container" dangerouslySetInnerHTML={{ __html: codeTxt }}
-                                key={i} />
+                                key={i} />;
                         }
                     })}
                 </div>
@@ -289,26 +289,27 @@ export class Doc extends HornetComponent<docProps, any> {
 
     /**
      * rempalce les inclusions de md par le contenu du md
+     * Afin de construire le chemin, se baser sur le fichier composantDoc.ts
      */
     includeMd(text, componentDoc) {
         let newText = text;
-        let baliseInclude = /{\s*showroom\s*mdinclude\s*[|]\s*/;
-        let baliseClose = "}";
+        const baliseInclude = /{\s*showroom\s*mdinclude\s*[|]\s*/;
+        const baliseClose = "}";
         let index = newText.search(baliseInclude);
         while (index !== -1) {
-            let beginCode = newText.substring(index, newText.length);
-            let indexClose = beginCode.indexOf(baliseClose);
+            const beginCode = newText.substring(index, newText.length);
+            const indexClose = beginCode.indexOf(baliseClose);
 
             let code = beginCode.substring(0, indexClose);
             code = code.replace(baliseInclude, "")
                 .replace(/\s/g, "")
                 .replace(/\n/g, "");
 
-            let mdSource = "comp." + code.replace(/\//g, ".");
-            let mdCode = _.get(componentDoc, mdSource) as any;
+            const mdSource = "comp." + code.replace(/\//g, ".");
+            const mdCode = _.get(componentDoc, mdSource) as any;
 
-            let begin = newText.substring(0, index);
-            let end = beginCode.substring(indexClose + 1, beginCode.length);
+            const begin = newText.substring(0, index);
+            const end = beginCode.substring(indexClose + 1, beginCode.length);
 
             newText = begin + mdCode + end;
 
@@ -322,9 +323,9 @@ export class Doc extends HornetComponent<docProps, any> {
      * Scroll au premier mot correspondant à la recherche
      */
     scrollToFirstWord() {
-        let target = document.getElementById("first-word");
+        const target = document.getElementById("first-word");
         if (target) {
-            let offset = target.offsetTop;
+            const offset = target.offsetTop;
             window.scrollTo(0, offset);
         }
     }
@@ -337,10 +338,10 @@ export class Doc extends HornetComponent<docProps, any> {
      */
     getEditorCode(textMd: string) {
 
-        let tabCode = [];
-        let returnTab = [];
-        let baliseShowroom = "<code class=\"javascript showroom\">";
-        let closeBalise = "</code>";
+        const tabCode = [];
+        const returnTab = [];
+        const baliseShowroom = "<code class=\"javascript showroom\">";
+        const closeBalise = "</code>";
         let text = "";
         let comp = 0;
         let currentText = textMd;
@@ -349,16 +350,16 @@ export class Doc extends HornetComponent<docProps, any> {
         /**
          * découpage du code en fonction de la balise showroom
          */
-        while (text.length != textMd.length) {
-            let index = currentText.indexOf(baliseShowroom, 1)
+        while (text.length !== textMd.length) {
+            const index = currentText.indexOf(baliseShowroom, 1);
             let temp = "";
-            if (index == -1) {
-                //il n'y a plus de balise showroom
+            if (index === -1) {
+                // il n'y a plus de balise showroom
                 temp = currentText;
                 text += currentText;
             } else {
-                //découpage avant la balise showroom
-                //elle sera au début de la chaîne suivante
+                // découpage avant la balise showroom
+                // elle sera au début de la chaîne suivante
                 temp = textMd.substring(text.length, text.length + index);
                 text = text + temp;
                 currentText = textMd.substring(text.length, textMd.length);
@@ -371,18 +372,18 @@ export class Doc extends HornetComponent<docProps, any> {
          * découpage du code en fonction de la balise fermante showroom
          */
         tabCode.forEach((item) => {
-            let index = item.indexOf(closeBalise);
-            let indexOpen = item.indexOf(baliseShowroom);
-            if (indexOpen == 0) {
-                //la balise showroom se trouve au début de la chaine
-                //il s'agit donc d'un live coding, on le découpe
-                let debut = item.substring(0, index + closeBalise.length);
-                let fin = item.substring(index + closeBalise.length, item.length);
-                if (debut != "") {
+            const index = item.indexOf(closeBalise);
+            const indexOpen = item.indexOf(baliseShowroom);
+            if (indexOpen === 0) {
+                // la balise showroom se trouve au début de la chaine
+                // il s'agit donc d'un live coding, on le découpe
+                const debut = item.substring(0, index + closeBalise.length);
+                const fin = item.substring(index + closeBalise.length, item.length);
+                if (debut !== "") {
                     returnTab[ ind ] = debut;
                     ind++;
                 }
-                if (fin != "") {
+                if (fin !== "") {
                     returnTab[ ind ] = fin;
                     ind++;
                 }
@@ -399,11 +400,11 @@ export class Doc extends HornetComponent<docProps, any> {
     /* remplace les balises html mal formatée */
     escape(html) {
         return html
-            .replace(/&amp;/i, '&', )
-            .replace(/&lt;/g, '<')
-            .replace(/&gt;/g, '>')
-            .replace(/&quot;/g, '"')
-            .replace(/&#39;/g, '\'');
+            .replace(/&amp;/i, "&")
+            .replace(/&lt;/g, "<")
+            .replace(/&gt;/g, ">")
+            .replace(/&quot;/g, "\"")
+            .replace(/&#39;/g, "'");
     }
 
     /**
@@ -411,11 +412,11 @@ export class Doc extends HornetComponent<docProps, any> {
      * @param html
      */
     summarize(html): any {
-        let titles = html.match(RegExp("<h[2-4?][^>]+>(.*)<\/h[^>]+>|iU", "gi"), "gi");
-        let summary = [];
+        const titles = html.match(RegExp("<h[2-4?][^>]+>(.*)<\/h[^>]+>|iU", "gi"), "gi");
+        const summary = [];
         if (titles) {
             titles.map((menu) => {
-                let ids = menu.match(RegExp("id=\"(.?)*\"", "gi"));
+                const ids = menu.match(RegExp("id=\"(.?)*\"", "gi"));
                 if (ids) {
                     let id = ids[ 0 ].replace("id=\"", "");
                     id = id.replace("\"", "");
@@ -430,11 +431,11 @@ export class Doc extends HornetComponent<docProps, any> {
                     id = id.replace(RegExp("<[^>]*>", "gi"), "");
                     name = name.replace(RegExp("<[^>]*>", "gi"), "");
 
-                    let level = menu[ 2 ];
+                    const levelMenu = menu[ 2 ];
                     summary.push({
                         id: this.escape(id),
                         name: this.escape(name),
-                        level: level
+                        level: levelMenu,
                     });
                 }
             });
@@ -447,8 +448,8 @@ export class Doc extends HornetComponent<docProps, any> {
      * @param ev
      */
     summaryOpenClose(ev) {
-        let docs = document.getElementsByClassName("content-doc-container");
-        let gitlabButton = document.getElementById("gitlab-button");
+        const docs = document.getElementsByClassName("content-doc-container");
+        const gitlabButton = document.getElementById("gitlab-button");
         for (let i = 0; docs[ i ]; i++) {
             if (ev.detail.opened) {
                 docs[ i ].className = "content-doc-container";
@@ -464,7 +465,7 @@ export class Doc extends HornetComponent<docProps, any> {
      * lie les boutons copy a la méthode de copiage
      */
     listenCopy() {
-        let elements = document.getElementsByClassName("copy-code-button");
+        const elements = document.getElementsByClassName("copy-code-button");
         for (let i = 0; elements[ i ]; i++) {
             elements[ i ].addEventListener("click", this.copyCode);
         }
@@ -474,7 +475,7 @@ export class Doc extends HornetComponent<docProps, any> {
      * remove les elements de copy
      */
     stopListenCopy() {
-        let elements = document.getElementsByClassName("copy-code-button");
+        const elements = document.getElementsByClassName("copy-code-button");
         for (let i = 0; elements[ i ]; i++) {
             elements[ i ].removeEventListener("click", this.copyCode);
         }
@@ -486,9 +487,9 @@ export class Doc extends HornetComponent<docProps, any> {
      */
     copyCode(ev) {
         window.getSelection().removeAllRanges();
-        let range = document.createRange();
-        let parent = ev.target.parentNode;
-        let code = parent.childNodes[ 1 ];
+        const range = document.createRange();
+        const parent = ev.target.parentNode;
+        const code = parent.childNodes[ 1 ];
         range.selectNode(code);
         window.getSelection().addRange(range);
         document.execCommand("copy");
@@ -500,9 +501,9 @@ export class Doc extends HornetComponent<docProps, any> {
      */
     copyEditor(indKey) {
         if (this.editor[ indKey ]) {
-            let code = this.editor[ indKey ].state.code || this.editor[ indKey ].props.code;
+            const code = this.editor[ indKey ].state.code || this.editor[ indKey ].props.code;
             // le texte n'etant pas présent dans un tag on créer une textarea pour l'utiliser
-            var textarea = document.createElement("textarea");
+            const textarea = document.createElement("textarea");
             textarea.textContent = code;
             textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
             document.body.appendChild(textarea);
