@@ -14,9 +14,7 @@ export interface SummaryOpenCloseDetail {
 
 export let SUMMARY_OPEN_CLOSE = new HornetEvent<SummaryOpenCloseDetail>("SUMMARY_OPEN_CLOSE");
 
-
 const logger: Logger = Utils.getLogger("hornet-showroom.summary");
-
 
 export interface SummaryProps extends HornetComponentProps {
     summary: any;
@@ -71,7 +69,6 @@ export class Summary<P extends SummaryProps, S extends SummaryState> extends Hor
      */
     render() {
         const visible = this.state.isVisible ? "summary-visible" : "summary-hidden";
-
 
         const classNameButtonGitlab = {
             "gitlab-button": true,
@@ -177,7 +174,7 @@ export class Summary<P extends SummaryProps, S extends SummaryState> extends Hor
 
         if (closestItem) {
             this.currentItem = closestItem;
-            let activeTitle = document.getElementById("title-" + closestItem.id);
+            const activeTitle = document.getElementById("title-" + closestItem.id);
             if (activeTitle) {
                 activeTitle.className += " title-active";
             }
@@ -204,5 +201,3 @@ export class Summary<P extends SummaryProps, S extends SummaryState> extends Hor
         };
     }
 }
-
-

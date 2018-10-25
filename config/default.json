@@ -32,7 +32,7 @@
     "httpOnly": true,
     "secure": true
   },
-  "themeName": "hornet-themes-intranet",
+  "themeName": "hornet-themes",
   "security": {
     "enabled": true,
     "hpp": true,
@@ -59,7 +59,6 @@
         "'self'"
       ],
       "frameAncestors": [
-        "http://10.110.193.33/sam/*"
       ],
       "reportOnly": false,
       "setAllHeaders": true,

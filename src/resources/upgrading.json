@@ -78,7 +78,7 @@
             },
             {
                 "name": "React",
-                "version": "16.4.0",
+                "version": "16.4.2",
                 "logo": "/img/logos/logo-reactjs.svg",
                 "link": "https://reactjs.org/",
                 "doc": "https://5abc31d8be40f1556f06c4be--reactjs.netlify.com/docs/hello-world.html"

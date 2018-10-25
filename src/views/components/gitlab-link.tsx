@@ -81,7 +81,7 @@ export class GitLabLink extends HornetComponent<HornetComponentProps, any> {
         */
         return (
 
-            <a className="home" title="Modifier le fichier sur gitlab" id="logo" target={"_blank"}
+            <a className ="home button-action picto-svg" title="Modifier le fichier sur gitlab" id="logo" target={"_blank"}
                 href={this.communityLink ? this.communityLink.git.labDoc + this.state.url : ""} >
                 <div className={"fl"}>
                     <img src={Picto.blue.editer} alt={"editer cette page"} title={"editer cette page"} />
