@@ -34,11 +34,11 @@
               "url": "/composant/page/applitutoriel-js/readme"
             },
             {
-              "text": "hornet-themes",
-              "title": "hornet-themes",
+              "text": "hornet-themes-intranet",
+              "title": "hornet-themes-intranet",
               "visibleDansMenu": true,
               "visibleDansPlan": true,
-              "url": "/composant/page/hornet-themes/readme"
+              "url": "/composant/page/hornet-themes-intranet/readme"
             },
             {
               "text": "hornet-js-gc-monitor",
@@ -216,11 +216,11 @@
               "url": "/composant/page/applitutoriel-js-batch/readme"
             },
             {
-              "text": "hornet-themes",
-              "title": "hornet-themes",
+              "text": "hornet-themes-intranet",
+              "title": "hornet-themes-intranet",
               "visibleDansMenu": true,
               "visibleDansPlan": true,
-              "url": "/composant/page/hornet-themes/readme"
+              "url": "/composant/page/hornet-themes-intranet/readme"
             },
             {
               "text": "hornet-js-gc-monitor",

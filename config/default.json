@@ -32,7 +32,7 @@
     "httpOnly": true,
     "secure": true
   },
-  "themeName": "hornet-themes",
+  "themeName": "hornet-themes-intranet",
   "security": {
     "enabled": true,
     "hpp": true,

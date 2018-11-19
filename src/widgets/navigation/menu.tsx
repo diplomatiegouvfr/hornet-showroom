@@ -73,7 +73,7 @@
  * hornet-js-react-components - Ensemble des composants web React de base de hornet-js
  *
  * @author MEAE - Ministère de l'Europe et des Affaires étrangères
- * @version v5.1.1
+ * @version v5.2.3
  * @link git+https://github.com/diplomatiegouvfr/hornet-js.git
  * @license CECILL-2.1
  */
@@ -88,7 +88,6 @@ import * as classNames from "classnames";
 import { KeyCodes } from "hornet-js-components/src/event/key-codes";
 import { MenuInfoAccessibilite } from "hornet-js-react-components/src/widget/navigation/menu-info-accessibilite";
 import { Utils } from "hornet-js-utils";
-import { UPDATE_PAGE_EXPAND_MENU } from "hornet-js-react-components/src/widget/screen/layout-switcher";
 
 import HTMLAttributes = __React.HTMLAttributes;
 
@@ -167,33 +166,8 @@ export class Menu extends HornetComponent<MenuProps, any> {
         };
         if (this.props.closeOnClickOutside) this.handleMenuOutsideClick.bind(this);
 
-        this.listen(UPDATE_PAGE_EXPAND_MENU, this.handleUpatePageMenuExpand);
     }
 
-    /**
-     * Change la taille du menu lorque la taille de l'écran est modifiée
-     */
-    /*handleResize() {
-        let show = window.innerWidth > showIconSize;
-        this.setState({ shouldShowIconInfo: show });
-    }*/
-
-    /**
-     * @inheritDoc
-     */
-    componentDidMount() {
-        // TODO A supprimer car pas l'utilite dans l'application ?
-        this.handleLayoutExpand();
-        // window.addEventListener("resize", this.handleResize);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    componentWillUnmount() {
-        // this.remove(MENU_LINK_ACTIVATED, this.handleMajLink);
-        this.remove(UPDATE_PAGE_EXPAND_MENU, this.handleUpatePageMenuExpand);
-    }
 
     /**
      * Gestion du clic clavier
@@ -368,29 +342,5 @@ export class Menu extends HornetComponent<MenuProps, any> {
     handleMenuOutsideClick(e) {
         e.stopPropagation();
         return false;
-    }
-
-    private handleLayoutExpand() {
-        // préparation de la taille pour le layout expanding
-        let maxWidth;
-        let classNameExpanded = "mainLayoutClassNameExpanded";
-        if (!(Utils.appSharedProps.get("isExpandedLayout"))) {
-            maxWidth = this.state.workingZoneWidth;
-            classNameExpanded = "mainLayoutClassName";
-        }
-
-        this.setState({
-            classNameExpanded,
-            currentWorkingZoneWidth: maxWidth,
-        });
-    }
-
-    /*private handleMajLink() {
-        this.setState({ majlink: true });
-    }*/
-
-    private handleUpatePageMenuExpand() {
-        this.handleLayoutExpand();
-        this.setState({ maj: true });
     }
 }
