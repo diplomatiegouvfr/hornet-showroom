@@ -1642,3 +1642,66 @@ scrollbar du menu
         max-width: 4em;
         margin: 1em;
     }
+
+
+    @media screen and ( max-width: 750px){
+        .logo-showroom {
+        width: 85%;
+        }
+
+        .toggler.is-active {
+            margin-left: 70%;
+        }
+
+        .menu-showroom .menu-content {
+            width: 85%;
+        }
+
+        .search-bar {
+            width: 85%;
+        }
+
+        ul.nav li.nav-item a.having-sub-nav span:after{
+            border-right: 0.15em solid white;
+            border-top: 0.15em solid white;
+        }
+
+        ul.nav li.sub-nav-item.masked a.having-sub-nav span:after{
+            border-right: 0.15em solid white;
+            border-top: 0.15em solid white;
+        }
+
+        ul.nav li.nav-item.masked a.having-sub-nav span:after{
+            border-right: 0.15em solid white;
+            border-top: 0.15em solid white;
+        }
+
+        .search-bar {
+        margin-top: 20%;
+        }
+
+        .menu-showroom .menu-content {
+        top: 9em;
+        }
+
+        .menu-showroom:not(.menuOpen) .menu-content{
+            width: 14%;
+        }
+
+        .menu-showroom:not(.menuOpen) .menu-content .having-sub-nav{
+            margin-left:0%;
+        }
+
+        .home-tule img{
+            width: 50%;
+        }
+
+        .hornet-js .home-tule, .hornet-js-lite .home-tule{
+            width: 5em;
+            margin: 0em;
+        }
+
+        #pageComposant .home-tule {
+            display: block;
+        }
+    }

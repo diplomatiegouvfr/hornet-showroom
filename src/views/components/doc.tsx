@@ -325,8 +325,8 @@ export class Doc extends HornetComponent<docProps, any> {
     scrollToFirstWord() {
         const target = document.getElementById("first-word");
         if (target) {
-            const offset = target.offsetTop;
-            window.scrollTo(0, offset);
+            target.scrollIntoView();
+            window.scroll(window.scrollX, window.scrollY - 69);
         }
     }
 
