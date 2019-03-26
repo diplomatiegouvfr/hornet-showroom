@@ -131,7 +131,7 @@ module.exports = {
             let filesToObject = {};
             let mdFiles = PathHelper.listFiles(docDir, ".md");
             let compFiles = PathHelper.listFiles(composantDirectory, ".tsx", 
-                [/generator-hornet-js/, /generator-hornet-js-lite/, /generator-hornet-js-lite-batch/, /applitutoriel-js-lite/, /applitutoriel-js-common/]);
+                [/generator-hornet-js/, /generator-hornet-js-lite/, /generator-hornet-js-lite-batch/, /applitutoriel-js-lite/, /applitutoriel-js-common/, /hornet-js-react-components\/test/]);
             let projects = PathHelper.listDir(nodeModuleDir, /^hornet-js(?!-gc)(?!-man)(?!-community)(?!-builder)/); //exclusion du gc-monitor, man, builder et community
             let mdFwkFiles = [];
 
