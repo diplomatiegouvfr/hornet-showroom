@@ -1,0 +1,8 @@
+{
+  "server":{
+    "route": "js#{INSTANCE}",
+    "port": #{PORT_SERVER},
+    "portMonitor": #{PORT_MONITOR}
+  }
+}
+

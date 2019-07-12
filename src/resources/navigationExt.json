@@ -13,17 +13,7 @@
           "visibleDansPlan": true,
           "url": "/catalogue",
           "position": 2,
-          "submenu": [
-            {
-              "text": "Pictogrammes ",
-              "title": "Pictogrammes",
-              "url": "/pictogrammes",
-              "visibleDansMenu": true,
-              "visibleDansPlan": true,
-              "position": 2,
-              "submenu": []
-            }
-          ]
+          "submenu": []
         }
       ]
     },
@@ -40,17 +30,7 @@
           "visibleDansPlan": true,
           "url": "/catalogue",
           "position": 2,
-          "submenu": [
-            {
-              "text": "Pictogrammes ",
-              "title": "Pictogrammes",
-              "url": "/pictogrammes",
-              "visibleDansMenu": true,
-              "visibleDansPlan": true,
-              "position": 2,
-              "submenu": []
-            }
-          ]
+          "submenu": []
         }
       ]
     }

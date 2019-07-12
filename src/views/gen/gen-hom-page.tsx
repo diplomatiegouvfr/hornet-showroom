@@ -1,5 +1,5 @@
 import { Utils } from "hornet-js-utils";
-import { Logger } from "hornet-js-utils/src/logger";
+import { Logger } from "hornet-js-logger/src/logger";
 import *  as React from "react";
 import { HornetPage } from "hornet-js-react-components/src/widget/component/hornet-page";
 import { HornetComponentProps } from "hornet-js-components/src/component/ihornet-component";
@@ -12,7 +12,7 @@ export interface Tuile {
     alt?: string;
 }
 
-const logger: Logger = Utils.getLogger("hornet-showroom.views.gen.gen-hom-page");
+const logger: Logger = Logger.getLogger("hornet-showroom.views.gen.gen-hom-page");
 
 const tuiles = {
     hornetJs: [
@@ -84,7 +84,6 @@ const tuiles = {
         },
     ],
 };
-
 
 /**
  * Ecran de page d'accueil de l'application
@@ -180,7 +179,6 @@ export class HomePage extends HornetPage<any, HornetComponentProps, any> {
             </div>
         );
     }
-
 
     /**
      *

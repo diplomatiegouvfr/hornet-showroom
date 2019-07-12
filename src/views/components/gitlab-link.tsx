@@ -4,9 +4,6 @@ import { HornetComponentProps } from "hornet-js-components/src/component/ihornet
 import { HornetComponent } from "hornet-js-react-components/src/widget/component/hornet-component";
 import { NavigationUtils } from "hornet-js-components/src/utils/navigation-utils";
 import { URL_CHANGE_EVENT } from "hornet-js-core/src/routes/router-client-async-elements";
-import { Icon } from "hornet-js-react-components/src/widget/icon/icon";
-import { Picto } from "hornet-js-react-components/src/img/picto";
-
 
 /**
  * Fil d'ariane
@@ -83,9 +80,6 @@ export class GitLabLink extends HornetComponent<HornetComponentProps, any> {
 
             <a className ="home button-action picto-svg" title="Modifier le fichier sur gitlab" id="logo" target={"_blank"}
                 href={this.communityLink ? this.communityLink.git.labDoc + this.state.url : ""} >
-                <div className={"fl"}>
-                    <img src={Picto.blue.editer} alt={"editer cette page"} title={"editer cette page"} />
-                </div>
             </a>
         );
     }

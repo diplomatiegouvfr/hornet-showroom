@@ -1,17 +1,19 @@
-var path = require("path");
-var fs = require("fs");
-const _ = require("lodash");
+const path = require("path");
+const fs = require("fs");
+
+const once = require("lodash.once");
+const merge = require("lodash.merge");
+const findIndex = require("lodash.findindex");
 
 const PathHelper = require("./path-helper");
 const MenuHelper = require("./menu");
-
 
 module.exports = {
     type: "application",
     authorizedPrerelease: "true",
     gulpTasks: function (gulp, project, conf, helper) {
 
-        const marked = require("markdown-loader/node_modules/marked");
+        const marked = require("marked");
         const MdHelper = require("./md-helper");
         const hljs = require("highlight.js");
 
@@ -23,43 +25,39 @@ module.exports = {
         MdHelper.highlight(marked, hljs);
 
         //Add task if needed
-        gulp.beforeTask("compile", _.once(beforeCompile));
-                
+        gulp.task("dependencies:install-ci-prod", (done) => {return done();})
+        gulp.beforeTask("compile", once(beforeCompile));
+
         function beforeCompile() {
             helper.info("Before compile task!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
             //Recuperation de la documentation dans le composant
-            //var composantDirectory = "node_modules/app/hornet-js-react-components/";
-
-            var fwkName = "hornet-js";
-            var builderName = "hornet-js-builder";
-            var docName = "hornet-js-man";
-            var templateHornetName = "generator-hornet-js";
-            var templateHornetLiteName = "generator-hornet-js-lite";
-            var templateHornetLiteBatchName = "generator-hornet-js-lite-batch";
-            var monitorName = "hornet-js-gc-monitor";
-            var hornetThemesName = "hornet-themes-intranet";
-            var communityName = "hornet-js-community";
-            var applitutorieljsName = "applitutoriel-js";
-            var applitutorieljsliteName = "applitutoriel-js-lite";
-            var applitutorieljsbatchName = "applitutoriel-js-batch";
+            const fwkName = "hornet-js";
+            const builderName = "hornet-js-builder";
+            const docName = "hornet-js-man";
+            const templateHornetName = "generator-hornet-js";
+            const templateHornetLiteName = "generator-hornet-js-lite";
+            const templateHornetLiteBatchName = "generator-hornet-js-lite-batch";
+            const monitorName = "hornet-js-gc-monitor";
+            const communityName = "hornet-js-community";
+            const applitutorieljsName = "applitutoriel-js";
+            const applitutorieljsliteName = "applitutoriel-js-lite";
+            const applitutorieljsbatchName = "applitutoriel-js-batch";
 
 
-            var navigationMergeFile = "./src/resources/navigationMerge.json";
-            var navigationExtFile = "./src/resources/navigationExt.json";
+            const navigationMergeFile = "./src/resources/navigationMerge.json";
+            const navigationExtFile = "./src/resources/navigationExt.json";
 
-            var composantDirectory = helper.NODE_MODULES_APP;
-            var docDir = path.join(helper.NODE_MODULES_APP, docName, "docs");
-            var fwkDir = path.join(project.dir, helper.NODE_MODULES_APP, fwkName);
-            var communityDir = path.join(helper.NODE_MODULES_APP, communityName, "docs");
-            var nodeModuleDir = path.join(project.dir, helper.NODE_MODULES_APP);
+            let composantDirectory = helper.NODE_MODULES + "/hornet-js-react-components/src";
+            let docDir = path.join(helper.NODE_MODULES, docName, "docs");
+            let fwkDir = path.join(project.dir, helper.NODE_MODULES, fwkName);
+            let communityDir = path.join(helper.NODE_MODULES, communityName, "docs");
+            let nodeModuleDir = path.join(project.dir, helper.NODE_MODULES);
 
             if (project.builderJs.externalModules.enabled) {
-                var extModules = project.builderJs.externalModules.directories;
+                const extModules = project.builderJs.externalModules.directories;
                 for (let i = 0; i < extModules.length; i++) {
                     let tmp = extModules[i].toLowerCase().split("/");
-
-                    console.log("externals : ", extModules[i]);
 
                     if (tmp.indexOf("hornet-js-man") > -1) {
                         docDir = path.join(extModules[i], "docs");
@@ -82,13 +80,13 @@ module.exports = {
 
             }
 
-            var composantIndex = "src/gen-doc/composantDoc.ts";
-            var menuSourceFile = "src/resources/navigation.json";
+            const composantIndex = "src/gen-doc/composantDoc.ts";
+            const menuSourceFile = "src/resources/navigation.json";
 
-            var reactComp = [];
-            var hornetComponent = {};
+            const reactComp = [];
+            const hornetComponent = {};
 
-            var fileExclude = [
+            const fileExclude = [
                 "readme",
                 "license",
                 "licence",
@@ -112,9 +110,7 @@ module.exports = {
                 SpinnerOption: "hornet-js-core/src/component/datasource/options/datasource-option",
                 NotificationManager: "hornet-js-core/src/notification/notification-manager",
                 Notifications: "hornet-js-core/src/notification/notification-manager",
-                NotificationType: "hornet-js-core/src/notification/notification-manager",
-                Position: "hornet-js-react-components/src/widget/dropdown/dropdown",
-                Tabs: "hornet-js-react-components/src/widget/tab/tabs"
+                NotificationType: "hornet-js-core/src/notification/notification-manager"
             };
 
             // suppression des fichiers générés
@@ -130,19 +126,20 @@ module.exports = {
 
             let filesToObject = {};
             let mdFiles = PathHelper.listFiles(docDir, ".md");
-            let compFiles = PathHelper.listFiles(composantDirectory, ".tsx", 
-                [/generator-hornet-js/, /generator-hornet-js-lite/, /generator-hornet-js-lite-batch/, /applitutoriel-js-lite/, /applitutoriel-js-common/, /hornet-js-react-components\/test/]);
-            let projects = PathHelper.listDir(nodeModuleDir, /^hornet-js(?!-gc)(?!-man)(?!-community)(?!-builder)/); //exclusion du gc-monitor, man, builder et community
-            let mdFwkFiles = [];
 
+            let compFiles = PathHelper.listFiles(composantDirectory, ".js",
+                [/hornet-js-react-components\/test/, /hornet-js-react-components\/src\/middleware/, /hornet-js-react-components\/src\/react/, /hornet-js-gc-monitor\/node_modules/]);
+            let projects = PathHelper.listDir(nodeModuleDir, /^hornet-js(?!-gc)(?!-man)(?!-community)(?!-builder)/);
+
+            let mdFwkFiles = [];
             let mdCommunityFiles = (fs.existsSync(communityDir)) ? PathHelper.listFiles(communityDir, ".md") : [];
 
             if (project.builderJs.externalModules.enabled) {
-                mdFwkFiles = PathHelper.listFiles(fwkDir, ".md", [/node_modules/, /\-dts/, /LICENSE.md/, /LICENCE.md/, /definition-ts/, /CHANGELOG.md/, /CONTRIBUTING.md/, /static/]);
+                mdFwkFiles = PathHelper.listFiles(fwkDir, ".md", [/node_modules/, /LICENSE.md/, /LICENCE.md/,  /CHANGELOG.md/, /CONTRIBUTING.md/, /static/]);
 
             } else {
-                for (var i = 0; i < projects.length; i++) {
-                    let file = PathHelper.listFilesWithDirName(projects[i].dataPath, ".md", [/\-dts/, /LICENSE.md/, /LICENCE.md/,/CHANGELOG.md/, /definition-ts/, /CONTRIBUTING.md/, /static/]);
+                for (let i = 0; i < projects.length; i++) {
+                    let file = PathHelper.listFilesWithDirName(projects[i].dataPath, ".md", [/hornet-js-gc-monitor\/node_modules/, /hornet-js-\S*\/node_modules/, /LICENSE.md/, /LICENCE.md/, /CHANGELOG.md/,  /CONTRIBUTING.md/, /static/]);
                     mdFwkFiles[i] = file;
                 }
             }
@@ -153,32 +150,31 @@ module.exports = {
              */
             mdFiles.forEach(function (file) {
                 let fileToObject = PathHelper.toObject(file, "docs", true);
-                filesToObject = _.merge(filesToObject, fileToObject);
+                filesToObject = merge(filesToObject, fileToObject);
             });
 
             mdCommunityFiles.forEach(function (file) {
                 let fileToObject = PathHelper.toObject(file, "docs", true);
-                filesToObject = _.merge(filesToObject, fileToObject);
+                filesToObject = merge(filesToObject, fileToObject);
             });
 
             if (project.builderJs.externalModules.enabled) {
                 mdFwkFiles.forEach(function (file) {
                     let fileToObject;
                     fileToObject = PathHelper.toObjectBuilder(file, fwkName, true);
-                    filesToObject = _.merge(filesToObject, fileToObject);
+                    filesToObject = merge(filesToObject, fileToObject);
                 });
             } else {
-                for (var i = 0; i < mdFwkFiles.length; i++) {
+                for (let i = 0; i < mdFwkFiles.length; i++) {
                     mdFwkFiles[i].forEach(function (file) {
                         let fileToObject;
                         fileToObject = PathHelper.toObjectBuilder(file.dataPath, projects[i].name, true);
-                        filesToObject = _.merge(filesToObject, fileToObject);
+                        filesToObject = merge(filesToObject, fileToObject);
                     });
                 }
             }
 
             MenuHelper.getFiles(project, helper, builderName, filesToObject);
-            MenuHelper.getFiles(project, helper, hornetThemesName, filesToObject);
             MenuHelper.getFiles(project, helper, monitorName, filesToObject);
             MenuHelper.getFiles(project, helper, templateHornetName, filesToObject);
             MenuHelper.getFiles(project, helper, templateHornetLiteName, filesToObject);
@@ -186,7 +182,7 @@ module.exports = {
             MenuHelper.getFiles(project, helper, applitutorieljsName, filesToObject);
             MenuHelper.getFiles(project, helper, applitutorieljsliteName, filesToObject);
             MenuHelper.getFiles(project, helper, applitutorieljsbatchName, filesToObject);
-        
+
             let declareObj = JSON.stringify(filesToObject,
                 (key, value) => {
                     if (typeof value === "string") {
@@ -195,7 +191,7 @@ module.exports = {
                     return value;
                 }, 2);
 
-            declareObj = "export var comp = " + declareObj + "\r\n";
+            declareObj = "export const comp = " + declareObj + "\r\n";
             declareObj = declareObj.replace(/\"require\(\'([^\)\']+)\'\),\"/g, "require(\"$1\")");
 
             fs.writeFileSync(composantIndex, declareObj);
@@ -209,40 +205,44 @@ module.exports = {
             });
 
             compFiles.forEach((file) => {
-                var fileJs = fs.readFileSync(file).toString();
-                var re = /export class\s+(\w+)[\s|<]/ig;
-                result = re.exec(fileJs);
+                let fileContent = fs.readFileSync(file).toString();
+                let re = /exports.(\w+)[\s|=]/ig;
+                let exportedModules
+                while ((exportedModules = re.exec(fileContent)) !== null) {
+                    if (exportedModules[1]) {
+                        const exportedModule = exportedModules[1];
+                        let componentPath = path.relative(path.join(composantDirectory, "..", ".."), file);
+                        // suppression de l'extension pour l'import
+                        let componentPathObject = path.parse(componentPath);
+                        componentPath = path.join(componentPathObject.dir, componentPathObject.name);
 
-                if (result && result[1]) {
-                    let componentPath = path.relative(composantDirectory, file);
-                    // suppression de l'extension pour l'import
-                    let componentPathObject = path.parse(componentPath);
-                    componentPath = path.join(componentPathObject.dir, componentPathObject.name);
 
-                    if (file.indexOf("content") > -1) {
-                        reactComp.splice(0, 0, "import { " + result[1] + " } from \"" + componentPath + "\";\n");
-                        hornetComponent[result[1]] = {};
-                    } else {
-                        reactComp.push("import { " + result[1] + " } from \"" + componentPath + "\";\n");
-                        hornetComponent[result[1]] = {};
+                        if (file.indexOf("content") > -1) {
+                            reactComp.splice(0, 0, "import { " + exportedModule + " } from \"" + componentPath + "\";\n");
+                            hornetComponent[exportedModule] = {};
+                        } else {
+                            reactComp.push("import { " + exportedModule + " } from \"" + componentPath + "\";\n");
+                            hornetComponent[exportedModule] = {};
+                        }
                     }
                 }
             });
 
             // add extra module et composant
-            for (var component in extraComponent) {
+            for (let component in extraComponent) {
                 reactComp.push("import { " + component + " } from \"" + extraComponent[component] + "\";\n");
                 hornetComponent[component] = {};
             }
 
-            reactComp.forEach((ligne) => {
+            // Pour dédupliquer, on transforme le tableau en liste
+            [...new Set(reactComp)].forEach((ligne) => {
                 fs.appendFileSync(composantIndex, ligne);
             });
 
 
-            //Creation la variable des composants hornet a injecter dans l'editeur
-            fs.appendFileSync(composantIndex, "export var hornetComponent = {\n");
-            for (var component in hornetComponent) {
+            // Creation la variable des composants hornet a injecter dans l'editeur
+            fs.appendFileSync(composantIndex, "export const hornetComponent = {\n");
+            for (let component in hornetComponent) {
                 fs.appendFileSync(composantIndex, " \t\"" + component + "\" : " + component + ", \n");
             }
 
@@ -253,11 +253,10 @@ module.exports = {
              */
 
             //génération du menu hornet-js
-            let fmkMenu = {},
-                communityMenu = {};
+            let fmkMenu = {};
+
             if (project.builderJs.externalModules.enabled) {
                 let fmkMenuObject = MenuHelper.toObject(mdFwkFiles, fwkName, fwkDir);
-
                 fmkMenu = {
                     "text": "HORNET-JS",
                     "visibleDansMenu": true,
@@ -269,17 +268,17 @@ module.exports = {
             } else {
                 let fmkMenuObjects = [];
                 let files = [];
-                for (var i = 0; i < mdFwkFiles.length; i++) {
+                for (let i = 0; i < mdFwkFiles.length; i++) {
                     files[i] = [];
-                    for (var j = 0; j < mdFwkFiles[i].length; j++) {
+                    for (let j = 0; j < mdFwkFiles[i].length; j++) {
                         files[i].push(mdFwkFiles[i][j].dataPath)
                     }
                 }
-                for (var i = 0; i < mdFwkFiles.length; i++) {
+                for (let i = 0; i < mdFwkFiles.length; i++) {
                     let fmkMenuObject = MenuHelper.toObject(files[i], projects[i].name, projects[i].dataPath);
                     let tmpMenuNode = {}
 
-                    for (var j = 0; j < fmkMenuObject.menu.length; j++) {
+                    for (let j = 0; j < fmkMenuObject.menu.length; j++) {
 
                         if (!("submenu" in tmpMenuNode)) {
                             //permet de ne pas afficher de sous répertoire dans le cas d'un seul élément
@@ -311,11 +310,10 @@ module.exports = {
             let templateHornetLiteMenu = MenuHelper.getMenu(project, helper, templateHornetLiteName);
             let templateHornetLiteBatchMenu = MenuHelper.getMenu(project, helper, templateHornetLiteBatchName);
             let monitorMenu = MenuHelper.getMenu(project, helper, monitorName);
-            let hornetThemesMenu = MenuHelper.getMenu(project, helper, hornetThemesName);
             let applitutorieljsMenu = MenuHelper.getMenu(project, helper, applitutorieljsName);
             let applitutorieljsliteMenu = MenuHelper.getMenu(project, helper, applitutorieljsliteName);
             let applitutorieljsbatchMenu = MenuHelper.getMenu(project, helper, applitutorieljsbatchName);
-           
+
             //génération du menu hornet-man
             let manMenuObject = MenuHelper.toObject(mdFiles, "docs", docDir);
 
@@ -338,7 +336,7 @@ module.exports = {
                 }
             }
 
-            let menuProjet = [fmkMenu, builderMenu, monitorMenu, hornetThemesMenu, templateHornetMenu, templateHornetLiteMenu, 
+            let menuProjet = [fmkMenu, builderMenu, monitorMenu, templateHornetMenu, templateHornetLiteMenu,
                 templateHornetLiteBatchMenu, applitutorieljsMenu, applitutorieljsliteMenu, applitutorieljsbatchMenu];
             let menuProjets = {
                 "text": "PROJETS",
@@ -361,7 +359,7 @@ module.exports = {
             /*Ajout url sur l'entrée catalogue des composants */
             manMenuObject.menu.map((menuObj, i) => {
                 if (menuObj.submenu) {
-                    var nodeCatalogueComp = _.findIndex(menuObj.submenu, {
+                    let nodeCatalogueComp = findIndex(menuObj.submenu, {
                         "text": "Catalogue de composant "
                     });
                     if (nodeCatalogueComp > -1) {
@@ -381,20 +379,27 @@ module.exports = {
                 fs.writeFileSync(menuSourceFile, declareObj);
             }
 
-        };
+        }
 
-        
         gulp.addTaskDependency("package-zip-static", "prepare-package:spa");
     },
     externalModules: {
         enabled: false,
-        directories: [
-            
+        directories: ["/home/zakarim/Dev/new_generation/hornet-js/hornet-js-batch",
+        "/home/zakarim/Dev/new_generation/hornet-js/hornet-js-bean",
+        "/home/zakarim/Dev/new_generation/hornet-js/hornet-js-components",
+        "/home/zakarim/Dev/new_generation/hornet-js/hornet-js-core",
+        "/home/zakarim/Dev/new_generation/hornet-js/hornet-js-database",
+        "/home/zakarim/Dev/new_generation/hornet-js/hornet-js-logger",
+        "/home/zakarim/Dev/new_generation/hornet-js/hornet-js-passport",
+        "/home/zakarim/Dev/new_generation/hornet-js/hornet-js-react-components",
+        "/home/zakarim/Dev/new_generation/hornet-js/hornet-js-test",
+        "/home/zakarim/Dev/new_generation/hornet-js/hornet-js-utils"
         ]
     },
     config: {
         clientExclude: {
-            noParse: ["node_modules/app/typescript"],
+            noParse: ["node_modules/typescript"],
             modules: [
                 "config",
                 "continuation-local-storage",
@@ -412,14 +417,14 @@ module.exports = {
                 rules: [{
                     test: /\.(md)$/,
                     use: [{
-                            loader: "html-loader"
-                        },
-                        {
-                            loader: "markdown-loader",
-                            options: {
-                                breaks: true
-                            }
+                        loader: "html-loader"
+                    },
+                    {
+                        loader: "markdown-loader",
+                        options: {
+                            breaks: true
                         }
+                    }
                     ]
                 }]
             }

@@ -1,33 +1,35 @@
 {
   "compilerOptions": {
-    "target": "ES5",
-    "module": "commonjs",
-    "moduleResolution": "classic",
-    "experimentalDecorators": true,
-    "jsx": "react",
-    "sourceMap": true,
-    "noResolve": true,
-    "importHelpers": true,
     "baseUrl": "./",
-    "paths": {
-      "tslib": [
-        "definition-ts/hornet-js-ts-typings/tslib/tslib.d.ts"
-      ]
-    }
+    "emitDecoratorMetadata": true,    
+    "esModuleInterop": false,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "jsx": "react",
+    "lib": ["dom", "es2015"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "target": "ES5",
+    "preserveSymlinks": true
   },
-  "files": ["./node_modules/app/hornet-js-community/definition.d.ts"],
-  "typeRoots": [
-    "./node_modules/app/hornet-js-community"
-  ],
-  "types": ["./node_modules/app/hornet-js-community/definition.d.ts"],
   "include": [
-    "./**/*.ts",
-    "src/**/*.tsx",
-    "definition-ts/**/*.d.ts"
+    "index.ts",
+    "src/**/*.ts*",
+    "test/**/*.ts*",
+    "./node_modules/hornet-js-bean/index.d.ts",
+    "./node_modules/hornet-js-components/index.d.ts",
+    "./node_modules/hornet-js-core/index.d.ts",
+    "./node_modules/hornet-js-logger/index.d.ts",
+    "./node_modules/hornet-js-passport/index.d.ts",
+    "./node_modules/hornet-js-react-components/index.d.ts",
+    "./node_modules/hornet-js-test/index.d.ts",
+    "./node_modules/hornet-js-utils/index.d.ts"
   ],
   "exclude": [
     "istanbul",
-    "node_modules",
     "static"
   ]
 }

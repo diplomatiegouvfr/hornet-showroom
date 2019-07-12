@@ -1,13 +1,18 @@
 import { Utils } from "hornet-js-utils";
-import { Logger } from "hornet-js-utils/src/logger";
+import { Logger } from "hornet-js-logger/src/logger";
 import { Client } from "hornet-js-core/src/client";
 import { Routes } from "src/routes/routes";
 import { HornetApp } from "src/views/layouts/hornet-app";
 import { ErrorPage } from "hornet-js-react-components/src/widget/component/error-page";
 import { ReactClientInitializer } from "hornet-js-react-components/src/react/react-client";
 
+import "hornet-js-react-components/src/widget/component/fonts/NotoSans-Bold.ttf";
+const context = require["context"]("hornet-js-react-components/src/widget/component/fonts", true, /\.ttf$/);
+context.keys().forEach(context);
+
+
 const startClient = () => {
-    const logger: Logger = Utils.getLogger("hornet-showroom.client");
+    const logger: Logger = Logger.getLogger("hornet-showroom.client");
 
     function routeLoader(name: string, callback: any) {
         logger.info("routeLoaderClient(" + name + ")");

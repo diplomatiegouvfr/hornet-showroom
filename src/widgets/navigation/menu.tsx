@@ -83,13 +83,13 @@ import { NavigationUtils } from "hornet-js-components/src/utils/navigation-utils
 import { HornetComponentProps } from "hornet-js-components/src/component/ihornet-component";
 import { HornetComponent } from "hornet-js-react-components/src/widget/component/hornet-component";
 import { MenuNavigation } from "src/widgets/navigation/menu-navigation";
-import * as _ from "lodash";
+import cloneDeep = require("lodash.clonedeep");
 import * as classNames from "classnames";
 import { KeyCodes } from "hornet-js-components/src/event/key-codes";
 import { MenuInfoAccessibilite } from "hornet-js-react-components/src/widget/navigation/menu-info-accessibilite";
 import { Utils } from "hornet-js-utils";
 
-import HTMLAttributes = __React.HTMLAttributes;
+import HTMLAttributes = React.HTMLAttributes;
 
 const showIconSize = 720;
 
@@ -116,7 +116,6 @@ export interface MenuItemConfig {
     /** Nom de rôle ou liste de noms de rôles autorisé(s) à accéder à ce menu */
     rolesAutorises?: string | string[];
 }
-
 
 export interface MenuProps extends HornetComponentProps {
     configMenu?: MenuItemConfig[];
@@ -161,13 +160,12 @@ export class Menu extends HornetComponent<MenuProps, any> {
 
         this.state = {
             ...this.state,
-            items: this.props.configMenu ? NavigationUtils.getFilteredConfigNavigation(_.cloneDeep(this.props.configMenu), this.user)
+            items: this.props.configMenu ? NavigationUtils.getFilteredConfigNavigation(cloneDeep(this.props.configMenu), this.user)
                 : NavigationUtils.getFilteredConfigNavigation(NavigationUtils.getConfigMenu(), this.user),
         };
         if (this.props.closeOnClickOutside) this.handleMenuOutsideClick.bind(this);
 
     }
-
 
     /**
      * Gestion du clic clavier
@@ -321,7 +319,6 @@ export class Menu extends HornetComponent<MenuProps, any> {
             this.state.onToggleClick();
         }
     }
-
 
     componentDidUpdate() {
         // gestion de levent click ua chargement de la page

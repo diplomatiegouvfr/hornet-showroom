@@ -7,7 +7,6 @@ target/
 istanbul/
 src/gen-doc
 src/resources/navigation.json
-static/hornet-themes-intranet/
 static/html
 static/img
 static/messages*

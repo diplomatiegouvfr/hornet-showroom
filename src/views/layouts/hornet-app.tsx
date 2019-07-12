@@ -1,5 +1,5 @@
 import { Utils } from "hornet-js-utils";
-import { Logger } from "hornet-js-utils/src/logger";
+import { Logger } from "hornet-js-logger/src/logger";
 import *  as React from "react";
 import { Class } from "hornet-js-utils/src/typescript-utils";
 import { HornetPage } from "hornet-js-react-components/src/widget/component/hornet-page";
@@ -11,12 +11,11 @@ import * as classNames from "classnames";
 import { HornetEvent } from "hornet-js-core/src/event/hornet-event";
 import { UPDATE_PAGE_EXPAND } from "hornet-js-react-components/src/widget/screen/layout-switcher";
 
-import * as _ from "lodash";
 import { SEARCH_CLOSE_EVENT, SearchLayout } from "src/views/layouts/search/search-layout";
 import { MENU_OPEN_EVENT, MenuShowroom } from "src/views/layouts/menu-showroom";
 import { MENU_LINK_ACTIVATED } from "src/widgets/navigation/menu-link";
-
-const logger: Logger = Utils.getLogger("hornet-showroom.views.layouts.hornet-app");
+import "hornet-js-react-components/src/widget/sass/gen.scss";
+const logger: Logger = Logger.getLogger("hornet-showroom.views.layouts.hornet-app");
 
 export interface SearchResultEventDetail {
     results: any;
@@ -76,8 +75,6 @@ export class HornetApp extends HornetPage<any, HornetAppProps, any> {
         this.listen(MENU_OPEN_EVENT, this.menuIsOpen);
         this.listen(SEARCH_CLOSE_EVENT, this.searchClose);
         this.listen(MENU_LINK_ACTIVATED, this.menuLinkActived);
-
-
     }
 
     /**
@@ -117,7 +114,6 @@ export class HornetApp extends HornetPage<any, HornetAppProps, any> {
      */
     prepareClient() {
     }
-
 
     /**
      * @inheritDoc
@@ -190,7 +186,6 @@ export class HornetApp extends HornetPage<any, HornetAppProps, any> {
         this.deleteNavigateData();
         this.fire(STOP_HIGHLIGHT_EVENT);
     }
-
 
     private menuLinkActived(event) {
         if (!this.state.isMenuOpen) {

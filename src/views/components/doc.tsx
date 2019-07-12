@@ -1,25 +1,21 @@
 import { Utils } from "hornet-js-utils";
-import { Logger } from "hornet-js-utils/src/logger";
+import { Logger } from "hornet-js-logger/src/logger";
 import *  as React from "react";
 import { Editor } from "src/views/components/editor";
 import { Preview } from "src/views/components/preview";
-import * as ReactDom from "react-dom";
-import * as classNames from "classnames";
-import * as _ from "lodash";
+import get = require("lodash.get") ;
 import { HornetComponent } from "hornet-js-react-components/src/widget/component/hornet-component";
 import { HornetComponentProps } from "hornet-js-components/src/component/ihornet-component";
 import { STOP_HIGHLIGHT_EVENT } from "src/views/layouts/hornet-app";
 import { Summary, SUMMARY_OPEN_CLOSE } from "src/views/components/summary";
 
-const path = require("path");
-const logger: Logger = Utils.getLogger("hornet-showroom.showroom.page");
+const logger: Logger = Logger.getLogger("hornet-showroom.showroom.page");
 
 export interface docProps extends HornetComponentProps {
     title?: string;
     composantName: string;
     word?: string;
 }
-
 
 export class Doc extends HornetComponent<docProps, any> {
 
@@ -29,7 +25,6 @@ export class Doc extends HornetComponent<docProps, any> {
 
     scopeHornetComposant: {};
     isFirst: boolean = true;
-
 
     constructor(props) {
         super(props);
@@ -127,7 +122,6 @@ export class Doc extends HornetComponent<docProps, any> {
             */
     highlightWord(text) {
         // on découpe le texte du md aux endroits ou il y a le mot
-
         const data = text.split(new RegExp(this.state.word, "i"));
         let result = data[ 0 ];
         // chaine permttant de savoir ou on en est dans texte
@@ -205,16 +199,16 @@ export class Doc extends HornetComponent<docProps, any> {
             this.scopeHornetComposant[ "React" ] = React;
 
             const mdSource = "comp." + this.props.composantName.replace(/\//g, ".");
-            let text = _.get(componentDoc, mdSource) as any;
+            let text = get(componentDoc, mdSource) as any;
 
             text = this.includeMd(text, componentDoc);
 
-            text = text.replace(/<a /g, "<a target=\"_blank\"");
+            text = text ? text.replace(/<a /g, "<a target=\"_blank\"") : "";
 
-            const tab = (text) ? this.getEditorCode(text) : [];
+            const tab = text ? this.getEditorCode(text) : [];
             let removenext = false;
 
-            const summary = (text) ? this.summarize(text) : [];
+            const summary = text ? this.summarize(text) : [];
 
 
             this.preview = [];
@@ -295,7 +289,7 @@ export class Doc extends HornetComponent<docProps, any> {
         let newText = text;
         const baliseInclude = /{\s*showroom\s*mdinclude\s*[|]\s*/;
         const baliseClose = "}";
-        let index = newText.search(baliseInclude);
+        let index = newText ? newText.search(baliseInclude) : -1;
         while (index !== -1) {
             const beginCode = newText.substring(index, newText.length);
             const indexClose = beginCode.indexOf(baliseClose);
@@ -306,7 +300,7 @@ export class Doc extends HornetComponent<docProps, any> {
                 .replace(/\n/g, "");
 
             const mdSource = "comp." + code.replace(/\//g, ".");
-            const mdCode = _.get(componentDoc, mdSource) as any;
+            const mdCode = get(componentDoc, mdSource) as any;
 
             const begin = newText.substring(0, index);
             const end = beginCode.substring(indexClose + 1, beginCode.length);

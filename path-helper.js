@@ -1,6 +1,5 @@
 const path = require("path");
 const fs = require("fs");
-const _ = require("lodash");
 
 class PathHelper {
 
@@ -75,15 +74,11 @@ PathHelper.listFiles = function (pathToParse, ext, filtersExclude) {
 
             let filterFile = false;
             if (filtersExclude) {
-                filterFile = filtersExclude.find((filter) => {
-                    filterFile = currentPath.match(filter);
-                    return filterFile;
-                })
+                filterFile = filtersExclude.find(filter => currentPath.match(filter));
             }
 
-
             if (path.extname(currentPath) == ext && !filterFile) {
-                files.push(currentPath);
+                files.push(currentPath); 
             }
         }
         if (fs.statSync(currentPath).isDirectory()) {

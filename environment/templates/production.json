@@ -1,0 +1,54 @@
+{
+  "contextPath": "#{APPLICATION_CONTEXT_ROOT}",
+  "cookie": {
+    "httpOnly": true,
+    "secure": false
+  },
+  "security": {
+    "enabled": true,
+    "csp": {
+      "defaultSrc": [
+        "'self'",
+        "'unsafe-inline'",
+        "'unsafe-eval'"
+      ],
+      "scriptSrc": [
+        "'self'",
+        "'unsafe-inline'",
+        "'unsafe-eval'"
+      ],
+      "styleSrc":[
+        "'self'",
+        "'unsafe-inline'"
+      ],
+      "fontSrc":[
+        "'self'"
+      ],
+      "imgSrc":[
+        "'self'"
+      ]
+    },
+      "reportOnly": false
+  },
+  "logClient": {
+    "remote": false,
+    "level": "#{LOGCLIENT_LEVEL}",
+    "appenders": [
+      {
+        "type": "BrowserConsole",
+        "layout": {
+          "type": "THIN"
+        }
+      }
+    ]
+  },
+  "mock": {
+    "enabled": false
+  },
+  "fullSpa": {
+    "enabled": false
+  },
+  "cache": {
+    "enabled": true
+  }
+}

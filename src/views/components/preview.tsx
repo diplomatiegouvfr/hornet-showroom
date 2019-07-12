@@ -3,19 +3,14 @@ import * as ReactDOM from "react-dom";
 import {
     HornetEvent,
     listenHornetEvent,
-    listenOnceHornetEvent,
-    fireHornetEvent,
-    removeHornetEvent,
 } from "hornet-js-core/src/event/hornet-event";
 import { HornetComponent } from "hornet-js-react-components/src/widget/component/hornet-component";
 import { HornetComponentProps } from "hornet-js-components/src/component/ihornet-component";
 import { Utils } from "hornet-js-utils";
-import { ERROR_EVENT } from "src/views/components/event";
-import { Logger } from "hornet-js-utils/src/logger";
+import { Logger } from "hornet-js-logger/src/logger";
 
 const ts = require("typescript");
-const logger: Logger = Utils.getLogger("hornet-showroom.preview");
-
+const logger: Logger = Logger.getLogger("hornet-showroom.preview");
 
 export interface PreviewProps extends HornetComponentProps {
     code: string;
@@ -93,8 +88,8 @@ export class Preview<P extends PreviewProps, S extends PreviewState> extends Hor
 
     /**
      * @inheritDoc
-     * @param error 
-     * @param info 
+     * @param error
+     * @param info
      */
     componentDidCatch(error, info) {
         this.reload = true;
@@ -143,13 +138,12 @@ export class Preview<P extends PreviewProps, S extends PreviewState> extends Hor
 
         this.reload = true;
 
-
         return ts.transpileModule(sourceCode, { compilerOptions: options }).outputText;
     }
 
     /**
      * Injecte les composants Hornet.js dans le preview
-     * @param mountNode 
+     * @param mountNode
      */
     buildScope(mountNode) {
         return Object.keys(this.props.scope).map((key) => {
@@ -173,9 +167,9 @@ export class Preview<P extends PreviewProps, S extends PreviewState> extends Hor
     }
     /**
      * Surcharge de la methode listen de hornetComponent
-     * @param event 
-     * @param callback 
-     * @param capture 
+     * @param event
+     * @param callback
+     * @param capture
      */
     listen<T extends HornetEvent<any>>(event: T, callback: (ev: T) => void, capture: boolean = true): void {
         if (!Utils.isServer) {

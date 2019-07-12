@@ -1,14 +1,15 @@
 import { Utils } from "hornet-js-utils";
-import { Logger } from "hornet-js-utils/src/logger";
+import { Logger } from "hornet-js-logger/src/logger";
 import *  as React from "react";
 import { SEARCH_RESULT_EVENT } from "src/views/layouts/hornet-app";
 import { HornetComponent } from "hornet-js-react-components/src/widget/component/hornet-component";
 import { HornetComponentProps } from "hornet-js-components/src/component/ihornet-component";
 import { SearchResult } from "src/views/layouts/search/search-result";
 import { HornetEvent } from "hornet-js-core/src/event/hornet-event";
-import * as _ from "lodash";
+import includes = require("lodash.includes");
+import cloneDeep = require("lodash.clonedeep");
 
-const logger: Logger = Utils.getLogger("search-result.showroom.page");
+const logger: Logger = Logger.getLogger("search-result.showroom.page");
 
 export interface SearchLayoutProps extends HornetComponentProps {
     isVisible?: boolean;
@@ -167,11 +168,11 @@ export class SearchLayout extends HornetComponent<SearchLayoutProps, any> {
             elem.classList.remove("showroom-menu-hidden");
             inputSearch.value = "";
 
-            if (!_.includes(result.classList, "showroom-result-hidden")) {
+            if (!includes(result.classList, "showroom-result-hidden")) {
                 result.classList.add("showroom-result-hidden");
             }
 
-            if (!_.includes(this.searchContainer.classList, "search-result-panel-hidden")) {
+            if (!includes(this.searchContainer.classList, "search-result-panel-hidden")) {
                 this.searchContainer.classList.add("search-result-panel-hidden");
             }
             this.setState({ results: [] });
@@ -199,10 +200,8 @@ export class SearchLayout extends HornetComponent<SearchLayoutProps, any> {
             const elem = document.getElementById("showroom-menu-container");
             const result = document.getElementById("result");
 
-            const resultPanel = document.getElementById("search-result-panel-container");
-
             if (elem) {
-                if (!_.includes(elem.classList, "showroom-menu-hidden")) {
+                if (!includes(elem.classList, "showroom-menu-hidden")) {
                     elem.classList.add("showroom-menu-hidden");
                 }
 
@@ -264,7 +263,7 @@ export class SearchLayout extends HornetComponent<SearchLayoutProps, any> {
         if (value && value.length > 2) {
 
             this.matches = 0;
-            const clone = _.cloneDeep(this.docs.comp);
+            const clone = cloneDeep(this.docs.comp);
             const result = this.searchData(clone, value);
             let message = this.i18n("menu.search.multipleResult");
             if (this.matches === 1) {
@@ -272,7 +271,6 @@ export class SearchLayout extends HornetComponent<SearchLayoutProps, any> {
             }
             (document.getElementById("result") as any).innerHTML = this.matches.toString() + " " + message;
             this.fire(SEARCH_RESULT_EVENT.withData({ results: result }));
-            // console.log("=>", result)
         } else {
             (document.getElementById("result") as any).innerHTML = "";
 
@@ -282,5 +280,4 @@ export class SearchLayout extends HornetComponent<SearchLayoutProps, any> {
             inputSearch.value = value;
         }
     }
-
 }

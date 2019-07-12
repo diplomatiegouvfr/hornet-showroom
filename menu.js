@@ -1,7 +1,9 @@
 const path = require("path");
 const fs = require("fs");
 const PathHelper = require("./path-helper");
-const _ = require("lodash");
+const findIndex = require("lodash.findindex");
+const merge = require("lodash.merge");
+const includes =  require("lodash.includes");
 
 class MenuHelper {
 
@@ -13,17 +15,16 @@ class MenuHelper {
  */
 MenuHelper.toObject = function (mdFiles, until, startDirectory) {
 
-    let filesToObject = {};
 
+    let filesToObject = {};
     mdFiles.forEach(function (file) {
         let fileToObject = PathHelper.toObject(file, until, false);
-        filesToObject = _.merge(filesToObject, fileToObject);
+        filesToObject = merge(filesToObject, fileToObject);
     });
 
     function transformAttribut(objCible, objParse, startDirectory) {
         for (let attr in objParse) {
             if (typeof objParse[attr] === "string") {
-
                 let data = {};
 
                 let componentPath = path.relative(startDirectory, objParse[attr]);
@@ -33,25 +34,16 @@ MenuHelper.toObject = function (mdFiles, until, startDirectory) {
 
                 /** Pour les fichiers de documentation à la racine du projet, on ajoute le nom du projet dans l'url*/
                 if (componentPathObject.dir == "") {
-
                     let dirName = startDirectory.split("/");
                     let projectName = PathHelper.cleanName(dirName[dirName.length - 1]);
-                    //Un fichier builder.js est présent à la racine de chaque projet
-                    if (fs.existsSync(path.join(startDirectory, "builder.js"))) {
-                        componentPath = projectName + "/" + componentPath;
-                    }
-
-                    //ajout d'une condition pour hornet-js-builder car il ne possède pas de fichier builder.js
-                    if (projectName == "hornet-js-builder" || projectName == "hornet-js-gc-monitor") {
-                        componentPath = projectName + "/" + componentPath;
-                    }
+                    componentPath = projectName + "/" + componentPath;
                 } else {
                     // on ajoute les liens gitlab pour les fichiers liés à hornet-js-man
                     //@todo: variabiliser le nom du projet "hornet-js-man"
                     data["gitlabUrl"] = "/hornet-js-man/blob/develop/docs/" + gitUrl;
                 }
 
-                data = _.merge(data, {
+                data = merge(data, {
                     "text": MenuHelper.cleanName(attr) + " ",
                     "title": attr,
                     "url": "/composant/page/" + componentPath,
@@ -76,13 +68,12 @@ MenuHelper.toObject = function (mdFiles, until, startDirectory) {
     let obj = {}
     obj.menu = [];
     transformAttribut(obj.menu, filesToObject, startDirectory);
-
     return obj;
 
 }
 
 /**
- * retourne les fichiers du projets
+ * retourne les fichiers du projet
  * @param project
  * @param helper
  * @param projectName nom du projet dont il faut récupérer les fichiers
@@ -90,11 +81,9 @@ MenuHelper.toObject = function (mdFiles, until, startDirectory) {
  * @returns {*}
  */
 MenuHelper.getFiles = function (project, helper, projectName, filesToObject) {
-    var directory = path.join(project.dir, helper.NODE_MODULES_APP, projectName);
-
+    let directory = path.join(project.dir, helper.NODE_MODULES, projectName);
     if (project.builderJs.externalModules.enabled) {
-        var extModules = project.builderJs.externalModules.directories;
-        docName = "hornet-man";
+        let extModules = project.builderJs.externalModules.directories;
         for (let i = 0; i < extModules.length; i++) {
             let tmp = extModules[i].toLowerCase().split("/");
             if (tmp.indexOf(projectName) > -1) {
@@ -113,23 +102,21 @@ MenuHelper.getFiles = function (project, helper, projectName, filesToObject) {
     if (project.builderJs.externalModules.enabled) {
         files = PathHelper.listFiles(directory, ".md", [/node_modules/, /\-dts/, /LICENSE.md/, /LICENCE.md/, /CHANGELOG.md/, /definition-ts/, /generators/, /CONTRIBUTING.md/, /static/, /.svn/, "/.vscode/", "/.idea/"]);
     } else {
-        files = PathHelper.listFiles(directory, ".md", [/\-dts/, /LICENSE.md/, /LICENCE.md/, /CHANGELOG.md/, /definition-ts/, /generators/, /CONTRIBUTING.md/, /static/]);
-
+        files = PathHelper.listFiles(directory, ".md", [/hornet-js-gc-monitor\/node_modules/, /hornet-js-builder\/node_modules/, /LICENSE.md/, /LICENCE.md/, /CHANGELOG.md/, /definition-ts/, /generators/, /CONTRIBUTING.md/, /static/]);
     }
 
     //  let filesToObject = {};
     if (project.builderJs.externalModules.enabled) {
         files.forEach(function (file) {
             let fileToObject = PathHelper.toObjectBuilder(file, projectName, true);
-            filesToObject = _.merge(filesToObject, fileToObject);
+            filesToObject = merge(filesToObject, fileToObject);
         });
     } else {
         files.forEach(function (file) {
-            let fileToObject = PathHelper.toObject(file, "app", true);
-            filesToObject = _.merge(filesToObject, fileToObject);
+            let fileToObject = PathHelper.toObject(file, helper.NODE_MODULES, true);
+            filesToObject = merge(filesToObject, fileToObject);
         });
     }
-
     return filesToObject;
 }
 
@@ -141,11 +128,10 @@ MenuHelper.getFiles = function (project, helper, projectName, filesToObject) {
  * @returns {{text: string, visibleDansMenu: boolean, visibleDansPlan: boolean, submenu: (React.HTMLProps<HTMLElement>|HTMLFactory<HTMLElement>|Array|*|boolean)}}
  */
 MenuHelper.getMenu = function (project, helper, projectName) {
-    var directory = path.join(project.dir, helper.NODE_MODULES_APP, projectName);
+    let directory = path.join(project.dir, helper.NODE_MODULES, projectName);
 
     if (project.builderJs.externalModules.enabled) {
-        var extModules = project.builderJs.externalModules.directories;
-        docName = "hornet-man";
+        const extModules = project.builderJs.externalModules.directories;
         for (let i = 0; i < extModules.length; i++) {
             let tmp = extModules[i].toLowerCase().split("/");
 
@@ -163,15 +149,13 @@ MenuHelper.getMenu = function (project, helper, projectName) {
 
     let files = [];
     if (project.builderJs.externalModules.enabled) {
-        files = PathHelper.listFiles(directory, ".md", [/node_modules/, /\-dts/, /LICENSE.md/, /LICENCE.md/, /CHANGELOG.md/, /definition-ts/, /generators/, /CONTRIBUTING.md/, /static/]);
+        files = PathHelper.listFiles(directory, ".md", [/node_modules/, /LICENSE.md/, /LICENCE.md/, /CHANGELOG.md/, /generators/, /CONTRIBUTING.md/, /static/]);
     } else {
-        files = PathHelper.listFiles(directory, ".md", [/\-dts/, /LICENSE.md/, /LICENCE.md/, /CHANGELOG.md/, /definition-ts/, /generators/, /CONTRIBUTING.md/, /static/]);
-
+        files = PathHelper.listFiles(directory, ".md", [/hornet-js-gc-monitor\/node_modules/, /hornet-js-builder\/node_modules/, /LICENSE.md/, /LICENCE.md/, /CHANGELOG.md/, /generators/, /CONTRIBUTING.md/, /static/]);
     }
-
     let menuObject = MenuHelper.toObject(files, projectName, directory);
     let menu = {};
-    if(menuObject.menu.length === 1){
+    if (menuObject.menu.length === 1) {
         //permet de ne pas afficher de sous répertoire dans le cas d'un seul élément
         menu = {
             "text": projectName,
@@ -180,7 +164,7 @@ MenuHelper.getMenu = function (project, helper, projectName) {
             "visibleDansPlan": true,
             "url": menuObject.menu[0].url
         };
-    }else{
+    } else {
         menu = {
             "text": projectName,
             "title": projectName,
@@ -200,7 +184,6 @@ MenuHelper.cleanName = function (name) {
     let newNane = name;
     newNane = newNane.replace(/^\d+\s*\-?\s*/, "");
     newNane = newNane.replace(/\s*-\s*/g, " ");
-    //newNane = _.camelCase(newNane);
     return newNane;
 };
 
@@ -215,7 +198,7 @@ MenuHelper.menuExtend = function (menuExt, menuSource) {
     function recursiveMenu(objRef, extendedMenu) {
         extendedMenu.map((extM, i) => {
             if (objRef.submenu) {
-                var keyNode = _.findIndex(objRef.submenu, {
+                let keyNode = findIndex(objRef.submenu, {
                     "title": extM.title
                 });
 
@@ -227,11 +210,11 @@ MenuHelper.menuExtend = function (menuExt, menuSource) {
                     //suppression du noeud 
                     delete extM.submenu;
                     if (Object.keys(extM).length > Object.keys(objRef.submenu[keyNode]).length) {
-                        _.merge(objRef.submenu[keyNode], extM);
+                        merge(objRef.submenu[keyNode], extM);
                     }
 
                 } else {
-                    if (!_.includes(objRef.submenu, extM)) {
+                    if (!includes(objRef.submenu, extM)) {
                         objRef.submenu.push(extM);
                     }
                 }
@@ -240,7 +223,7 @@ MenuHelper.menuExtend = function (menuExt, menuSource) {
     }
 
     menuSource.menu.map((src, index) => {
-        let idx = _.findIndex(menuExt.menu, {
+        let idx = findIndex(menuExt.menu, {
             "title": src.title
         });
         if (idx > -1) {
@@ -288,8 +271,8 @@ MenuHelper.menuExtendMerged = function (menuExt, menuSource) {
                 if (mExt.submenu == undefined) {
                     mExt.submenu = [];
                 }
-                //_.merge(mExt, menu[i]);
-                if(menu[i].submenu){
+                //merge(mExt, menu[i]);
+                if (menu[i].submenu) {
                     mExt.submenu = mExt.submenu.concat(menu[i].submenu);
                 }
             } else {
@@ -302,7 +285,7 @@ MenuHelper.menuExtendMerged = function (menuExt, menuSource) {
 
 
     menuSource.menu.map((src, index) => {
-        let idx = _.findIndex(menuExt.menu, {
+        let idx = findIndex(menuExt.menu, {
             "text": src.text
         });
         if (idx > -1) {
@@ -329,7 +312,7 @@ MenuHelper.sortMenu = function (menuSource) {
      * @returns {*}
      */
     function recursiveSort(menu) {
-    
+
         menu.map((item, index) => {
             if (item && item.position) {
                 let newMenu = [];

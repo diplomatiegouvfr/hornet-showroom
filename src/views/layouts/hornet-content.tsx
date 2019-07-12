@@ -1,5 +1,5 @@
 import { Utils } from "hornet-js-utils";
-import { Logger } from "hornet-js-utils/src/logger";
+import { Logger } from "hornet-js-logger/src/logger";
 import *  as React from "react";
 import { Class } from "hornet-js-utils/src/typescript-utils";
 import { ErrorPage } from "hornet-js-react-components/src/widget/component/error-page";
@@ -8,7 +8,7 @@ import { HornetComponentProps } from "hornet-js-components/src/component/ihornet
 import { HornetComponent } from "hornet-js-react-components/src/widget/component/hornet-component";
 import { COMPONENT_CHANGE_EVENT, PAGE_READY_EVENT } from "hornet-js-core/src/routes/router-client-async-elements";
 import { HeaderShowroom } from "src/views/layouts/header-showroom";
-import * as _ from "lodash";
+import includes = require("lodash.includes");
 
 
 import { TopButton } from "hornet-js-react-components/src/widget/button/top-button";
@@ -17,7 +17,7 @@ import { fireHornetEvent } from "hornet-js-core/src/event/hornet-event";
 import { ERROR_EVENT } from "src/views/components/event";
 import { SEARCH_CLOSE_EVENT } from "src/views/layouts/search/search-layout";
 
-const logger: Logger = Utils.getLogger("hornet-showroom.views.layouts.gen-cnt-cmp");
+const logger: Logger = Logger.getLogger("hornet-showroom.views.layouts.gen-cnt-cmp");
 
 export interface ContentProps extends HornetComponentProps {
     content: Class<HornetPage<any, any, any>>;
@@ -90,7 +90,7 @@ export class HornetContent extends HornetComponent<ContentProps, any> {
     fadeIn(bool?: boolean) {
 
         // on applique le fadeIn/fadeOut que sur un changement de page et non lorsque l'on utilise le summary avec les anchors
-        if (window && window.location && window.location.href && !_.includes(window.location.href, "#")) {
+        if (window && window.location && window.location.href && !includes(window.location.href, "#")) {
             const e = document.getElementById("doc-container");
             if (bool) {
                 e.classList.remove("animate-out");

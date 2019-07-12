@@ -1,23 +1,21 @@
 import { Utils } from "hornet-js-utils";
-import { Logger } from "hornet-js-utils/src/logger";
+import { Logger } from "hornet-js-logger/src/logger";
 import *  as React from "react";
 import { HornetPage } from "hornet-js-react-components/src/widget/component/hornet-page";
 import { Doc } from "src/views/components/doc";
 import { ShowroomService } from "src/services/page/showroom-service-page";
 import { SEARCH_CLOSE_EVENT } from "src/views/layouts/search/search-layout";
 
-const logger: Logger = Utils.getLogger("hornet-showroom.showroom.page");
+const logger: Logger = Logger.getLogger("hornet-showroom.showroom.page");
 
 export interface showroomProps {
 
-};
-
+}
 
 /**
  * Ecran de page d'accueil de l'application
  */
 export class ShowroomPage extends HornetPage<ShowroomService, showroomProps, any> {
-
 
     constructor(props, context?: any) {
         super(props, context);
@@ -34,7 +32,6 @@ export class ShowroomPage extends HornetPage<ShowroomService, showroomProps, any
     }
 
     prepareClient() {
-        //console.log("Showroopage");
     }
 
     /**

@@ -1,22 +1,21 @@
-import { Utils } from "hornet-js-utils";
-import { Logger } from "hornet-js-utils/src/logger";
+import { Logger } from "hornet-js-logger/src/logger";
 import *  as React from "react";
 import { HornetComponent } from "hornet-js-react-components/src/widget/component/hornet-component";
 import { HornetComponentProps } from "hornet-js-components/src/component/ihornet-component";
 import { HornetEvent, CHANGE_URL_WITH_DATA_EVENT } from "hornet-js-core/src/event/hornet-event";
 import { SEARCH_RESULT_EVENT } from "src/views/layouts/hornet-app";
+import "hornet-js-react-components/src/widget/sass/gen.scss";
 
 export interface SelectedResultChangeDetail {
     result: any;
 }
 export const SELECTED_RESULT_CHANGE = new HornetEvent<SelectedResultChangeDetail>("SELECTED_RESULT_CHANGE");
 
-const logger: Logger = Utils.getLogger("search-result.showroom.page");
+const logger: Logger = Logger.getLogger("search-result.showroom.page");
 
 export interface SearchResultProps extends HornetComponentProps {
     item: any;
 }
-
 
 /**
  * Composant permettant d'afficher un résultat de recherche

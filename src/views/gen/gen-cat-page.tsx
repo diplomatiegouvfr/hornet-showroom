@@ -1,10 +1,10 @@
 import { Utils } from "hornet-js-utils";
-import { Logger } from "hornet-js-utils/src/logger";
+import { Logger } from "hornet-js-logger/src/logger";
 import *  as React from "react";
 import { HornetPage } from "hornet-js-react-components/src/widget/component/hornet-page";
 import { HornetComponentProps } from "hornet-js-components/src/component/ihornet-component";
 
-const logger: Logger = Utils.getLogger("hornet-showroom.views.gen.gen-hom-page");
+const logger: Logger = Logger.getLogger("hornet-showroom.views.gen.gen-hom-page");
 
 /*tableau des composants*/
 const hornetComposant =
@@ -179,7 +179,6 @@ const hornetComposant =
  */
 export class CataloguePage extends HornetPage<any, HornetComponentProps, any> {
 
-
     indexCompo = 0;
 
     prepareClient() {
@@ -221,7 +220,6 @@ export class CataloguePage extends HornetPage<any, HornetComponentProps, any> {
             </div>
         );
     }
-
 
     /**
      *  Génération de la tuile

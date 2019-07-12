@@ -79,7 +79,7 @@
  */
 
 import { Utils } from "hornet-js-utils";
-import { Logger } from "hornet-js-utils/src/logger";
+import { Logger } from "hornet-js-logger/src/logger";
 import * as React from "react";
 import { MenuItemConfig } from "src/widgets/navigation/menu";
 import { MENU_ROOT, LVL_SEPARATOR, MASKED_CLASSNAME } from "hornet-js-components/src/utils/menu-constantes";
@@ -88,18 +88,17 @@ import { HornetComponentProps } from "hornet-js-components/src/component/ihornet
 import { HornetComponent } from "hornet-js-react-components/src/widget/component/hornet-component";
 import { MenuLink } from "src/widgets/navigation/menu-link";
 import * as classNames from "classnames";
-import KeyboardEvent = __React.KeyboardEvent;
-import HTMLAttributes = __React.HTMLAttributes;
+import KeyboardEvent = React.KeyboardEvent;
+import HTMLAttributes = React.HTMLAttributes;
 import { KeyCodes } from "hornet-js-components/src/event/key-codes";
-import { UPDATE_PAGE_EXPAND } from "hornet-js-react-components/src/widget/screen/layout-switcher";
-import { HornetEvent } from "hornet-js-core/src/event/hornet-event";
+
 
 const expandBreakPointSize = 1640;
 const expandSecondBreakPointSize = 1400;
 const expandMenuSize = "16.5%";
 const expandReducMenuSize = "20%";
 
-const logger: Logger = Utils.getLogger("hornet-js-react-components.widget.navigation.menu-navigation");
+const logger: Logger = Logger.getLogger("hornet-js-react-components.widget.navigation.menu-navigation");
 
 /**
  * Propriétés MenuNavigation
@@ -537,7 +536,7 @@ export class MenuNavigation extends HornetComponent<MenuNavigationProps, any> {
             }
         });
 
-        const classes: ClassDictionary = {
+        const classes: any = {
             nav: true,
             "flex-container": true,
             "sub-nav-1": (level === 1),

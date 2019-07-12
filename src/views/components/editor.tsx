@@ -1,14 +1,13 @@
 import { Utils } from "hornet-js-utils";
-import { Logger } from "hornet-js-utils/src/logger";
+import { Logger } from "hornet-js-logger/src/logger";
 import *  as React from "react";
 import * as ReactDOM from "react-dom";
 import { HornetComponent } from "hornet-js-react-components/src/widget/component/hornet-component";
 import { HornetComponentProps } from "hornet-js-components/src/component/ihornet-component";
 
-
 let CodeMirror = null;
 
-const logger: Logger = Utils.getLogger("hornet-showroom.editor");
+const logger: Logger = Logger.getLogger("hornet-showroom.editor");
 if (!Utils.isServer) {
 
     CodeMirror = require("react-codemirror2").UnControlled;
@@ -19,7 +18,6 @@ if (!Utils.isServer) {
     require("codemirror/addon/fold/brace-fold");
     require("codemirror/addon/fold/comment-fold");
 }
-
 
 export interface EditorProps extends HornetComponentProps {
     code: string; // code de l'editeur
@@ -34,7 +32,6 @@ export interface EditorState {
     code: string;  // code de l'editeur
 }
 
-
 export class Editor<P extends EditorProps, S extends EditorState> extends HornetComponent<EditorProps, any>{
 
     editor: any;
@@ -48,7 +45,7 @@ export class Editor<P extends EditorProps, S extends EditorState> extends Hornet
 
     /**
      * mise a jour du code
-     *  @param  newCode 
+     *  @param  newCode
      */
     updateCode(newCode: string) {
 
@@ -60,7 +57,6 @@ export class Editor<P extends EditorProps, S extends EditorState> extends Hornet
      * @param {Readonly<P>} nextProps
      * @param {Readonly<S>} nextState
      * @returns {boolean}
-     * 
      */
     shouldComponentUpdate(nextProps, nextState) {
         if ((nextProps && nextProps.code !== this.props.code)
@@ -72,7 +68,6 @@ export class Editor<P extends EditorProps, S extends EditorState> extends Hornet
 
     /**
      * @inheritDoc
-     * 
      */
     render() {
 

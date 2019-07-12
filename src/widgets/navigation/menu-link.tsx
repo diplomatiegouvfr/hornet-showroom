@@ -79,7 +79,7 @@
  */
 
 import { Utils } from "hornet-js-utils";
-import { Logger } from "hornet-js-utils/src/logger";
+import { Logger } from "hornet-js-logger/src/logger";
 import * as React from "react";
 import { NavigationUtils } from "hornet-js-components/src/utils/navigation-utils";
 import { HornetComponentProps } from "hornet-js-components/src/component/ihornet-component";
@@ -95,16 +95,15 @@ import {
     IMG_PATH
 } from "hornet-js-components/src/utils/menu-constantes";
 import { KeyCodes } from "hornet-js-components/src/event/key-codes";
-import { HornetEvent } from "hornet-js-core/src/event/hornet-event";
-import { fireHornetEvent } from "hornet-js-core/src/event/hornet-event";
+import { HornetEvent, fireHornetEvent  } from "hornet-js-core/src/event/hornet-event";
 
-const logger: Logger = Utils.getLogger("hornet-js-react-components.widget.navigation.menu-link");
+const logger: Logger = Logger.getLogger("hornet-js-react-components.widget.navigation.menu-link");
 
 export interface LinkActivatedDetail {
     linkId: string;
 }
 
-export var MENU_LINK_ACTIVATED = new HornetEvent<LinkActivatedDetail>("MENU_LINK_ACTIVATED");
+export const MENU_LINK_ACTIVATED = new HornetEvent<LinkActivatedDetail>("MENU_LINK_ACTIVATED");
 
 export interface MenuLinkProps extends HornetComponentProps {
     /* Object représentant l'élément de menu */
@@ -275,7 +274,7 @@ export class MenuLink extends HornetComponent<MenuLinkProps, any> {
         if (item.level > 0) {
             srcImg = (hover) ? RIGHT_ARROW_IMG_HOVER : RIGHT_ARROW_IMG;
         }
-        let urlTheme = this.state.imgFilePath || HornetComponent.genUrlTheme();
+        const urlTheme = this.state.imgFilePath || HornetComponent.genUrlTheme();
 
         return urlTheme + IMG_PATH + srcImg;
     }

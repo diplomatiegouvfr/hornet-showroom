@@ -1,17 +1,15 @@
-import { Utils } from "hornet-js-utils";
-import { Logger } from "hornet-js-utils/src/logger";
+import { Logger } from "hornet-js-logger/src/logger";
 import * as fs from "fs";
 import * as path from "path";
 
-const logger: Logger = Utils.getLogger("hornet.showroom.services.composant-service-page-impl");
-const composantDirectory = "node_modules/app/hornet-js-react-components/docs";
+const logger: Logger = Logger.getLogger("hornet.showroom.services.composant-service-page-impl");
+const composantDirectory = "node_modules/hornet-js-react-components/docs";
 
 export interface ComposantsService {
     rechercheComposantMd(composantName: string): Promise<any>;
 
     readDirRecursive(dir, callback): any;
 }
-
 
 /**
  *
@@ -33,7 +31,6 @@ export class ComposantServiceImpl implements ComposantsService {
         });
     }
 
-
     fileExists = function (file) {
         let stat: fs.Stats;
         try {
@@ -44,7 +41,6 @@ export class ComposantServiceImpl implements ComposantsService {
 
         return stat.isFile();
     };
-
 
     /**
      * Contruction du chemin pour accèder à la doc a l'aide re require
@@ -60,11 +56,9 @@ export class ComposantServiceImpl implements ComposantsService {
             (i < (sourceDir.length - 1)) ?
                 newPath += path.join(sourceDir[ i ] + path.sep) : newPath += path.join(sourceDir[ i ]);
         }
-
         return newPath;
 
     }
-
 
     rechercheComposantMd(composantName: string): Promise<any> {
 

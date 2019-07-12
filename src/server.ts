@@ -1,6 +1,6 @@
 // L'import de hornet-js-utils doit être fait le plus tôt possible
 import { Utils } from "hornet-js-utils";
-import { Logger } from "hornet-js-utils/src/logger";
+import { Logger } from "hornet-js-logger/src/logger";
 import * as fs from "fs";
 import { AppliI18nLoader } from "src/i18n/app-i18n-loader";
 import { ServerConfiguration } from "hornet-js-core/src/server-conf";
@@ -14,12 +14,11 @@ import {
     UnmanagedViewErrorMiddleware,
 } from "hornet-js-react-components/src/middleware/component-middleware";
 
-
 import * as HornetMiddlewares from "hornet-js-core/src/middleware/middlewares";
 
 const MENU = require("src/resources/navigation");
 
-const logger: Logger = Utils.getLogger("applitutoriel.server");
+const logger: Logger = Logger.getLogger("applitutoriel.server");
 
 function routeLoader(name) {
     logger.info("routeLoaderServer(" + name + ")");
@@ -27,13 +26,6 @@ function routeLoader(name) {
 }
 
 export class Server {
-    // let configServer: ServerConfiguration;
-
-    // constructor(configServer: ServerConfiguration, Array<Class<AbstractHornetMiddleware>>){
-    //
-    // }
-
-
     static configure() {
         const configServer: ServerConfiguration = {
             serverDir: __dirname,

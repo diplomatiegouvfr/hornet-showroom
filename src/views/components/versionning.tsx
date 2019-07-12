@@ -1,11 +1,10 @@
-import { Utils } from "hornet-js-utils";
-import { Logger } from "hornet-js-utils/src/logger";
+import { Logger } from "hornet-js-logger/src/logger";
 import *  as React from "react";
 import { HornetComponent } from "hornet-js-react-components/src/widget/component/hornet-component";
 import { HornetComponentProps } from "hornet-js-components/src/component/ihornet-component";
 import * as AppModule from "src/resources/upgrading.json";
 
-const logger: Logger = Utils.getLogger("hornet-showroom.versionning");
+const logger: Logger = Logger.getLogger("hornet-showroom.versionning");
 
 export interface VersionProps extends HornetComponentProps {
 
@@ -31,7 +30,6 @@ export class Versionning<P extends VersionProps, S extends VersionState> extends
         );
     }
 
-
     /**
      * renvoie le code html des element à afficher
      * @returns {any[]}
@@ -48,7 +46,7 @@ export class Versionning<P extends VersionProps, S extends VersionState> extends
                 if (node && (node as any).length) {
                     const htmlCode = [];
                     for (const el in (node as any)) {
-                        let doc = node[el].doc ? (<a href={node[el].doc} target={"_blank"}>Documentation
+                        const doc = node[el].doc ? (<a href={node[el].doc} target={"_blank"}>Documentation
                         </a>) : null;
 
                         htmlCode.push(

@@ -1,12 +1,12 @@
 import { Utils } from "hornet-js-utils";
-import { Logger } from "hornet-js-utils/src/logger";
+import { Logger } from "hornet-js-logger/src/logger";
 import * as React from "react";
 import { HornetPage } from "hornet-js-react-components/src/widget/component/hornet-page";
 import { HornetComponentProps } from "hornet-js-components/src/component/ihornet-component";
 import { Notification } from "hornet-js-react-components/src/widget/notification/notification";
 import { BusinessErrorList } from "hornet-js-utils/src/exception/business-error-list";
 
-const logger: Logger = Utils.getLogger("hornet-showroom.views.gen.gen-err-page");
+const logger: Logger = Logger.getLogger("hornet-showroom.views.gen.gen-err-page");
 
 export class ErrorPage extends HornetPage<any, HornetComponentProps, any> {
 
