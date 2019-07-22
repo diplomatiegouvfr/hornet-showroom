@@ -58,7 +58,7 @@
         "'self'"
       ],
       "frameAncestors": [
-        "http://10.110.193.33/sam/*"
+        "http://server/sam/*"
       ],
       "reportOnly": false,
       "setAllHeaders": true,

@@ -35,7 +35,7 @@ pipeline {
         REPOSITORY_NPM_RELEASE = "${REPOSITORY_GROUP}-npm-release"
 
         // Déploiement
-        RUNDECK_HOST="10.110.192.11"
+        RUNDECK_HOST="x.x.x.x"
         RUNDECK_JOB_OS_CIBLE="DEB9"
         RUNDECK_JOB_DEB9_SNAPSHOT_ID="${MODULE_GROUP}-${MODULE_ID}-DEVNG-${RUNDECK_JOB_OS_CIBLE}-SNAPSHOT-application-${MODULE_ID}-scheduled-install"
         RUNDECK_JOB_DEB9_RELEASE_ID="${MODULE_GROUP}-${MODULE_ID}-DEVNG-${RUNDECK_JOB_OS_CIBLE}-RELEASE-application-${MODULE_ID}-scheduled-install"
