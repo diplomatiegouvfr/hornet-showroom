@@ -6777,6 +6777,12 @@ a.hornet-button.nfe-button {
     padding: 0.5em 1em 0.5em 1em;
     margin-top: 1em;
     margin-bottom: 1em;
+    color: #e6151d;
+}
+
+.error-message button{
+    color: #e6151d;
+    background-color: transparent;
 }
 
 .error-message-title {
@@ -6786,8 +6792,6 @@ a.hornet-button.nfe-button {
     font-family: NotoSansUI-Regular;
     font-weight: lighter;
     text-transform: none;
-    background-image: url('../img/notification/ic_warning_red_24px.svg');
-    background-repeat: no-repeat;
     padding-left: 1.875em;
     display: block;
     font-family: NotoSansUI-Bold;
@@ -6818,6 +6822,12 @@ a.hornet-button.nfe-button {
     padding: 0.5em 1em 0.5em 1em;
     margin-top: 1em;
     margin-bottom: 1em;
+    color: darkorange;
+}
+
+.warning-message button {
+    color: darkorange;
+    background-color: transparent;
 }
 
 .warning-message-title {
@@ -6827,8 +6837,6 @@ a.hornet-button.nfe-button {
     font-family: NotoSansUI-Regular;
     font-weight: lighter;
     text-transform: none;
-    background-image: url('../img/notification/ic_warning_black_24px.svg');
-    background-repeat: no-repeat;
     padding-left: 1.875em;
     display: block;
     font-family: NotoSansUI-Bold;
@@ -6850,11 +6858,21 @@ a.hornet-button.nfe-button {
     font-family: NotoSansUI-Regular;
 }
 
+.warning-button svg {
+    fill: currentColor;
+}
+
 .info-message {
     border: 0.063em solid green;
     padding: 0.5em 1em 0.5em 1em;
     margin-top: 1em;
     margin-bottom: 1em;
+    color: green;
+}
+
+.info-message button {
+    color: green;
+    background-color: transparent;
 }
 
 .info-message-title {
@@ -6864,8 +6882,6 @@ a.hornet-button.nfe-button {
     font-family: NotoSansUI-Regular;
     font-weight: lighter;
     text-transform: none;
-    background-image: url('../img/notification/ic_check_circle_black_24px.svg');
-    background-repeat: no-repeat;
     padding-left: 1.875em;
     display: block;
     font-family: NotoSansUI-Bold;
@@ -6891,6 +6907,15 @@ a.hornet-button.nfe-button {
     padding: 0.5em 1em 0.5em 1em;
     margin-top: 1em;
     margin-bottom: 1em;
+}
+
+.personnal-message div {
+    color: currentColor;
+}
+
+.personnal-message button {
+    color: currentColor;
+    background-color: transparent;
 }
 
 .personnal-message-title {
@@ -6933,8 +6958,6 @@ a.hornet-button.nfe-button {
 
 .error-button-open {
     border: none;
-    background: url("../img/notification/icon_fleche_expand_open.svg") transparent;
-    background-repeat: no-repeat;
     height: 1.625em;
     width: 1.625em;
     float: right;
@@ -6944,14 +6967,35 @@ a.hornet-button.nfe-button {
 
 .error-button-close {
     border: none;
-    background: url("../img/notification/icon_fleche_expand_close.svg") transparent;
-    background-repeat: no-repeat;
     height: 1.625em;
     width: 1.625em;
     float: right;
     font-size: 1em;
     cursor: pointer;
 }
+
+.error-button-close svg {
+    fill: currentColor;
+}
+
+.error-button-close .icon-bottom {
+    display: none
+}
+.error-button-close .icon-top {
+    display: inherit
+}
+
+.error-button-open svg {
+    fill: currentColor;
+}
+
+.error-button-open .icon-top {
+    display: none
+}
+.error-button-open .icon-bottom {
+    display: inherit
+}
+
 
 .error-message-list.close,
 .personnal-message-list.close,
@@ -6961,13 +7005,16 @@ a.hornet-button.nfe-button {
 
 .info-button {
     border: none;
-    background: url("../img/notification/ico_notification_close.svg") transparent;
-    background-repeat: no-repeat;
     height: 1.625em;
     width: 1.625em;
     float: right;
     cursor: pointer;
 }
+
+.info-button svg {
+    fill: currentColor;
+}
+
 
 .notification-timeout {
     position: fixed;
