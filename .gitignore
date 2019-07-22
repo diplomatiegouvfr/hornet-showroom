@@ -13,6 +13,7 @@ static/messages*
 static/navigation*
 !builder.js
 !menu.js
+!md-helper.js
 !path-helper.js
 !trigger-rundeck.js
 .vscode

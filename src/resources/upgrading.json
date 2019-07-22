@@ -18,7 +18,7 @@
             },
             {
                 "name": "vscode",
-                "version": "1.25.0",
+                "version": "1.36.0",
                 "logo": "/img/logos/logo-vscode.svg",
                 "link": "https://code.visualstudio.com/",
                 "doc": "https://code.visualstudio.com/docs"
@@ -28,7 +28,7 @@
             
             {
                 "name": "node deb.nodesource.com",
-                "version": "8.11.1",
+                "version": "10.16.0",
                 "logo": "/img/logos/logo-nodejs.svg",
                 "link": "https://nodejs.org",
                 "doc": "https://nodejs.org/dist/latest-v8.x/docs/api/"
@@ -71,21 +71,21 @@
         "Node modules": [
             {
                 "name": "webpack",
-                "version": "3.10.0",
+                "version": "4.31.11",
                 "logo": "/img/logos/logo-webpack.svg",
                 "link": "https://webpack.js.org/",
                 "doc": "https://webpack.js.org/concepts/"
             },
             {
                 "name": "React",
-                "version": "16.4.2",
+                "version": "16.6.3",
                 "logo": "/img/logos/logo-reactjs.svg",
                 "link": "https://reactjs.org/",
                 "doc": "https://5abc31d8be40f1556f06c4be--reactjs.netlify.com/docs/hello-world.html"
             },
             {
                 "name": "Typescript",
-                "version": "2.8.3",
+                "version": "3.4.5",
                 "logo": "/img/logos/logo-typescript.jpg",
                 "link": "https://www.typescriptlang.org/",
                 "doc": "https://www.typescriptlang.org/docs/home.html"
